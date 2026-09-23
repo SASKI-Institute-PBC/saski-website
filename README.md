@@ -38,7 +38,7 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 | `/about/` | Institute and public-benefit purpose |
 | `/contact-us/` | Demo scheduling using the existing booking URL |
 
-Every page has a unique title/description, canonical, Open Graph and Twitter metadata, Organization JSON-LD, and appropriate page schema. Product pages add Product schema; Findings adds Article schema. No invented prices, ratings, review counts, or publication dates are included. Social image tags are deliberately omitted until an approved brand image is supplied.
+Every page has a unique title/description, canonical, Open Graph and Twitter metadata, Organization JSON-LD, and appropriate page schema. Product pages add Product schema; Findings adds Article schema. No invented prices, ratings, review counts, or publication dates are included. A branded 1.91:1 social card is wired through absolute Open Graph and X image metadata for Facebook, LinkedIn, and other link previews. `llms.txt` provides a concise, canonical product map for AI systems that choose to use the emerging convention; the semantic page content and structured data remain the primary machine-readable sources.
 
 ## Migration scope
 
@@ -60,3 +60,5 @@ Estate content is adapted from the user-supplied **SASKI_Estates_Product_Sheet_v
 The Institute, Agentic, and Estate logos are the supplied original PNG artwork. The Institute logo appears in the header/footer and Organization schema; product logos appear on the matching product pages and in Product schema. About includes the supplied portraits and biographies in leadership order: Stephen Calhoun (Founder & CEO), Ishak Kang (Co-founder & COO), and Dick Dawson (Co-founder & CRO). Dick's CRO title reflects his sales and business-development remit.
 
 Source-access clarification: the rebuild used the saved prior-conversation content inventory and recommendations. Web retrieval returned previously crawled Findings and Contact content, while the homepage fetch timed out. This was not a verified live review of the complete legacy website.
+
+The social card was generated with OpenAI's built-in image generation using the official SASKI Institute logo as the reference. Final prompt: a restrained 1.91:1 navy/teal B2B card with the official logo and the exact text “AI understands. SASKI governs.” and “Deterministic governance for AI, from conversations to real-world actions.”

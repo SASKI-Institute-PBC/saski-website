@@ -29,8 +29,11 @@ for file in pages:
     meta={a.get('name',a.get('property')):a.get('content') for t,a in tags if t=='meta'}
     assert meta['description'] not in descriptions,file
     descriptions.add(meta['description'])
-    for key in ['description','robots','og:title','og:description','og:type','og:url','twitter:card','twitter:title','twitter:description']: assert meta.get(key), (file,key)
+    for key in ['description','robots','og:title','og:description','og:type','og:url','og:image','og:image:secure_url','og:image:type','og:image:width','og:image:height','og:image:alt','twitter:card','twitter:title','twitter:description','twitter:image','twitter:image:alt']: assert meta.get(key), (file,key)
     assert meta['og:url']==canonical[0],file
+    assert meta['og:image']==meta['og:image:secure_url']==meta['twitter:image'],file
+    assert meta['og:image'].endswith('/assets/social-share.png'),file
+    assert meta['twitter:card']=='summary_large_image',file
     assert p.ld and p.ld[0]['@context']=='https://schema.org',file
     ids={a['id'] for t,a in tags if 'id' in a}
     for t,a in tags:
@@ -53,5 +56,7 @@ listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}
 assert len(listed)==11
 assert listed.issubset(canonical_seen)
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
+assert (ROOT/'assets/social-share.png').is_file()
+assert (ROOT/'llms.txt').read_text().startswith('# SASKI Institute PBC')
 assert not (ROOT/'CNAME').exists()
 print(f'PASS: {len(pages)} HTML pages; internal links, assets, metadata, JSON-LD, labels, sitemap, and no domain change.')
