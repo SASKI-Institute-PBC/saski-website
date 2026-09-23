@@ -16,7 +16,7 @@ Open http://localhost:4173. Edit content and metadata in `scripts/build.py`, sty
 
 The default build targets `https://saski-institute-pbc.github.io/saski-website/`. It handles the repository subpath in links, assets, canonicals, structured data, and sitemap. Staging pages use `noindex,follow`; robots.txt allows crawling so crawlers can observe that directive. This does not make the staging site private.
 
-The Pages workflow is manually triggered, so pushing or merging does not deploy. After the implementation is merged, select GitHub Actions as the repository's Pages source and run **Deploy Pages preview**. The separate validation workflow builds and checks pull requests and pushes. No CNAME file is included. Durable remains live and DNS is unchanged.
+The Pages workflow is manually triggered, so pushing or merging does not deploy. After the implementation is merged, select GitHub Actions as the repository's Pages source and run **Deploy Pages preview**. The separate validation workflow builds and checks pull requests and pushes. No CNAME file is included. Durable hosting and DNS are unchanged; availability of the legacy site has not been verified.
 
 ## Production, later
 
@@ -57,4 +57,6 @@ Current Agentic-first direction takes precedence over earlier SDK-led homepage r
 
 Estate content is adapted from the user-supplied **SASKI_Estates_Product_Sheet_v2.pdf**. The website uses the singular product name from its title, preserves the supported-system list and labeled lab example, and does not repeat legal-outcome guarantees. The original PDF is not republished.
 
-The Institute, Agentic, and Estate logos are the supplied original PNG artwork. The Institute logo appears in the header/footer and Organization schema; product logos appear on the matching product pages and in Product schema. Team profiles will live on About once names, roles, biographies, and portraits are supplied. No placeholder people are published.
+The Institute, Agentic, and Estate logos are the supplied original PNG artwork. The Institute logo appears in the header/footer and Organization schema; product logos appear on the matching product pages and in Product schema. About includes the supplied portraits of Stephen Calhoun (Founder & CEO), Dick Dawson (Co-founder, as instructed), and Ishak Kang (COO). Stephen and Ishak’s titles are carried from the saved site inventory. Biographies are omitted until supplied.
+
+Source-access clarification: the rebuild used the saved prior-conversation content inventory and recommendations. Web retrieval returned previously crawled Findings and Contact content, while the homepage fetch timed out. This was not a verified live review of the complete legacy website.
