@@ -34,3 +34,12 @@
 .team-caption .team-role{margin:0;font-size:14px;color:var(--teal);font-weight:600}
 .team-caption .team-bio{margin:18px 0 0;font-size:14px;color:var(--muted);font-weight:400;line-height:1.65}
 @media(max-width:760px){.team-grid{grid-template-columns:1fr;gap:30px}.team-member{max-width:440px;width:100%}}
+
+.footer-choice,.text-button{border:0;background:transparent;color:var(--muted);padding:0;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.footer-choice{display:block;margin-top:8px}
+.consent-banner{position:fixed;z-index:30;left:24px;right:24px;bottom:24px;max-width:780px;margin:auto;padding:24px;background:var(--white);border:1px solid var(--line);box-shadow:0 12px 40px rgba(16,43,50,.2);display:flex;align-items:center;justify-content:space-between;gap:32px}
+.consent-banner[hidden]{display:none}
+.consent-banner h2{font-size:22px;margin-bottom:6px}
+.consent-banner p{margin:0;color:var(--muted);font-size:14px}
+.consent-actions{display:flex;align-items:center;gap:20px;flex-shrink:0}
+@media(max-width:760px){.consent-banner{left:12px;right:12px;bottom:12px;align-items:flex-start;flex-direction:column;gap:20px}.consent-actions{width:100%;justify-content:space-between}}

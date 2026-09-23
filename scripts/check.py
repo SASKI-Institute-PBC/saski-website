@@ -3,6 +3,8 @@ from html.parser import HTMLParser
 from urllib.parse import urlparse
 import json, xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]/'dist'
+GA_ID='G-KN2FB37JB4'
+SITE_PUBLIC='content="index,follow"' in (ROOT/'index.html').read_text()
 class Page(HTMLParser):
     def __init__(self): super().__init__(); self.tags=[]; self.ld=[]; self.in_ld=False; self.data=''
     def handle_starttag(self,tag,attrs):
@@ -14,7 +16,8 @@ class Page(HTMLParser):
         if tag=='script' and self.in_ld: self.ld.append(json.loads(self.data)); self.in_ld=False
 pages=list(ROOT.rglob('*.html')); canonical_seen=set(); descriptions=set()
 for file in pages:
-    p=Page(); p.feed(file.read_text()); tags=p.tags
+    source=file.read_text()
+    p=Page(); p.feed(source); tags=p.tags
     assert sum(t=='h1' for t,a in tags)==1,file
     assert sum(t=='main' for t,a in tags)==1,file
     assert any(t=='html' and a.get('lang')=='en' for t,a in tags),file
@@ -35,6 +38,8 @@ for file in pages:
     assert meta['og:image'].endswith('/assets/social-share.png'),file
     assert meta['twitter:card']=='summary_large_image',file
     assert p.ld and p.ld[0]['@context']=='https://schema.org',file
+    assert (GA_ID in source)==SITE_PUBLIC,file
+    assert ('data-analytics-consent' in source)==SITE_PUBLIC,file
     ids={a['id'] for t,a in tags if 'id' in a}
     for t,a in tags:
         target=a.get('href') if t=='a' else a.get('src') if t in ['script','img'] else a.get('href') if t=='link' and a.get('rel') in ['stylesheet','icon'] else None

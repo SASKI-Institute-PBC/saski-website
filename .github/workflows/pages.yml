@@ -16,6 +16,7 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://saski-institute-pbc.github.io/saski-website' }}
           SITE_INDEXABLE: ${{ vars.SITE_INDEXABLE || 'false' }}
+          GOOGLE_ANALYTICS_ID: ${{ vars.GOOGLE_ANALYTICS_ID || 'G-KN2FB37JB4' }}
         run: python3 scripts/build.py
       - run: python3 scripts/check.py
       - uses: actions/upload-pages-artifact@v4

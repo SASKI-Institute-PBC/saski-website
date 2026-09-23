@@ -1,6 +1,6 @@
 # SASKI Institute website
 
-Static website for SASKI-Institute-PBC, built around SASKI Agentic, Estate, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies, cookies, analytics, or form backend.
+Static website for SASKI-Institute-PBC, built around SASKI Agentic, Estate, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies or form backend. The production build offers optional Google Analytics; it does not load Analytics until the visitor accepts.
 
 ## Preview locally
 

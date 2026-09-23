@@ -32,3 +32,40 @@ if (form) {
     document.getElementById('calc-note').textContent = proposed > current ? 'Negative savings: the proposed prompt increases repeated input-token cost.' : 'This estimate covers repeated input tokens only.';
   });
 }
+
+const consent = document.querySelector('[data-analytics-consent]');
+const manageConsent = document.querySelector('[data-manage-consent]');
+const consentKey = 'saski-analytics-consent';
+let analyticsLoaded = false;
+const loadAnalytics = () => {
+  if (analyticsLoaded || !window.SASKI_GA_ID) return;
+  analyticsLoaded = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', window.SASKI_GA_ID, {
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false
+  });
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(window.SASKI_GA_ID)}`;
+  document.head.appendChild(script);
+};
+if (consent) {
+  const choice = localStorage.getItem(consentKey);
+  if (choice === 'granted') loadAnalytics();
+  if (!choice) consent.hidden = false;
+  consent.querySelectorAll('[data-consent]').forEach(button => {
+    button.addEventListener('click', () => {
+      const nextChoice = button.dataset.consent;
+      localStorage.setItem(consentKey, nextChoice);
+      consent.hidden = true;
+      if (nextChoice === 'granted') loadAnalytics();
+    });
+  });
+  manageConsent?.addEventListener('click', () => {
+    consent.hidden = false;
+    consent.querySelector('[data-consent="declined"]').focus();
+  });
+}
