@@ -14,7 +14,7 @@ class Page(HTMLParser):
         if self.in_ld: self.data+=data
     def handle_endtag(self,tag):
         if tag=='script' and self.in_ld: self.ld.append(json.loads(self.data)); self.in_ld=False
-pages=list(ROOT.rglob('*.html')); canonical_seen=set(); descriptions=set()
+pages=[p for p in ROOT.rglob('*.html') if 'assets' not in p.relative_to(ROOT).parts]; canonical_seen=set(); descriptions=set()
 for file in pages:
     source=file.read_text()
     p=Page(); p.feed(source); tags=p.tags
@@ -42,7 +42,7 @@ for file in pages:
     assert ('data-analytics-consent' in source)==SITE_PUBLIC,file
     ids={a['id'] for t,a in tags if 'id' in a}
     for t,a in tags:
-        target=a.get('href') if t=='a' else a.get('src') if t in ['script','img'] else a.get('href') if t=='link' and a.get('rel') in ['stylesheet','icon'] else None
+        target=a.get('href') if t=='a' else a.get('src') if t in ['script','img','iframe'] else a.get('href') if t=='link' and a.get('rel') in ['stylesheet','icon'] else None
         if not target: continue
         u=urlparse(target)
         if u.scheme or u.netloc: continue
@@ -62,6 +62,10 @@ assert len(listed)==11
 assert listed.issubset(canonical_seen)
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
 assert (ROOT/'assets/social-share.png').is_file()
+workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
+assert '<meta charset="utf-8">' in workflow
+assert 'prefers-reduced-motion' in workflow
+assert not any(claim in workflow for claim in ['UNDER 50MS','BIP-340','SCHNORR','RFC 8785','Zero Socket','NO UNMONITORED','Ed25519','policy_ver'])
 assert (ROOT/'llms.txt').read_text().startswith('# SASKI Institute PBC')
 assert not (ROOT/'CNAME').exists()
 print(f'PASS: {len(pages)} HTML pages; internal links, assets, metadata, JSON-LD, labels, sitemap, and no domain change.')

@@ -94,3 +94,8 @@ h1,.page-hero h1,.product-hero h1{letter-spacing:0}
 .sdk-flow-summary p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
 @media(max-width:1050px){.sdk-flow-summary{grid-template-columns:1fr 1fr}.sdk-flow-summary>div{border-bottom:1px solid #cad8cf}.sdk-flow-summary>div:nth-child(2){border-right:0}.sdk-flow-summary>div:nth-child(n+3){border-bottom:0}}
 @media(max-width:760px){.sdk-flow-summary{grid-template-columns:1fr}.sdk-flow-summary>div:nth-child(n){border-right:0;border-bottom:1px solid #cad8cf}.sdk-flow-summary>div:last-child{border-bottom:0}}
+
+/* Animated Agentic enterprise example. The text below it carries the same meaning. */
+.workflow-visual-frame{width:100%;max-width:1024px;aspect-ratio:1;margin:0 auto;background:#070b14;border:1px solid #294650;box-shadow:12px 14px 0 #dce6dd}
+.workflow-visual-frame iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:760px){.workflow-visual-frame{box-shadow:7px 8px 0 #dce6dd}}

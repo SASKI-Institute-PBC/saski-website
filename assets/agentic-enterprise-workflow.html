@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SASKI Agentic illustrative enterprise workflow</title>
+</head>
+<body>
+<style>html,body{margin:0;background:#070B14}body{padding:8px}</style>
+<div class="saski-dashboard">
+  <style>
+    .saski-dashboard {
+      width: 100%;
+      max-width: 1024px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      background: #070B14;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    .saski-dashboard svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Prevent SVG stroke inheritance on text glyphs */
+    .saski-dashboard text {
+      stroke: none !important;
+    }
+
+    /* 13.2s Master Loop (10% slowed from 12s): ALLOW (0s-4.4s) | HOLD (4.4s-8.8s) | DENY (8.8s-13.2s) */
+
+    @keyframes orbitPulse {
+      0%, 33.3%, 66.6%, 100% { stroke-dashoffset: 260; opacity: 0.3; }
+      4%, 10%, 37%, 43%, 70%, 76% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 6px #38bdf8); }
+      14%, 47%, 80% { opacity: 0.3; }
+    }
+
+    /* Live Proposal Inspector Cross-Fades */
+    @keyframes inspectAllowCycle {
+      0%, 30% { opacity: 1; visibility: visible; }
+      33.3%, 100% { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes inspectHoldCycle {
+      0%, 33.3% { opacity: 0; visibility: hidden; }
+      36.6%, 63.3% { opacity: 1; visibility: visible; }
+      66.6%, 100% { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes inspectDenyCycle {
+      0%, 66.6% { opacity: 0; visibility: hidden; }
+      70%, 96.6% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* Data Packet Trajectories */
+    @keyframes packetAllow {
+      0%, 100% { opacity: 0; transform: translate(280px, 570px); }
+      5% { opacity: 1; transform: translate(280px, 570px); }
+      12% { opacity: 1; transform: translate(390px, 260px); }
+      18% { opacity: 1; transform: translate(500px, 535px); }
+      24% { opacity: 1; transform: translate(750px, 250px); }
+      30% { opacity: 0; transform: translate(780px, 250px); }
+    }
+
+    @keyframes packetHold {
+      0%, 33% { opacity: 0; transform: translate(280px, 570px); }
+      38% { opacity: 1; transform: translate(280px, 570px); }
+      45% { opacity: 1; transform: translate(390px, 350px); }
+      51% { opacity: 1; transform: translate(500px, 535px); }
+      57% { opacity: 1; transform: translate(750px, 460px); }
+      63% { opacity: 0; transform: translate(780px, 460px); }
+      100% { opacity: 0; }
+    }
+
+    @keyframes packetDeny {
+      0%, 66% { opacity: 0; transform: translate(280px, 570px); }
+      71% { opacity: 1; transform: translate(280px, 570px); }
+      78% { opacity: 1; transform: translate(390px, 200px); }
+      84% { opacity: 1; transform: translate(500px, 535px); }
+      90% { opacity: 1; transform: translate(750px, 670px); }
+      96% { opacity: 0; transform: translate(780px, 670px); }
+      100% { opacity: 0; }
+    }
+
+    /* 5 Invariant Gates */
+    @keyframes gateCheck1 {
+      0%, 100% { fill: #1e293b; stroke: #475569; }
+      10%, 30%, 43%, 63%, 76%, 95% { fill: #064e3b; stroke: #10b981; }
+    }
+    @keyframes gateCheck2 {
+      0%, 100% { fill: #1e293b; stroke: #475569; }
+      12%, 30%, 45%, 63% { fill: #064e3b; stroke: #10b981; }
+      80%, 95% { fill: #450a0a; stroke: #ef4444; }
+    }
+    @keyframes gateCheck3 {
+      0%, 100% { fill: #1e293b; stroke: #475569; }
+      14%, 30%, 47%, 63% { fill: #064e3b; stroke: #10b981; }
+    }
+    @keyframes gateCheck4 {
+      0%, 100% { fill: #1e293b; stroke: #475569; }
+      16%, 30%, 49%, 63% { fill: #064e3b; stroke: #10b981; }
+    }
+    @keyframes gateCheck5 {
+      0%, 100% { fill: #1e293b; stroke: #475569; }
+      18%, 30% { fill: #064e3b; stroke: #10b981; }
+      51%, 63% { fill: #451a03; stroke: #f59e0b; }
+    }
+
+    /* Deterministic Verdict Badges */
+    @keyframes pillAllowState {
+      0%, 15%, 31%, 100% { opacity: 0.25; fill: #0a141d; stroke: #1e293b; stroke-width: 1.5; filter: none; }
+      17%, 29% { opacity: 1; fill: #064e3b; stroke: #10b981; stroke-width: 2.5; filter: drop-shadow(0 0 12px #10b981); }
+    }
+    @keyframes textAllowState {
+      0%, 15%, 31%, 100% { fill: #475569; }
+      17%, 29% { fill: #34d399; }
+    }
+
+    @keyframes pillHoldState {
+      0%, 48%, 64%, 100% { opacity: 0.25; fill: #0a141d; stroke: #1e293b; stroke-width: 1.5; filter: none; }
+      50%, 62% { opacity: 1; fill: #451a03; stroke: #f59e0b; stroke-width: 2.5; filter: drop-shadow(0 0 12px #f59e0b); }
+    }
+    @keyframes textHoldState {
+      0%, 48%, 64%, 100% { fill: #475569; }
+      50%, 62% { fill: #fbbf24; }
+    }
+
+    @keyframes pillDenyState {
+      0%, 81%, 97%, 100% { opacity: 0.25; fill: #0a141d; stroke: #1e293b; stroke-width: 1.5; filter: none; }
+      83%, 95% { opacity: 1; fill: #450a0a; stroke: #ef4444; stroke-width: 2.5; filter: drop-shadow(0 0 12px #ef4444); }
+    }
+    @keyframes textDenyState {
+      0%, 81%, 97%, 100% { fill: #475569; }
+      83%, 95% { fill: #f87171; }
+    }
+
+    /* Receipt Block Fade */
+    @keyframes receiptFade {
+      0%, 15% { opacity: 0.4; stroke: #1e293b; }
+      20%, 30% { opacity: 1; stroke: #10b981; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.25)); }
+      35%, 48% { opacity: 0.4; stroke: #1e293b; }
+      53%, 63% { opacity: 1; stroke: #f59e0b; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.25)); }
+      68%, 81% { opacity: 0.4; stroke: #1e293b; }
+      86%, 96% { opacity: 1; stroke: #ef4444; filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.25)); }
+    }
+
+    /* Financial Targets */
+    @keyframes targetPaymentRails {
+      0%, 20%, 32%, 100% { stroke: #1e293b; fill: #0c1322; filter: none; }
+      22%, 30% { stroke: #10b981; fill: #064e3b; filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.4)); }
+    }
+    @keyframes targetOfficerApproval {
+      0%, 53%, 65%, 100% { stroke: #1e293b; fill: #0c1322; filter: none; }
+      55%, 63% { stroke: #f59e0b; fill: #451a03; filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.4)); }
+    }
+    @keyframes targetSafeStopRect {
+      0%, 86%, 98%, 100% { stroke: #1e293b; fill: #0c1322; filter: none; }
+      88%, 96% { stroke: #ef4444; fill: #450a0a; filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.4)); }
+    }
+
+    /* 13.2s Slowed Animation Rules */
+    .anim-orbit { animation: orbitPulse 13.2s infinite linear; }
+    .anim-inspect-allow { animation: inspectAllowCycle 13.2s infinite ease-in-out; }
+    .anim-inspect-hold { animation: inspectHoldCycle 13.2s infinite ease-in-out; }
+    .anim-inspect-deny { animation: inspectDenyCycle 13.2s infinite ease-in-out; }
+    .anim-packet-allow { animation: packetAllow 13.2s infinite ease-out; }
+    .anim-packet-hold { animation: packetHold 13.2s infinite ease-out; }
+    .anim-packet-deny { animation: packetDeny 13.2s infinite ease-out; }
+    .anim-gate-1 { animation: gateCheck1 13.2s infinite; }
+    .anim-gate-2 { animation: gateCheck2 13.2s infinite; }
+    .anim-gate-3 { animation: gateCheck3 13.2s infinite; }
+    .anim-gate-4 { animation: gateCheck4 13.2s infinite; }
+    .anim-gate-5 { animation: gateCheck5 13.2s infinite; }
+    .anim-box-allow { animation: pillAllowState 13.2s infinite ease-in-out; }
+    .anim-txt-allow { animation: textAllowState 13.2s infinite ease-in-out; }
+    .anim-box-hold { animation: pillHoldState 13.2s infinite ease-in-out; }
+    .anim-txt-hold { animation: textHoldState 13.2s infinite ease-in-out; }
+    .anim-box-deny { animation: pillDenyState 13.2s infinite ease-in-out; }
+    .anim-txt-deny { animation: textDenyState 13.2s infinite ease-in-out; }
+    .anim-receipt-box { animation: receiptFade 13.2s infinite; }
+    .anim-rect-rails { animation: targetPaymentRails 13.2s infinite; }
+    .anim-rect-officer { animation: targetOfficerApproval 13.2s infinite; }
+    .anim-rect-stop { animation: targetSafeStopRect 13.2s infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .saski-dashboard [class*="anim-"] {
+        animation-play-state: paused !important;
+        animation-delay: -3.2s !important;
+      }
+    }
+  </style>
+
+  <svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1024" height="1024" fill="#070B14"/>
+
+    <!-- ==================== TOP HEADER BAR ==================== -->
+    <g transform="translate(30, 20)">
+      <text x="0" y="29" fill="#FFFFFF" font-size="28" font-weight="800" letter-spacing="0.5">
+        SASKI AGENTIC GATEWAY
+      </text>
+
+      <!-- Right Fail-Closed Pill -->
+      <g transform="translate(794, 0)">
+        <rect width="170" height="42" rx="21" fill="#064E3B" stroke="#10B981" stroke-width="1.8"/>
+        <circle cx="24" cy="21" r="5" fill="#34D399"/>
+        <text x="38" y="27" fill="#A7F3D0" font-size="15" font-weight="800" letter-spacing="1">RULEBOOK ACTIVE</text>
+      </g>
+    </g>
+
+    <!-- ==================== COLUMN 1: AI AGENT STACK ==================== -->
+    <g transform="translate(30, 78)">
+      <rect width="270" height="812" rx="14" fill="#0C1322" stroke="#1E293B" stroke-width="2"/>
+      <text x="24" y="40" fill="#E2E8F0" font-size="24" font-weight="800">1. AI AGENT STACK</text>
+      
+      <!-- Autonomous Treasury Agent Card + Schnorr Identity -->
+      <g transform="translate(18, 56)">
+        <rect width="234" height="114" rx="10" fill="#131D31" stroke="#2563EB" stroke-width="1.5"/>
+        <circle cx="34" cy="42" r="16" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+        <circle cx="34" cy="36" r="4" fill="#38BDF8"/>
+        <path d="M26 49 C26 43, 42 43, 42 49" stroke="#38BDF8" stroke-width="1.8" fill="none"/>
+        <text x="60" y="38" fill="#F8FAFC" font-size="19" font-weight="700">Treasury Agent</text>
+        <text x="60" y="58" fill="#93C5FD" font-size="14" font-weight="600">Autonomous Workflow</text>
+        
+        <!-- Verified agent identity badge -->
+        <rect x="14" y="76" width="206" height="24" rx="5" fill="#090E1A" stroke="#1E293B"/>
+        <circle cx="26" cy="88" r="3.5" fill="#10B981"/>
+        <text x="36" y="92" fill="#94A3B8" font-size="11" font-weight="700" letter-spacing="0.5">VERIFIED AGENT IDENTITY</text>
+      </g>
+
+      <!-- Planning Loop Diagram -->
+      <g transform="translate(18, 180)">
+        <rect width="234" height="188" rx="10" fill="#090E1A" stroke="#1E293B" stroke-width="1.5"/>
+        <text x="117" y="26" text-anchor="middle" fill="#94A3B8" font-size="16" font-weight="700">Planning Loop</text>
+
+        <circle cx="117" cy="98" r="42" stroke="#1E293B" stroke-width="4" fill="none"/>
+        <circle class="anim-orbit" cx="117" cy="98" r="42" stroke="#38BDF8" stroke-width="4" fill="none" stroke-dasharray="120 120"/>
+
+        <circle cx="117" cy="56" r="14" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+        <text x="117" y="61" text-anchor="middle" fill="#38BDF8" font-size="15" font-weight="800">A</text>
+
+        <circle cx="117" cy="140" r="14" fill="#1E293B" stroke="#60A5FA" stroke-width="2"/>
+        <text x="117" y="145" text-anchor="middle" fill="#60A5FA" font-size="15" font-weight="800">B</text>
+
+        <text x="117" y="174" text-anchor="middle" fill="#64748B" font-size="13" font-weight="600">Ledger ⇄ Action</text>
+      </g>
+
+      <!-- LIVE PROPOSAL INSPECTOR CARD -->
+      <g transform="translate(18, 380)">
+        <rect width="234" height="412" rx="10" fill="#0A0F1D" stroke="#1E293B" stroke-width="1.8"/>
+        <text x="117" y="28" text-anchor="middle" fill="#94A3B8" font-size="13.5" font-weight="800" letter-spacing="0.8">
+          LIVE PROPOSAL INSPECTOR
+        </text>
+
+        <!-- ================= ACT 1: ALLOW POPUP ================= -->
+        <g class="anim-inspect-allow">
+          <rect x="12" y="42" width="210" height="26" rx="5" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+          <text x="117" y="59" text-anchor="middle" fill="#34D399" font-size="11.5" font-weight="800" letter-spacing="0.5">
+            ALLOW SCENARIO
+          </text>
+
+          <rect x="12" y="76" width="210" height="110" rx="6" fill="#050811" stroke="#1E293B"/>
+          <text x="22" y="96" fill="#38BDF8" font-size="11.5" font-weight="800">USER PROMPT</text>
+          <text x="22" y="120" fill="#E2E8F0" font-size="13.5" font-weight="600">"Pay Apex Consulting"</text>
+          <text x="22" y="140" fill="#E2E8F0" font-size="13.5" font-weight="600">"inv #402 for $4,500"</text>
+          <text x="22" y="160" fill="#94A3B8" font-size="13">"from Operations acct."</text>
+
+          <rect x="12" y="196" width="210" height="135" rx="6" fill="#050811" stroke="#1E293B"/>
+          <text x="22" y="216" fill="#F59E0B" font-size="11.5" font-weight="800">PROPOSED MCP TOOL</text>
+          <text x="22" y="240" fill="#F472B6" font-size="13" font-family="ui-monospace, monospace">ach_transfer(</text>
+          <text x="28" y="260" fill="#38BDF8" font-size="12.5" font-family="ui-monospace, monospace">dest: "apex_consult",</text>
+          <text x="28" y="280" fill="#FBBF24" font-size="12.5" font-family="ui-monospace, monospace">amount: 4500.00</text>
+          <text x="22" y="300" fill="#F472B6" font-size="13" font-family="ui-monospace, monospace">)</text>
+
+          <rect x="12" y="342" width="210" height="42" rx="6" fill="#082F49"/>
+          <text x="117" y="362" text-anchor="middle" fill="#7DD3FC" font-size="12" font-weight="800">✓ Approved Vendor</text>
+          <text x="117" y="376" text-anchor="middle" fill="#BAE6FD" font-size="11">Within $10,000 Auto Ceiling</text>
+        </g>
+
+        <!-- ================= ACT 2: HOLD POPUP ================= -->
+        <g class="anim-inspect-hold">
+          <rect x="12" y="42" width="210" height="26" rx="5" fill="#451A03" stroke="#F59E0B" stroke-width="1.2"/>
+          <text x="117" y="59" text-anchor="middle" fill="#FBBF24" font-size="11.5" font-weight="800" letter-spacing="0.5">
+            HOLD SCENARIO
+          </text>
+
+          <rect x="12" y="76" width="210" height="110" rx="6" fill="#050811" stroke="#1E293B"/>
+          <text x="22" y="96" fill="#38BDF8" font-size="11.5" font-weight="800">USER PROMPT</text>
+          <text x="22" y="120" fill="#E2E8F0" font-size="13.5" font-weight="600">"Wire $250,000 from"</text>
+          <text x="22" y="140" fill="#E2E8F0" font-size="13.5" font-weight="600">"Reserve to London HQ"</text>
+          <text x="22" y="160" fill="#94A3B8" font-size="13">"for urgent payroll."</text>
+
+          <rect x="12" y="196" width="210" height="135" rx="6" fill="#050811" stroke="#1E293B"/>
+          <text x="22" y="216" fill="#F59E0B" font-size="11.5" font-weight="800">PROPOSED MCP TOOL</text>
+          <text x="22" y="240" fill="#F472B6" font-size="13" font-family="ui-monospace, monospace">wire_transfer(</text>
+          <text x="28" y="260" fill="#38BDF8" font-size="12.5" font-family="ui-monospace, monospace">dest: "uk_sub_01",</text>
+          <text x="28" y="280" fill="#FBBF24" font-size="12.5" font-family="ui-monospace, monospace">amount: 250000.00</text>
+          <text x="22" y="300" fill="#F472B6" font-size="13" font-family="ui-monospace, monospace">)</text>
+
+          <rect x="12" y="342" width="210" height="42" rx="6" fill="#451A03"/>
+          <text x="117" y="362" text-anchor="middle" fill="#FDE68A" font-size="12" font-weight="800">⚠ High-Consequence Cap</text>
+          <text x="117" y="376" text-anchor="middle" fill="#FEF08A" font-size="11">Exceeds $50k • Officer Hold</text>
+        </g>
+
+        <!-- ================= ACT 3: DENY POPUP ================= -->
+        <g class="anim-inspect-deny">
+          <!-- Deny Scenario Button (Clean Label) -->
+          <rect x="12" y="42" width="210" height="26" rx="5" fill="#450A0A" stroke="#EF4444" stroke-width="1.2"/>
+          <text x="117" y="59" text-anchor="middle" fill="#F87171" font-size="11.5" font-weight="800" letter-spacing="0.5">
+            DENY SCENARIO
+          </text>
+
+          <rect x="12" y="76" width="210" height="110" rx="6" fill="#050811" stroke="#1E293B"/>
+          <text x="22" y="96" fill="#38BDF8" font-size="11.5" font-weight="800">USER PROMPT</text>
+          <text x="22" y="120" fill="#E2E8F0" font-size="13.5" font-weight="600">"Transfer $85,000 from"</text>
+          <text x="22" y="140" fill="#E2E8F0" font-size="13.5" font-weight="600">"Reserve to third-party"</text>
+          <text x="22" y="160" fill="#94A3B8" font-size="13">"escrow acct #99401."</text>
+
+          <rect x="12" y="196" width="210" height="135" rx="6" fill="#050811" stroke="#1E293B"/>
+          <text x="22" y="216" fill="#F59E0B" font-size="11.5" font-weight="800">PROPOSED MCP TOOL</text>
+          <text x="22" y="240" fill="#F472B6" font-size="13" font-family="ui-monospace, monospace">wire_transfer(</text>
+          <text x="28" y="260" fill="#EF4444" font-size="12.5" font-family="ui-monospace, monospace">dest: "ext_escrow_99",</text>
+          <text x="28" y="280" fill="#FBBF24" font-size="12.5" font-family="ui-monospace, monospace">amount: 85000.00</text>
+          <text x="22" y="300" fill="#F472B6" font-size="13" font-family="ui-monospace, monospace">)</text>
+
+          <rect x="12" y="342" width="210" height="42" rx="6" fill="#450A0A"/>
+          <text x="117" y="362" text-anchor="middle" fill="#FCA5A5" font-size="12" font-weight="800">✕ Scope Invariant Failed</text>
+          <text x="117" y="376" text-anchor="middle" fill="#FECACA" font-size="11">Beneficiary Not on Allowlist</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Isolation Conduit 1 -->
+    <line x1="313" y1="78" x2="313" y2="890" stroke="#38BDF8" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+
+    <!-- ==================== COLUMN 2: SASKI GATEWAY (HERO) ==================== -->
+    <g transform="translate(326, 78)">
+      <rect width="372" height="812" rx="14" fill="#0A0F1E" stroke="#D97706" stroke-width="2.5"/>
+      
+      <text x="24" y="40" fill="#FBBF24" font-size="24" font-weight="800">2. SASKI GATEWAY</text>
+      
+      <rect x="20" y="56" width="332" height="34" rx="8" fill="#1E1911" stroke="#F59E0B" stroke-width="1"/>
+      <text x="186" y="78" text-anchor="middle" fill="#38BDF8" font-size="16" font-weight="800" letter-spacing="0.5">
+        DETERMINISTIC RULEBOOK CHECK
+      </text>
+
+      <!-- 5 Financial Invariant Gates -->
+      <g transform="translate(18, 102)">
+        <rect width="336" height="300" rx="10" fill="#070B14" stroke="#1E293B" stroke-width="1.5"/>
+
+        <!-- Gate 1: Authorization -->
+        <g transform="translate(14, 10)">
+          <circle class="anim-gate-1" cx="16" cy="22" r="13" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+          <path d="M11 22 L15 26 L22 18" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+          <text x="38" y="27" fill="#F8FAFC" font-size="16.5" font-weight="700">1. Authorization</text>
+          <text x="312" y="27" text-anchor="end" fill="#94A3B8" font-size="13" font-weight="500">Caller &amp; Key ID</text>
+        </g>
+
+        <!-- Gate 2: Scope Check -->
+        <g transform="translate(14, 68)">
+          <circle class="anim-gate-2" cx="16" cy="22" r="13" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+          <path d="M11 22 L15 26 L22 18" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+          <text x="38" y="27" fill="#F8FAFC" font-size="16.5" font-weight="700">2. Scope Check</text>
+          <text x="312" y="27" text-anchor="end" fill="#94A3B8" font-size="13" font-weight="500">Account Scope</text>
+        </g>
+
+        <!-- Gate 3: Param Bounds -->
+        <g transform="translate(14, 126)">
+          <circle class="anim-gate-3" cx="16" cy="22" r="13" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+          <path d="M11 22 L15 26 L22 18" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+          <text x="38" y="27" fill="#F8FAFC" font-size="16.5" font-weight="700">3. Param Bounds</text>
+          <text x="312" y="27" text-anchor="end" fill="#94A3B8" font-size="13" font-weight="500">Transfer Limits</text>
+        </g>
+
+        <!-- Gate 4: Prerequisites -->
+        <g transform="translate(14, 184)">
+          <circle class="anim-gate-4" cx="16" cy="22" r="13" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+          <path d="M11 22 L15 26 L22 18" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+          <text x="38" y="27" fill="#F8FAFC" font-size="16.5" font-weight="700">4. Prerequisites</text>
+          <text x="312" y="27" text-anchor="end" fill="#94A3B8" font-size="13" font-weight="500">Dual-Control OK</text>
+        </g>
+
+        <!-- Gate 5: Holds Cleared -->
+        <g transform="translate(14, 242)">
+          <circle class="anim-gate-5" cx="16" cy="22" r="13" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+          <path d="M11 22 L15 26 L22 18" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+          <text x="38" y="27" fill="#F8FAFC" font-size="16.5" font-weight="700">5. Holds Cleared</text>
+          <text x="312" y="27" text-anchor="end" fill="#94A3B8" font-size="13" font-weight="500">Officer Sign-Off</text>
+        </g>
+      </g>
+
+      <!-- Hero Centered Verdict Badge -->
+      <g transform="translate(18, 414)">
+        <rect width="336" height="116" rx="10" fill="#070B14" stroke="#1E293B" stroke-width="1.5"/>
+        <text x="168" y="30" text-anchor="middle" fill="#94A3B8" font-size="16" font-weight="800" letter-spacing="1">
+          DETERMINISTIC VERDICT
+        </text>
+
+        <!-- ALLOW Pill -->
+        <g transform="translate(17, 46)">
+          <rect class="anim-box-allow" width="94" height="48" rx="8" fill="#0A141D" stroke="#1E293B" stroke-width="1.5"/>
+          <text class="anim-txt-allow" x="47" y="31" text-anchor="middle" fill="#475569" font-size="20" font-weight="900" letter-spacing="0.5">ALLOW</text>
+        </g>
+
+        <!-- HOLD Pill -->
+        <g transform="translate(121, 46)">
+          <rect class="anim-box-hold" width="94" height="48" rx="8" fill="#0A141D" stroke="#1E293B" stroke-width="1.5"/>
+          <text class="anim-txt-hold" x="47" y="31" text-anchor="middle" fill="#475569" font-size="20" font-weight="900" letter-spacing="0.5">HOLD</text>
+        </g>
+
+        <!-- DENY Pill -->
+        <g transform="translate(225, 46)">
+          <rect class="anim-box-deny" width="94" height="48" rx="8" fill="#0A141D" stroke="#1E293B" stroke-width="1.5"/>
+          <text class="anim-txt-deny" x="47" y="31" text-anchor="middle" fill="#475569" font-size="20" font-weight="900" letter-spacing="0.5">DENY</text>
+        </g>
+      </g>
+
+      <!-- Signed governance attestation -->
+      <g transform="translate(18, 542)">
+        <rect class="anim-receipt-box" width="336" height="252" rx="10" fill="#070B14" stroke="#1E293B" stroke-width="2"/>
+        <text x="20" y="32" fill="#F8FAFC" font-size="20" font-weight="800">Signed Attestation</text>
+        
+        <rect x="14" y="46" width="308" height="190" rx="8" fill="#020617"/>
+        <text x="24" y="82" fill="#94A3B8" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+          receipt_id : <tspan fill="#F8FAFC">rcpt_fin_7a03bc</tspan>
+        </text>
+        <text x="24" y="120" fill="#94A3B8" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+          rulebook_ver: <tspan fill="#38BDF8">fin-v2.1-strict</tspan>
+        </text>
+        <text x="24" y="158" fill="#94A3B8" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+          verdict    : <tspan fill="#FBBF24" font-weight="700">ALLOW|HOLD|DENY</tspan>
+        </text>
+        <text x="24" y="196" fill="#94A3B8" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+          signature  : <tspan fill="#34D399">signed_receipt_ok</tspan>
+        </text>
+      </g>
+    </g>
+
+    <!-- Isolation Conduit 2 -->
+    <line x1="711" y1="78" x2="711" y2="890" stroke="#F59E0B" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+
+    <!-- ==================== COLUMN 3: ACTUATION LAYER ==================== -->
+    <g transform="translate(724, 78)">
+      <rect width="270" height="812" rx="14" fill="#0C1322" stroke="#1E293B" stroke-width="2"/>
+      <text x="24" y="40" fill="#E2E8F0" font-size="24" font-weight="800">3. ACTUATION</text>
+
+      <!-- Row 1: Payment Rails (ALLOW) -->
+      <g transform="translate(18, 58)">
+        <rect class="anim-rect-rails" width="234" height="205" rx="10" fill="#0C1322" stroke="#1E293B" stroke-width="2"/>
+        <g transform="translate(95, 20)">
+          <path d="M4 14 L22 4 L40 14 Z" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+          <line x1="10" y1="18" x2="10" y2="38" stroke="#38BDF8" stroke-width="2"/>
+          <line x1="22" y1="18" x2="22" y2="38" stroke="#38BDF8" stroke-width="2"/>
+          <line x1="34" y1="18" x2="34" y2="38" stroke="#38BDF8" stroke-width="2"/>
+          <line x1="4" y1="42" x2="40" y2="42" stroke="#38BDF8" stroke-width="2"/>
+        </g>
+        <text x="117" y="108" text-anchor="middle" fill="#F8FAFC" font-size="20" font-weight="700">Payment Rails</text>
+        <text x="117" y="136" text-anchor="middle" fill="#38BDF8" font-size="16" font-weight="600">Core Banking &amp; ACH</text>
+        <rect x="37" y="156" width="160" height="28" rx="6" fill="#082F49"/>
+        <text x="117" y="175" text-anchor="middle" fill="#7DD3FC" font-size="13" font-weight="800">TRANSFER DISPATCHED</text>
+      </g>
+
+      <!-- Row 2: Treasury Approval (HOLD) -->
+      <g transform="translate(18, 275)">
+        <rect class="anim-rect-officer" width="234" height="205" rx="10" fill="#0C1322" stroke="#1E293B" stroke-width="2"/>
+        <g transform="translate(95, 20)">
+          <circle cx="22" cy="24" r="22" fill="#1E293B" stroke="#F59E0B" stroke-width="2"/>
+          <path d="M12 24 L18 30 L32 16" stroke="#FBBF24" stroke-width="3" fill="none"/>
+        </g>
+        <text x="117" y="108" text-anchor="middle" fill="#F8FAFC" font-size="20" font-weight="700">Treasury Review</text>
+        <text x="117" y="136" text-anchor="middle" fill="#F59E0B" font-size="16" font-weight="600">High-Value Wire Queue</text>
+        <rect x="37" y="156" width="160" height="28" rx="6" fill="#451A03"/>
+        <text x="117" y="175" text-anchor="middle" fill="#FDE68A" font-size="13" font-weight="800">DUAL-CONTROL HOLD</text>
+      </g>
+
+      <!-- Row 3: Safe Stop Terminal (DENY) -->
+      <g transform="translate(18, 492)">
+        <rect class="anim-rect-stop" width="234" height="205" rx="10" fill="#0C1322" stroke="#1E293B" stroke-width="2"/>
+        <g transform="translate(95, 20)">
+          <polygon points="14,2 30,2 42,14 42,30 30,42 14,42 2,30 2,14" fill="#1E293B" stroke="#EF4444" stroke-width="2"/>
+          <line x1="14" y1="22" x2="30" y2="22" stroke="#EF4444" stroke-width="3"/>
+        </g>
+        <text x="117" y="108" text-anchor="middle" fill="#F8FAFC" font-size="20" font-weight="700">Safe Stop Terminal</text>
+        <text x="117" y="136" text-anchor="middle" fill="#EF4444" font-size="16" font-weight="600">Zero Capital Routed</text>
+        <rect x="37" y="156" width="160" height="28" rx="6" fill="#450A0A"/>
+        <text x="117" y="175" text-anchor="middle" fill="#FCA5A5" font-size="13" font-weight="800">TRANSACTION BLOCKED</text>
+      </g>
+
+      <!-- Egress Footer -->
+      <g transform="translate(18, 728)">
+        <rect width="234" height="66" rx="10" fill="#090E1A" stroke="#1E293B" stroke-width="1.5"/>
+        <text x="117" y="40" text-anchor="middle" fill="#94A3B8" font-size="16" font-weight="800" letter-spacing="0.5">
+          RULEBOOK-GOVERNED EGRESS
+        </text>
+      </g>
+    </g>
+
+    <!-- Animated Data Packets -->
+    <circle class="anim-packet-allow" cx="0" cy="0" r="9" fill="#10B981" filter="drop-shadow(0 0 8px #10b981)"/>
+    <circle class="anim-packet-hold" cx="0" cy="0" r="9" fill="#F59E0B" filter="drop-shadow(0 0 8px #f59e0b)"/>
+    <circle class="anim-packet-deny" cx="0" cy="0" r="9" fill="#EF4444" filter="drop-shadow(0 0 8px #ef4444)"/>
+
+    <!-- ==================== FOOTER BAR ==================== -->
+    <g transform="translate(30, 915)">
+      <rect width="964" height="84" rx="12" fill="#090E1A" stroke="#1E293B" stroke-width="1.5"/>
+      
+      <!-- Brand & Title Left -->
+      <text x="24" y="36" fill="#FFFFFF" font-size="20" font-weight="800">SASKI AGENTIC</text>
+      <text x="24" y="60" fill="#94A3B8" font-size="14" font-weight="600">ILLUSTRATIVE ENTERPRISE WORKFLOW</text>
+
+      <!-- Center Guarantee -->
+      <text x="495" y="36" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="600">
+        Deterministic Rulebook Checks • Signed Attestation
+      </text>
+      <text x="495" y="60" text-anchor="middle" fill="#94A3B8" font-size="14" font-weight="500">
+        ALLOW • HOLD • DENY
+      </text>
+
+      <!-- Status Indicator Right -->
+      <g transform="translate(790, 20)">
+        <rect width="154" height="44" rx="22" fill="#064E3B" stroke="#10B981" stroke-width="1.8"/>
+        <circle cx="24" cy="22" r="5" fill="#34D399"/>
+        <text x="38" y="28" fill="#A7F3D0" font-size="15" font-weight="800" letter-spacing="1">ENFORCING</text>
+      </g>
+    </g>
+  </svg>
+</div>
+</body>
+</html>
