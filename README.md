@@ -50,7 +50,7 @@ The demo CTA uses the booking URL linked from the existing contact page. The new
 
 - User's September 23, 2026 build request and referenced conversation: **AI Visibility for SASKI**.
 - User-supplied SASKI Public Website Content Inventory and SASKI Website Change Recommendations (July 20, 2026).
-- Existing public Findings and Contact pages checked September 23, 2026.
+- Existing Findings content was reviewed in the legacy Durable editor on September 23, 2026. The new page adapts the technical observations while omitting unreviewed regulatory conclusions and unsupported performance claims.
 - [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 Current Agentic-first direction takes precedence over earlier SDK-led homepage recommendations. Unsupported latency, savings percentages, compliance guarantees, FDA claims, customer/partner claims, and old pricing are omitted. The homepage action panel is explicitly labeled illustrative. No proprietary SDK/Agentic code or internal documents are included.
@@ -59,6 +59,6 @@ Estate content is adapted from the user-supplied **SASKI_Estates_Product_Sheet_v
 
 The Institute, Agentic, and Estate logos are the supplied original PNG artwork. The Institute logo appears in the header/footer and Organization schema; product logos appear on the matching product pages and in Product schema. About includes the supplied portraits and biographies in leadership order: Stephen Calhoun (Founder & CEO), Ishak Kang (Co-founder & COO), and Dick Dawson (Co-founder & CRO). Dick's CRO title reflects his sales and business-development remit.
 
-Source-access clarification: the rebuild used the saved prior-conversation content inventory and recommendations. Web retrieval returned previously crawled Findings and Contact content, while the homepage fetch timed out. This was not a verified live review of the complete legacy website.
+Source-access clarification: the rebuild used the saved prior-conversation content inventory and recommendations. The legacy Durable Findings page was later reviewed directly in the authenticated editor; other legacy pages have not received the same complete editorial review.
 
 The social card was generated with OpenAI's built-in image generation using the official SASKI Institute logo as the reference. Final prompt: a restrained 1.91:1 navy/teal B2B card with the official logo and the exact text “AI understands. SASKI governs.” and “Deterministic governance for AI, from conversations to real-world actions.”
