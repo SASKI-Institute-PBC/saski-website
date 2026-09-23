@@ -56,3 +56,5 @@ The demo CTA uses the booking URL linked from the existing contact page. The new
 Current Agentic-first direction takes precedence over earlier SDK-led homepage recommendations. Unsupported latency, savings percentages, compliance guarantees, FDA claims, customer/partner claims, and old pricing are omitted. The homepage action panel is explicitly labeled illustrative. No proprietary SDK/Agentic code or internal documents are included.
 
 Estate content is adapted from the user-supplied **SASKI_Estates_Product_Sheet_v2.pdf**. The website uses the singular product name from its title, preserves the supported-system list and labeled lab example, and does not repeat legal-outcome guarantees. The original PDF is not republished.
+
+The Institute, Agentic, and Estate logos are the supplied original PNG artwork. The Institute logo appears in the header/footer and Organization schema; product logos appear on the matching product pages and in Product schema. Team profiles will live on About once names, roles, biographies, and portraits are supplied. No placeholder people are published.

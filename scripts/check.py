@@ -34,7 +34,7 @@ for file in pages:
     assert p.ld and p.ld[0]['@context']=='https://schema.org',file
     ids={a['id'] for t,a in tags if 'id' in a}
     for t,a in tags:
-        target=a.get('href') if t=='a' else a.get('src') if t=='script' else a.get('href') if t=='link' and a.get('rel') in ['stylesheet','icon'] else None
+        target=a.get('href') if t=='a' else a.get('src') if t in ['script','img'] else a.get('href') if t=='link' and a.get('rel') in ['stylesheet','icon'] else None
         if not target: continue
         u=urlparse(target)
         if u.scheme or u.netloc: continue
@@ -46,6 +46,7 @@ for file in pages:
         if u.path.endswith('/'): dest=dest/'index.html'
         assert dest.is_file(),(file,target)
     for t,a in tags:
+        if t=='img': assert 'alt' in a and a.get('width') and a.get('height'),(file,a)
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}

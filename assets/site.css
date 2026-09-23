@@ -14,3 +14,14 @@
 .troubleshooting li{padding:13px 0 13px 8px;border-bottom:1px solid #cad8cf}
 .troubleshooting li::marker{color:var(--teal);font-weight:700}
 @media(max-width:760px){.product-grid{grid-template-columns:1fr}.product-grid .card:nth-child(n){border:0;border-bottom:1px solid var(--line)}.product-grid .card:last-child{border:0}}
+
+/* Supplied brand artwork: preserve original proportions and colors. */
+.institute-logo{display:block;width:110px;height:110px;object-fit:contain;background:white}
+.site-header,.site-header .header-inner{background:white}
+.header-inner{min-height:126px}
+.policy-logo{display:block;object-fit:contain;background:white;flex-shrink:0}
+.product-hero{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:60px;align-items:center}
+.product-hero h1{font-size:clamp(44px,4.5vw,64px)}
+.product-logo{width:280px;height:280px;object-fit:contain;background:white;border:1px solid var(--line)}
+@media(max-width:1050px){.header-inner{padding:8px 0}.product-hero{grid-template-columns:minmax(0,1fr) 210px;gap:28px}.product-logo{width:210px;height:210px}}
+@media(max-width:760px){.institute-logo{width:96px;height:96px}.header-inner{min-height:108px}.product-hero{grid-template-columns:1fr;gap:30px}.product-logo{width:200px;height:200px}.product-hero h1{font-size:44px}}
