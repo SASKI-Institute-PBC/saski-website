@@ -1,6 +1,6 @@
 # SASKI Institute website
 
-Static website for SASKI-Institute-PBC, built around SASKI Agentic, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies, cookies, analytics, or form backend.
+Static website for SASKI-Institute-PBC, built around SASKI Agentic, Estate, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies, cookies, analytics, or form backend.
 
 ## Preview locally
 
@@ -26,8 +26,9 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Agentic-led positioning and three-product overview |
+| `/` | Agentic-led positioning and four-product overview |
 | `/agentic/` | Governance of agent actions |
+| `/estate/` | Governed smart-home control and troubleshooting for integrators |
 | `/sdk/` | Human-facing interaction governance |
 | `/replay/` | Historical policy evaluation and evidence |
 | `/how-it-works/` | Independent enforcement architecture |
@@ -53,3 +54,5 @@ The demo CTA uses the booking URL linked from the existing contact page. The new
 - [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 Current Agentic-first direction takes precedence over earlier SDK-led homepage recommendations. Unsupported latency, savings percentages, compliance guarantees, FDA claims, customer/partner claims, and old pricing are omitted. The homepage action panel is explicitly labeled illustrative. No proprietary SDK/Agentic code or internal documents are included.
+
+Estate content is adapted from the user-supplied **SASKI_Estates_Product_Sheet_v2.pdf**. The website uses the singular product name from its title, preserves the supported-system list and labeled lab example, and does not repeat legal-outcome guarantees. The original PDF is not republished.

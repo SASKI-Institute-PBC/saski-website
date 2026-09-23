@@ -49,7 +49,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==10
+assert len(listed)==11
 assert listed.issubset(canonical_seen)
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
 assert not (ROOT/'CNAME').exists()
