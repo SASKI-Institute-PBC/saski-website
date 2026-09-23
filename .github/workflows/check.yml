@@ -1,0 +1,15 @@
+name: Validate website
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build staging site
+        run: python3 scripts/build.py
+      - name: Check pages and links
+        run: python3 scripts/check.py
+      - name: Check JavaScript syntax
+        run: node --check assets/site.js

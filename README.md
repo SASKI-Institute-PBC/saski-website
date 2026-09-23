@@ -1,6 +1,6 @@
 # SASKI Institute website
 
-Static website for SASKI-Institute-PBC, built around SASKI Agentic, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies, cookies, analytics, or form backend.
+Static website for SASKI-Institute-PBC, built around SASKI Agentic, Estate, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies or form backend. The production build offers optional Google Analytics; it does not load Analytics until the visitor accepts.
 
 ## Preview locally
 
@@ -16,7 +16,7 @@ Open http://localhost:4173. Edit content and metadata in `scripts/build.py`, sty
 
 The default build targets `https://saski-institute-pbc.github.io/saski-website/`. It handles the repository subpath in links, assets, canonicals, structured data, and sitemap. Staging pages use `noindex,follow`; robots.txt allows crawling so crawlers can observe that directive. This does not make the staging site private.
 
-The Pages workflow is manually triggered, so pushing or merging does not deploy. After the implementation is merged, select GitHub Actions as the repository's Pages source and run **Deploy Pages preview**. The separate validation workflow builds and checks pull requests and pushes. No CNAME file is included. Durable remains live and DNS is unchanged.
+The Pages workflow is manually triggered, so pushing or merging does not deploy. After the implementation is merged, select GitHub Actions as the repository's Pages source and run **Deploy Pages preview**. The separate validation workflow builds and checks pull requests and pushes. No CNAME file is included. Durable hosting and DNS are unchanged; availability of the legacy site has not been verified.
 
 ## Production, later
 
@@ -26,8 +26,9 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Agentic-led positioning and three-product overview |
+| `/` | Agentic-led positioning and four-product overview |
 | `/agentic/` | Governance of agent actions |
+| `/estate/` | Governed smart-home control and troubleshooting for integrators |
 | `/sdk/` | Human-facing interaction governance |
 | `/replay/` | Historical policy evaluation and evidence |
 | `/how-it-works/` | Independent enforcement architecture |
@@ -37,7 +38,7 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 | `/about/` | Institute and public-benefit purpose |
 | `/contact-us/` | Demo scheduling using the existing booking URL |
 
-Every page has a unique title/description, canonical, Open Graph and Twitter metadata, Organization JSON-LD, and appropriate page schema. Product pages add Product schema; Findings adds Article schema. No invented prices, ratings, review counts, or publication dates are included. Social image tags are deliberately omitted until an approved brand image is supplied.
+Every page has a unique title/description, canonical, Open Graph and Twitter metadata, Organization JSON-LD, and appropriate page schema. Product pages add Product schema; Findings adds Article schema. No invented prices, ratings, review counts, or publication dates are included. A branded 1.91:1 social card is wired through absolute Open Graph and X image metadata for Facebook, LinkedIn, and other link previews. `llms.txt` provides a concise, canonical product map for AI systems that choose to use the emerging convention; the semantic page content and structured data remain the primary machine-readable sources.
 
 ## Migration scope
 
@@ -53,3 +54,11 @@ The demo CTA uses the booking URL linked from the existing contact page. The new
 - [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 Current Agentic-first direction takes precedence over earlier SDK-led homepage recommendations. Unsupported latency, savings percentages, compliance guarantees, FDA claims, customer/partner claims, and old pricing are omitted. The homepage action panel is explicitly labeled illustrative. No proprietary SDK/Agentic code or internal documents are included.
+
+Estate content is adapted from the user-supplied **SASKI_Estates_Product_Sheet_v2.pdf**. The website uses the singular product name from its title, preserves the supported-system list and labeled lab example, and does not repeat legal-outcome guarantees. The original PDF is not republished.
+
+The Institute, Agentic, and Estate logos are the supplied original PNG artwork. The Institute logo appears in the header/footer and Organization schema; product logos appear on the matching product pages and in Product schema. About includes the supplied portraits and biographies in leadership order: Stephen Calhoun (Founder & CEO), Ishak Kang (Co-founder & COO), and Dick Dawson (Co-founder & CRO). Dick's CRO title reflects his sales and business-development remit.
+
+Source-access clarification: the rebuild used the saved prior-conversation content inventory and recommendations. Web retrieval returned previously crawled Findings and Contact content, while the homepage fetch timed out. This was not a verified live review of the complete legacy website.
+
+The social card was generated with OpenAI's built-in image generation using the official SASKI Institute logo as the reference. Final prompt: a restrained 1.91:1 navy/teal B2B card with the official logo and the exact text “AI understands. SASKI governs.” and “Deterministic governance for AI, from conversations to real-world actions.”
