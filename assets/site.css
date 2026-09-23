@@ -69,3 +69,17 @@
 h1,.page-hero h1,.product-hero h1{letter-spacing:0}
 .section h2,.cta h2{letter-spacing:0}
 @media(max-width:1050px){h1,.page-hero h1,.product-hero h1{letter-spacing:0}}
+
+/* Agentic technical deep dive: the image supports equivalent semantic text. */
+.architecture-graphic{display:block;background:var(--ink);border:1px solid #294650;box-shadow:12px 14px 0 #dce6dd}
+.architecture-graphic img{display:block;width:100%;height:auto}
+.architecture-graphic:hover{outline:3px solid var(--teal);outline-offset:4px}
+.diagram-note{margin:24px 0 34px;color:var(--muted);font-size:12px}
+.stage-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #cad8cf}
+.stage-summary>div{padding:24px;border-right:1px solid #cad8cf}
+.stage-summary>div:last-child{border-right:0}
+.stage-summary span{display:block;color:var(--teal);font:11px monospace;letter-spacing:1px;margin-bottom:20px}
+.stage-summary h3{font-size:19px;margin-bottom:10px}
+.stage-summary p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+@media(max-width:1050px){.stage-summary{grid-template-columns:1fr 1fr}.stage-summary>div{border-bottom:1px solid #cad8cf}.stage-summary>div:nth-child(2){border-right:0}.stage-summary>div:nth-child(n+3){border-bottom:0}.architecture-graphic{box-shadow:7px 8px 0 #dce6dd}}
+@media(max-width:760px){.stage-summary{grid-template-columns:1fr}.stage-summary>div:nth-child(n){border-right:0;border-bottom:1px solid #cad8cf}.stage-summary>div:last-child{border-bottom:0}.architecture-graphic{overflow:auto}.architecture-graphic img{width:900px;max-width:none}.diagram-note{margin-top:18px}}
