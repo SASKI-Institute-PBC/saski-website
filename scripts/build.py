@@ -71,7 +71,7 @@ add('about','About SASKI Institute PBC','SASKI Institute PBC develops independen
 team_members = [
     ('Stephen Calhoun', 'Founder & CEO', 'A seasoned technology leader with 35+ years of multidisciplinary experience—now focused on the evolving intersection of AI, infrastructure, and human-centered design.', 'stephen-calhoun.png', 374, 532),
     ('Ishak Kang', 'Co-founder & COO', 'Ishak supports SASKI Institute’s growth by translating complex AI, healthcare, and governance technology into clear strategic value grounded in systems thinking, ethical design, and scalable implementation.', 'ishak-kang.jpeg', 400, 400),
-    ('Dick Dawson', 'Co-founder & Chief Revenue Officer', 'Dick has over two decades of enterprise sales and business development experience, including 10 years at Oracle as Global Business Development Manager. He specializes in turning complex technology into clear business value and scalable revenue.', 'dick-dawson.png', 1739, 1736),
+    ('Dick Dawson', 'Co-founder & CRO', 'Dick has over two decades of enterprise sales and business development experience, including 10 years at Oracle as Global Business Development Manager. He specializes in turning complex technology into clear business value and scalable revenue.', 'dick-dawson.png', 1739, 1736),
 ]
 team_html = '<div class="team-grid">' + ''.join(
     f'<article class="team-member"><img src="{PREFIX}/assets/{photo}" alt="{name}" width="{width}" height="{height}" loading="lazy"><div class="team-caption"><h3>{name}</h3><p class="team-role">{html.escape(role)}</p><p class="team-bio">{html.escape(bio)}</p></div></article>'
