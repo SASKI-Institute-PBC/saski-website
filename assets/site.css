@@ -31,5 +31,6 @@
 .team-member img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:center 30%}
 .team-caption{padding:25px}
 .team-caption h3{margin-bottom:8px;font-size:23px}
-.team-caption p{margin:0;font-size:14px;color:var(--teal);font-weight:600}
+.team-caption .team-role{margin:0;font-size:14px;color:var(--teal);font-weight:600}
+.team-caption .team-bio{margin:18px 0 0;font-size:14px;color:var(--muted);font-weight:400;line-height:1.65}
 @media(max-width:760px){.team-grid{grid-template-columns:1fr;gap:30px}.team-member{max-width:440px;width:100%}}
