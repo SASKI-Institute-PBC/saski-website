@@ -43,3 +43,24 @@
 .consent-banner p{margin:0;color:var(--muted);font-size:14px}
 .consent-actions{display:flex;align-items:center;gap:20px;flex-shrink:0}
 @media(max-width:760px){.consent-banner{left:12px;right:12px;bottom:12px;align-items:flex-start;flex-direction:column;gap:20px}.consent-actions{width:100%;justify-content:space-between}}
+
+/* Centered company title, Estate video, and governed-action diagram. */
+.header-inner{display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:10px 24px;padding:10px 0 16px}
+.header-title{justify-self:center;text-align:center;font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.header-title:hover{text-decoration:none;color:var(--teal)}
+.header-inner nav{grid-column:1/-1;justify-content:center}
+.menu-toggle{grid-column:3;grid-row:1;justify-self:end}
+.video-shell{position:relative;width:100%;aspect-ratio:16/9;background:var(--ink);box-shadow:12px 14px 0 #dce6dd}
+.video-shell iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-note{margin:28px 0 0;color:var(--muted);font-size:13px}
+.estate-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;margin:0;background:var(--line);border:1px solid var(--line)}
+.estate-flow>div{position:relative;background:var(--paper);padding:26px 22px;min-height:210px}
+.estate-flow>div:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:24px;z-index:1;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:white;font-size:12px}
+.estate-flow span{display:block;color:var(--teal);font:11px monospace;letter-spacing:1px;margin-bottom:35px}
+.estate-flow strong{display:block;font-size:17px;line-height:1.3;margin-bottom:12px}
+.estate-flow p{font-size:13px;line-height:1.55;color:var(--muted);margin:0}
+.estate-flow .estate-govern{background:var(--ink);color:white}
+.estate-flow .estate-govern span{color:var(--mint)}
+.estate-flow .estate-govern p{color:#c7d7d5}
+@media(max-width:1050px){.header-inner{display:grid;grid-template-columns:96px minmax(0,1fr) 96px;flex-wrap:nowrap}.header-inner nav{grid-column:1/-1;width:100%;justify-content:center;padding:15px 0}.estate-flow{grid-template-columns:1fr 1fr}.estate-flow>div{min-height:175px}.estate-flow>div:last-child{grid-column:1/-1}.estate-flow>div:not(:last-child)::after{display:none}}
+@media(max-width:760px){.header-inner{grid-template-columns:82px minmax(0,1fr) 82px}.header-title{font-size:13px;line-height:1.3;letter-spacing:1.4px;white-space:normal}.video-shell{box-shadow:7px 8px 0 #dce6dd}.estate-flow{grid-template-columns:1fr}.estate-flow>div,.estate-flow>div:last-child{grid-column:auto;min-height:0}.estate-flow span{margin-bottom:18px}}
