@@ -1,6 +1,6 @@
 # SASKI Institute website
 
-Static website for SASKI-Institute-PBC, built around SASKI Agentic, Estate, SDK, and Replay. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies or form backend. The production build offers optional Google Analytics; it does not load Analytics until the visitor accepts.
+Static website for SASKI-Institute-PBC, positioning SASKI as independent governance infrastructure that helps organizations de-risk AI through enforceable rulebooks and verifiable attestation. The product order is Agentic, SDK, Replay, and Estate; Estate is presented as a vertical application of the same architecture. Python 3 generates complete semantic HTML; the deployed site uses only HTML, CSS, and a small JavaScript file. There are no runtime dependencies or form backend. The production build offers optional Google Analytics; it does not load Analytics until the visitor accepts.
 
 ## Preview locally
 
@@ -28,9 +28,9 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 | --- | --- |
 | `/` | Agentic-led positioning and four-product overview |
 | `/agentic/` | Governance of agent actions |
-| `/estate/` | Governed smart-home control and troubleshooting for integrators |
 | `/sdk/` | Human-facing interaction governance |
 | `/replay/` | Historical policy evaluation and evidence |
+| `/estate/` | Smart-home application of SASKI rulebook governance and attestation |
 | `/how-it-works/` | Independent enforcement architecture |
 | `/findings/` | Condensed six-failure-class research article |
 | `/resources/` | Findings, architecture, and Tokenator discovery |
