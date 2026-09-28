@@ -267,8 +267,7 @@ private_source='\n'.join(private_lines[1:]).replace('**[Embed The Calhoun Foreca
 private_pdf=(
     '<section class="private-pdf" id="calhoun-forecasts-document"><p class="eyebrow">The Calhoun Forecasts</p>'
     '<h2>Read the full forecast record</h2><p>The 12-page document compares the technology forecasts Stephen wrote in 2001 and 2013 with later developments.</p>'
-    f'<object data="{PREFIX}/assets/documents/calhoun-forecasts.pdf#view=FitH" type="application/pdf" aria-label="The Calhoun Forecasts PDF">'
-    f'<p>Your browser cannot display the PDF here. <a href="{PREFIX}/assets/documents/calhoun-forecasts.pdf">Open The Calhoun Forecasts</a>.</p></object>'
+    f'<iframe src="{PREFIX}/assets/documents/calhoun-forecasts.pdf#view=FitH" title="The Calhoun Forecasts PDF" loading="lazy"></iframe>'
     f'<div class="private-pdf-actions"><a class="button" href="{PREFIX}/assets/documents/calhoun-forecasts.pdf" target="_blank" rel="noopener">Open the PDF ↗</a>'
     f'<a class="button button-secondary" href="{PREFIX}/assets/documents/calhoun-forecasts.pdf" download="The_Calhoun_Forecasts.pdf">Download the PDF ↓</a></div></section>'
 )
