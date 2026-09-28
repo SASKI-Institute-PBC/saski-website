@@ -16,7 +16,7 @@ For a kid whose strongest ability may have been seeing connections and possibili
 
 ## 62 Jobs. Thousands of Dots.
 
-Over roughly 30 years, I worked more than 60 jobs. Some were highly technical. Some absolutely were not.
+Over roughly 40 years, I worked more than 60 jobs. Some were highly technical. Some absolutely were not.
 
 I stocked vitamins for my parents for $3 an hour. I worked construction, farms, restaurants, ski shops and marinas. I worked aboard large yachts. I drafted architecture, HVAC, electrical, plumbing and mechanical systems. I worked around hospitals, semiconductor facilities and major construction projects. I repaired computers and printers, managed technicians, built networks, administered servers, designed websites, programmed automation systems and eventually started companies of my own.
 
