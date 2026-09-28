@@ -38,8 +38,9 @@ for file in pages:
     assert meta['og:image'].endswith('/assets/social-share.png'),file
     assert meta['twitter:card']=='summary_large_image',file
     assert p.ld and p.ld[0]['@context']=='https://schema.org',file
-    assert (GA_ID in source)==SITE_PUBLIC,file
-    assert ('data-analytics-consent' in source)==SITE_PUBLIC,file
+    analytics_expected=SITE_PUBLIC and meta['robots']!='noindex,nofollow'
+    assert (GA_ID in source)==analytics_expected,file
+    assert ('data-analytics-consent' in source)==analytics_expected,file
     ids={a['id'] for t,a in tags if 'id' in a}
     for t,a in tags:
         target=a.get('href') if t=='a' else a.get('src') if t in ['script','img','iframe'] else a.get('href') if t=='link' and a.get('rel') in ['stylesheet','icon'] else None

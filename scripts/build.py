@@ -12,6 +12,52 @@ def url(path=''): return PREFIX+'/'+path.strip('/')+('/' if path else '')
 def link(path,label,cls=''): return f'<a class="{cls}" href="{url(path)}">{label}</a>'
 def cards(items): return '<div class="cards'+(' product-grid' if len(items)==4 else '')+'">'+''.join(f'<article class="card"><span class="eyebrow">{n:02d} / {k}</span><h3>{t}</h3><p>{d}</p>{link(p,"Explore "+t+" <span aria-hidden=\"true\">↗</span>","text-link") if p else ""}</article>' for n,(k,t,d,p) in enumerate(items,1))+'</div>'
 def section(k,t,body,cls=''): return f'<section class="section {cls}"><div class="wrap"><div class="section-heading"><p class="eyebrow">{k}</p><h2>{t}</h2></div>{body}</div></section>'
+def legal_inline(text):
+    text=text.replace(r'\[','[').replace(r'\]',']')
+    text=html.escape(text)
+    text=re.sub(r'\*\*(.+?)\*\*',r'<strong>\1</strong>',text)
+    text=re.sub(r'\[([^\[\]]+)\]',r'<mark class="legal-placeholder">[\1]</mark>',text)
+    text=text.replace('info@saski.io','<a href="mailto:info@saski.io">info@saski.io</a>')
+    text=text.replace('www.saski.io','<a href="https://www.saski.io">www.saski.io</a>')
+    return text
+def legal_markdown(text):
+    lines=text.splitlines(); out=[]; i=0
+    def structural(value):
+        return not value or value.startswith('#') or value.startswith('|') or value.startswith('- ') or re.match(r'^\d+\. ',value)
+    while i < len(lines):
+        line=lines[i].strip()
+        if not line: i+=1; continue
+        if line.startswith('### '):
+            title=line[4:]; slug=re.sub(r'[^a-z0-9]+','-',title.lower()).strip('-')
+            out.append(f'<h3 id="{slug}">{legal_inline(title)}</h3>'); i+=1; continue
+        if line.startswith('## '):
+            title=line[3:]; slug=re.sub(r'[^a-z0-9]+','-',title.lower()).strip('-')
+            out.append(f'<h2 id="{slug}">{legal_inline(title)}</h2>'); i+=1; continue
+        if line.startswith('# '):
+            title=line[2:]; slug=re.sub(r'[^a-z0-9]+','-',title.lower()).strip('-')
+            out.append(f'<h2 class="major-heading" id="{slug}">{legal_inline(title)}</h2>'); i+=1; continue
+        if line.startswith('|') and i+1 < len(lines) and re.match(r'^\|?\s*:?-+',lines[i+1].strip()):
+            headers=[c.strip() for c in line.strip('|').split('|')]; i+=2; rows=[]
+            while i < len(lines) and lines[i].strip().startswith('|'):
+                rows.append([c.strip() for c in lines[i].strip().strip('|').split('|')]); i+=1
+            head=''.join(f'<th scope="col">{legal_inline(c)}</th>' for c in headers)
+            body=''.join('<tr>'+''.join(f'<td>{legal_inline(c)}</td>' for c in row)+'</tr>' for row in rows)
+            out.append(f'<div class="legal-table-scroll"><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>'); continue
+        if line.startswith('- '):
+            items=[]
+            while i < len(lines) and lines[i].strip().startswith('- '):
+                items.append('<li>'+legal_inline(lines[i].strip()[2:])+'</li>'); i+=1
+            out.append('<ul>'+''.join(items)+'</ul>'); continue
+        if re.match(r'^\d+\. ',line):
+            items=[]
+            while i < len(lines) and re.match(r'^\d+\. ',lines[i].strip()):
+                items.append('<li>'+legal_inline(re.sub(r'^\d+\. ','',lines[i].strip()))+'</li>'); i+=1
+            out.append('<ol>'+''.join(items)+'</ol>'); continue
+        paragraph=[line]; i+=1
+        while i < len(lines) and not structural(lines[i].strip()):
+            paragraph.append(lines[i].strip()); i+=1
+        out.append('<p>'+legal_inline(' '.join(paragraph))+'</p>')
+    return ''.join(out)
 def hero(k,t,d):
     product = 'agentic' if k.startswith('SASKI Agentic /') else 'estate' if k.startswith('SASKI Estate /') else None
     logo = f'<img class="product-logo" src="{PREFIX}/assets/{product}-logo.png" alt="SASKI {product.title()} logo" width="280" height="280">' if product else ''
@@ -214,6 +260,28 @@ team_section = section('Our team', 'The people behind SASKI.', team_html)
 about_body = about_body.replace('<section class="section soft">', team_section + '<section class="section soft">', 1)
 pages['about'] = (about_title, about_desc, about_body, about_kind)
 
+private_source=(ROOT/'content'/'for-friends-and-family.md').read_text()
+private_lines=private_source.splitlines()
+private_heading=private_lines[0].removeprefix('# ').strip()
+private_source='\n'.join(private_lines[1:]).replace('**[Embed The Calhoun Forecasts PDF here]**','PRIVATE_PDF_EMBED')
+private_pdf=(
+    '<section class="private-pdf" id="calhoun-forecasts-document"><p class="eyebrow">The Calhoun Forecasts</p>'
+    '<h2>Read the full forecast record</h2><p>The 12-page document compares the technology forecasts Stephen wrote in 2001 and 2013 with later developments.</p>'
+    f'<object data="{PREFIX}/assets/documents/calhoun-forecasts.pdf#view=FitH" type="application/pdf" aria-label="The Calhoun Forecasts PDF">'
+    f'<p>Your browser cannot display the PDF here. <a href="{PREFIX}/assets/documents/calhoun-forecasts.pdf">Open The Calhoun Forecasts</a>.</p></object>'
+    f'<div class="private-pdf-actions"><a class="button" href="{PREFIX}/assets/documents/calhoun-forecasts.pdf" target="_blank" rel="noopener">Open the PDF ↗</a>'
+    f'<a class="button button-secondary" href="{PREFIX}/assets/documents/calhoun-forecasts.pdf" download="The_Calhoun_Forecasts.pdf">Download the PDF ↓</a></div></section>'
+)
+private_article=legal_markdown(private_source).replace('<p>PRIVATE_PDF_EMBED</p>',private_pdf)
+private_body=(
+    '<article class="wrap private-article"><aside class="private-notice"><strong>For Your Eyes Only</strong>'
+    '<span>This is an unlisted personal note for friends and family. Please do not forward it without permission.</span></aside>'
+    f'<h1>{html.escape(private_heading)}</h1>'+private_article+'</article>'
+)
+add('for-your-eyes-only','For Your Eyes Only — A Note for Friends and Family','An unlisted personal note from Stephen Calhoun for friends and family.',private_body)
+UNLISTED_PATHS = {'for-your-eyes-only'}
+DRAFT_PATHS = {'for-your-eyes-only'}
+
 add('contact-us','Contact — De-risk AI with SASKI','Discuss how SASKI rulebook governance and attestation can de-risk your AI application. Schedule a demonstration of Agentic, SDK, Replay, or Estate.',hero('Contact','Where do you need<br> to reduce risk?','Tell us what your AI does, which interactions or actions matter, and what your rulebook must govern and attest.')+section('Talk with SASKI','Let’s map your use case.','<div class="contact-grid"><div class="contact-card"><p class="eyebrow">Product demonstration</p><h3>See the governed path.</h3><p>See how SASKI applies a rulebook to an AI decision and produces attestation your team can inspect.</p><a class="button" href="https://calendar.app.google/xDDyqy35d2zpwDTX7">Schedule a demonstration ↗</a><p class="small-copy">Opens Google’s appointment scheduling service.</p></div><div><h3>A useful place to start</h3><ul class="plain-list"><li>The risk you need to reduce</li><li>Your application or agent workflow</li><li>The rules and authority boundaries you need to enforce</li><li>The evidence your team needs to retain</li></ul><p>Please use a high-level description and avoid sharing sensitive records in the booking notes.</p></div></div>'))
 nav=[('agentic','Agentic'),('sdk','SDK'),('replay','Replay'),('estate','Estate'),('how-it-works','How it works'),('findings','Findings'),('resources','Resources'),('about','About')]
 def render(path,title,desc,body,kind):
@@ -229,11 +297,12 @@ def render(path,title,desc,body,kind):
     navhtml=''.join(f'<a href="{url(p)}"'+(' aria-current="page"' if p==path else '')+f'>{n}</a>' for p,n in nav)
     analytics_ui = ''
     analytics_manage = ''
-    if PUBLIC and GA_ID:
+    if PUBLIC and GA_ID and path not in UNLISTED_PATHS:
         analytics_ui = f'''<script>window.SASKI_GA_ID={json.dumps(GA_ID)};</script><aside class="consent-banner" data-analytics-consent role="dialog" aria-labelledby="analytics-title" hidden><div><h2 id="analytics-title">Optional analytics</h2><p>We use Google Analytics to understand how people use this site. Analytics loads only if you accept.</p></div><div class="consent-actions"><button type="button" class="text-button" data-consent="declined">Decline</button><button type="button" class="button" data-consent="granted">Accept analytics</button></div></aside>'''
         analytics_manage = '<button type="button" class="footer-choice" data-manage-consent>Analytics choices</button>'
+    robots='noindex,nofollow' if path in UNLISTED_PATHS else ('index,follow' if PUBLIC and path!='404' and path not in DRAFT_PATHS else 'noindex,follow')
     return f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc,quote=True)}"><link rel="canonical" href="{canonical}"><meta name="robots" content="{'index,follow' if PUBLIC and path!='404' else 'noindex,follow'}"><meta property="og:type" content="{'article' if kind=='Article' else 'website'}"><meta property="og:title" content="{html.escape(title,quote=True)}"><meta property="og:description" content="{html.escape(desc,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:site_name" content="SASKI Institute"><meta property="og:locale" content="en_US"><meta property="og:image" content="{social_image}"><meta property="og:image:secure_url" content="{social_image}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1734"><meta property="og:image:height" content="907"><meta property="og:image:alt" content="SASKI Institute — AI understands. SASKI governs."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{html.escape(title,quote=True)}"><meta name="twitter:description" content="{html.escape(desc,quote=True)}"><meta name="twitter:image" content="{social_image}"><meta name="twitter:image:alt" content="SASKI Institute — AI understands. SASKI governs."><meta name="theme-color" content="#102b32"><link rel="icon" type="image/png" href="{PREFIX}/assets/institute-logo.png"><link rel="stylesheet" href="{PREFIX}/assets/site.css"><script src="{PREFIX}/assets/site.js" defer></script><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner"><a class="brand" href="{url()}" aria-label="SASKI Institute home"><img class="institute-logo" src="{PREFIX}/assets/institute-logo.png" alt="SASKI Institute" width="110" height="110"></a><a class="header-title" href="{url()}">SASKI Institute PBC</a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu</button><nav id="navigation" aria-label="Main navigation">{navhtml}{link('contact-us','Request a demo ↗','nav-cta')}</nav></div></header><main id="main">{body}{'' if path in ['contact-us','404'] else cta()}</main><footer><div class="wrap footer-grid"><div><a class="brand" href="{url()}"><img class="institute-logo" src="{PREFIX}/assets/institute-logo.png" alt="SASKI Institute" width="110" height="110"></a><p>Independent governance.<br> Accountable AI.</p></div><div><h2>Products</h2>{link('agentic','SASKI Agentic')}{link('sdk','SASKI SDK')}{link('replay','SASKI Replay')}{link('estate','SASKI Estate')}</div><div><h2>Explore</h2>{link('how-it-works','How it works')}{link('findings','Findings')}{link('resources','Resources')}{link('tokenator','Token Savings')}</div><div><h2>Institute</h2>{link('about','About')}{link('contact-us','Contact')}<a href="https://github.com/SASKI-Institute-PBC">GitHub ↗</a>{analytics_manage}</div></div><div class="wrap footer-bottom"><span>© 2026 SASKI Institute PBC</span><span>AI understands. SASKI governs.</span></div></footer>{analytics_ui}</body></html>'''
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc,quote=True)}"><link rel="canonical" href="{canonical}"><meta name="robots" content="{robots}"><meta property="og:type" content="{'article' if kind=='Article' else 'website'}"><meta property="og:title" content="{html.escape(title,quote=True)}"><meta property="og:description" content="{html.escape(desc,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:site_name" content="SASKI Institute"><meta property="og:locale" content="en_US"><meta property="og:image" content="{social_image}"><meta property="og:image:secure_url" content="{social_image}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1734"><meta property="og:image:height" content="907"><meta property="og:image:alt" content="SASKI Institute — AI understands. SASKI governs."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{html.escape(title,quote=True)}"><meta name="twitter:description" content="{html.escape(desc,quote=True)}"><meta name="twitter:image" content="{social_image}"><meta name="twitter:image:alt" content="SASKI Institute — AI understands. SASKI governs."><meta name="theme-color" content="#102b32"><link rel="icon" type="image/png" href="{PREFIX}/assets/institute-logo.png"><link rel="stylesheet" href="{PREFIX}/assets/site.css"><script src="{PREFIX}/assets/site.js" defer></script><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner"><a class="brand" href="{url()}" aria-label="SASKI Institute home"><img class="institute-logo" src="{PREFIX}/assets/institute-logo.png" alt="SASKI Institute" width="110" height="110"></a><a class="header-title" href="{url()}">SASKI Institute PBC</a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu</button><nav id="navigation" aria-label="Main navigation">{navhtml}{link('contact-us','Request a demo ↗','nav-cta')}</nav></div></header><main id="main">{body}{'' if path in ['contact-us','404'] or path in DRAFT_PATHS or path in UNLISTED_PATHS else cta()}</main><footer><div class="wrap footer-grid"><div><a class="brand" href="{url()}"><img class="institute-logo" src="{PREFIX}/assets/institute-logo.png" alt="SASKI Institute" width="110" height="110"></a><p>Independent governance.<br> Accountable AI.</p></div><div><h2>Products</h2>{link('agentic','SASKI Agentic')}{link('sdk','SASKI SDK')}{link('replay','SASKI Replay')}{link('estate','SASKI Estate')}</div><div><h2>Explore</h2>{link('how-it-works','How it works')}{link('findings','Findings')}{link('resources','Resources')}{link('tokenator','Token Savings')}</div><div><h2>Institute</h2>{link('about','About')}{link('contact-us','Contact')}<a href="https://github.com/SASKI-Institute-PBC">GitHub ↗</a>{analytics_manage}</div></div><div class="wrap footer-bottom"><span>© 2026 SASKI Institute PBC</span><span>AI understands. SASKI governs.</span></div></footer>{analytics_ui}</body></html>'''
 OUT.mkdir(exist_ok=True)
 for old in OUT.iterdir():
     if old.is_dir(): shutil.rmtree(old)
@@ -244,7 +313,7 @@ for path,(title,desc,body,kind) in pages.items():
 (OUT/'404.html').write_text(render('404','Page not found | SASKI Institute','The requested page could not be found.',hero('404 / Page not found','Let’s find a better path.','This page may have moved or may not be part of our current site.')+'<div class="wrap section">'+link('','Return to the homepage','button')+'</div>','WebPage'))
 (OUT/'.nojekyll').touch()
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+BASE+'/sitemap.xml\n')
-(OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+html.escape(BASE+'/'+(p+'/' if p else ''))+'</loc></url>' for p in pages)+'</urlset>\n')
+(OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+html.escape(BASE+'/'+(p+'/' if p else ''))+'</loc></url>' for p in pages if p not in DRAFT_PATHS and p not in UNLISTED_PATHS)+'</urlset>\n')
 (OUT/'llms.txt').write_text(
     '# SASKI Institute PBC\n\n'
     '> SASKI helps organizations de-risk AI through enforceable rulebooks and verifiable attestation, from conversations to real-world actions.\n\n'
