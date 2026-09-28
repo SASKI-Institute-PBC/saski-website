@@ -110,8 +110,6 @@ The timing matters because there is an uncomfortable irony in where I am today. 
 
 SASKI itself continues moving forward. We have working technology, multiple products, experienced partners, enterprise conversations, manufacturer interest and opportunities developing across several industries. We were also accepted into the FDA TEMPO program for research involving behavioral-health AI systems.
 
-I do not need help because I have lost confidence in what I am building. I need help because I believe in it more strongly than I ever have, and I need enough runway to cross the distance between building the technology and generating meaningful recurring revenue from it.
-
 ## Maybe I Wasn’t Failing to Find My Place
 
 For most of my life, I thought I was failing to find where I belonged. I moved through industries, jobs, businesses and ideas looking for something I could never quite define.
