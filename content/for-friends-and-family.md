@@ -28,7 +28,7 @@ Steve Jobs once said, **“Creativity is just connecting things.”**
 
 I spent decades collecting things to connect.
 
-Architecture taught me how systems occupy physical space. HVAC taught me dependencies and environmental control. Construction taught me that drawings eventually have to survive reality. Networking taught me that invisible infrastructure determines whether everything above it works. Yachting taught me what happens when complicated systems operate in environments where failures matter. Home automation taught me what changes when software begins controlling the physical world.
+Architecture taught me how systems occupy physical space. HVAC taught me dependencies and environmental control. Construction taught me that drawings eventually have to survive reality. Yachting taught me what happens when complicated systems operate in environments where failures matter. Home automation taught me what changes when software begins controlling the physical world.
 
 Working with tradespeople, technicians, architects, engineers, executives, business owners, wealthy clients and startups taught me something else: different people can look at exactly the same system and see completely different problems.
 
