@@ -44,6 +44,8 @@ Twenty-five years of hindsight finally gave me a way to find out.
 
 # The Calhoun Forecasts
 
+**Fourteen strong hits across two forecasts.**
+
 **[Embed The Calhoun Forecasts PDF here]**
 
 The document compares what I actually wrote in 2001 and 2013 with what happened later. It includes the strong predictions, the partial ones, the late ones and the things I simply got wrong. I did not want to rewrite history. I wanted to know whether the pattern was real.
