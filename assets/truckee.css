@@ -1,0 +1,95 @@
+:root {
+  --truckee-pine: #1e3b32;
+  --truckee-pine-deep: #132b24;
+  --truckee-amber: #f2b24c;
+  --truckee-light: #eaf1ed;
+  --truckee-text: #1b1f1d;
+  --truckee-white: #fffefb;
+}
+
+.truckee-page {
+  margin: 0;
+  color: var(--truckee-text);
+  background: var(--truckee-white);
+  font-family: "Archivo", Arial, sans-serif;
+  line-height: 1.55;
+}
+
+.truckee-page *, .truckee-page *::before, .truckee-page *::after { box-sizing: border-box; }
+.truckee-page a { color: inherit; }
+.truckee-wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+.truckee-hero { position: relative; overflow: hidden; min-height: 690px; color: white; background: var(--truckee-pine); }
+.truckee-topbar { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; font-size: .78rem; font-weight: 800; letter-spacing: .13em; }
+.truckee-topbar img { display: block; width: 76px; height: 76px; border-radius: 50%; background: white; object-fit: contain; }
+.truckee-hero-copy { position: relative; z-index: 1; padding: 62px 0 170px; }
+.truckee-kicker, .truckee-eyebrow { margin: 0 0 18px; font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
+.truckee-hero h1 { max-width: 850px; margin: 0; font-size: clamp(3.6rem, 8.5vw, 7.4rem); font-weight: 800; letter-spacing: -.055em; line-height: .88; }
+.truckee-subhead { margin: 28px 0 12px; color: var(--truckee-amber); font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 800; letter-spacing: -.035em; line-height: 1; }
+.truckee-intro { max-width: 620px; margin: 0 0 32px; color: #d9e5df; font-size: 1.18rem; }
+.truckee-button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; border: 0; border-radius: 4px; padding: 14px 22px; color: #17251f; background: var(--truckee-amber); font: inherit; font-weight: 800; text-decoration: none; cursor: pointer; }
+.truckee-button:hover, .truckee-button:focus-visible { background: #ffc66d; }
+.truckee-ridge { position: absolute; right: -1px; bottom: -1px; left: -1px; width: calc(100% + 2px); height: 150px; }
+.truckee-section { padding: 100px 0; }
+.truckee-section h2 { max-width: 720px; margin: 0 0 22px; color: var(--truckee-pine-deep); font-size: clamp(2.45rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -.045em; line-height: .98; }
+.truckee-eyebrow { color: #536b62; }
+.truckee-lead { max-width: 720px; margin: 0 0 40px; font-size: 1.25rem; }
+.truckee-services { background: var(--truckee-light); }
+.truckee-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 50px; }
+.truckee-cards article { min-height: 190px; padding: 30px; border: 1px solid #c8d8d0; background: #f8fbf9; }
+.truckee-cards span { color: #74877f; font-size: .8rem; font-weight: 800; }
+.truckee-cards h3 { margin: 36px 0 8px; color: var(--truckee-pine); font-size: 1.35rem; }
+.truckee-cards p { margin: 0; }
+.truckee-safety { background: #d9e8df; }
+.truckee-safety-grid, .truckee-about-grid, .truckee-contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; align-items: start; }
+.truckee-safety-grid > p { margin: 43px 0 0; font-size: 1.35rem; }
+.truckee-process ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 54px 0 0; padding: 0; list-style: none; }
+.truckee-process li { border-top: 3px solid var(--truckee-amber); padding-top: 24px; }
+.truckee-process li > span { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; color: white; background: var(--truckee-pine); font-weight: 800; }
+.truckee-process h3 { margin: 25px 0 8px; font-size: 1.3rem; }
+.truckee-process p { margin: 0; }
+.truckee-about { color: white; background: var(--truckee-pine); }
+.truckee-about h2, .truckee-about .truckee-eyebrow { color: white; }
+.truckee-about p { color: #e0eae5; }
+.truckee-text-link, .truckee-contact-links a { display: block; width: fit-content; margin-top: 20px; color: var(--truckee-amber) !important; font-weight: 700; }
+.truckee-contact { background: var(--truckee-white); }
+.truckee-contact-links { margin-top: 34px; }
+.truckee-contact-links a { margin-top: 11px; }
+.truckee-form { padding: 32px; border: 1px solid #cbd7d1; background: var(--truckee-light); }
+.truckee-form label { display: block; margin: 0 0 7px; font-size: .9rem; font-weight: 700; }
+.truckee-form label span { font-weight: 400; }
+.truckee-form input, .truckee-form textarea { width: 100%; margin: 0 0 18px; border: 1px solid #91a49b; border-radius: 3px; padding: 12px; color: var(--truckee-text); background: white; font: inherit; }
+.truckee-form textarea { resize: vertical; }
+.truckee-form .truckee-button { width: 100%; }
+.truckee-form-note, .truckee-form-status { margin: 12px 0 0; color: #53635c; font-size: .83rem; }
+.truckee-form-status { color: var(--truckee-pine); font-weight: 700; }
+.truckee-footer { padding: 48px 0; color: #dfe8e3; background: var(--truckee-pine-deep); }
+.truckee-footer .truckee-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+.truckee-footer p { margin: 0; }
+.truckee-footer a { color: white; }
+.truckee-footer .footer-choice { color: white; }
+
+@media (max-width: 720px) {
+  .truckee-wrap { width: min(100% - 28px, 1120px); }
+  .truckee-hero { min-height: 640px; }
+  .truckee-topbar { gap: 20px; font-size: .68rem; text-align: right; }
+  .truckee-topbar img { width: 62px; height: 62px; }
+  .truckee-hero-copy { padding-top: 68px; }
+  .truckee-hero h1 { font-size: clamp(3.25rem, 16vw, 5.25rem); }
+  .truckee-intro { font-size: 1.05rem; }
+  .truckee-button { width: 100%; text-align: center; }
+  .truckee-section { padding: 72px 0; }
+  .truckee-cards, .truckee-safety-grid, .truckee-about-grid, .truckee-contact-grid, .truckee-process ol { grid-template-columns: 1fr; }
+  .truckee-cards { margin-top: 34px; }
+  .truckee-cards article { min-height: 160px; }
+  .truckee-cards h3 { margin-top: 24px; }
+  .truckee-safety-grid, .truckee-about-grid, .truckee-contact-grid { gap: 24px; }
+  .truckee-safety-grid > p { margin-top: 0; }
+  .truckee-process ol { gap: 34px; }
+  .truckee-form { padding: 22px; }
+  .truckee-footer .truckee-wrap { display: block; }
+  .truckee-footer p + p { margin-top: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .truckee-page { scroll-behavior: auto; }
+}

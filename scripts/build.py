@@ -1,5 +1,6 @@
 from pathlib import Path
 import json, os, html, shutil, re
+from truckee import render as render_truckee
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
 BASE=os.getenv('SITE_URL','https://saski-institute-pbc.github.io/saski-website').rstrip('/')
@@ -282,6 +283,7 @@ UNLISTED_PATHS = {'for-your-eyes-only'}
 DRAFT_PATHS = {'for-your-eyes-only'}
 
 add('contact-us','Contact — De-risk AI with SASKI','Discuss how SASKI rulebook governance and attestation can de-risk your AI application. Schedule a demonstration of Agentic, SDK, Replay, or Estate.',hero('Contact','Where do you need<br> to reduce risk?','Tell us what your AI does, which interactions or actions matter, and what your rulebook must govern and attest.')+section('Talk with SASKI','Let’s map your use case.','<div class="contact-grid"><div class="contact-card"><p class="eyebrow">Product demonstration</p><h3>See the governed path.</h3><p>See how SASKI applies a rulebook to an AI decision and produces attestation your team can inspect.</p><a class="button" href="https://calendar.app.google/xDDyqy35d2zpwDTX7">Schedule a demonstration ↗</a><p class="small-copy">Opens Google’s appointment scheduling service.</p></div><div><h3>A useful place to start</h3><ul class="plain-list"><li>The risk you need to reduce</li><li>Your application or agent workflow</li><li>The rules and authority boundaries you need to enforce</li><li>The evidence your team needs to retain</li></ul><p>Please use a high-level description and avoid sharing sensitive records in the booking notes.</p></div></div>'))
+add('truckee-locals','AI help for Truckee businesses','Free 30 minute walkthrough for Truckee small businesses. AI assistants that handle busywork, designed so nothing happens without your approval.','','WebPage')
 nav=[('agentic','Agentic'),('sdk','SDK'),('replay','Replay'),('estate','Estate'),('how-it-works','How it works'),('findings','Findings'),('resources','Resources'),('about','About')]
 def render(path,title,desc,body,kind):
     canonical=BASE+'/'+(path+'/' if path else '')
@@ -308,7 +310,8 @@ for old in OUT.iterdir():
     else: old.unlink()
 shutil.copytree(ROOT/'assets',OUT/'assets')
 for path,(title,desc,body,kind) in pages.items():
-    dest=OUT/path/'index.html'; dest.parent.mkdir(parents=True,exist_ok=True); dest.write_text(render(path,title,desc,body,kind))
+    dest=OUT/path/'index.html'; dest.parent.mkdir(parents=True,exist_ok=True)
+    dest.write_text(render_truckee(PREFIX,BASE,PUBLIC,GA_ID) if path=='truckee-locals' else render(path,title,desc,body,kind))
 (OUT/'404.html').write_text(render('404','Page not found | SASKI Institute','The requested page could not be found.',hero('404 / Page not found','Let’s find a better path.','This page may have moved or may not be part of our current site.')+'<div class="wrap section">'+link('','Return to the homepage','button')+'</div>','WebPage'))
 (OUT/'.nojekyll').touch()
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+BASE+'/sitemap.xml\n')
