@@ -23,8 +23,8 @@
 .truckee-topbar img { display: block; width: 76px; height: 76px; border-radius: 50%; background: white; object-fit: contain; }
 .truckee-hero-copy { position: relative; z-index: 1; padding: 62px 0 170px; }
 .truckee-kicker, .truckee-eyebrow { margin: 0 0 18px; font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
-.truckee-hero h1 { max-width: 850px; margin: 0; font-size: clamp(3.6rem, 8.5vw, 7.4rem); font-weight: 800; letter-spacing: -.055em; line-height: .88; }
-.truckee-subhead { margin: 28px 0 12px; color: var(--truckee-amber); font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 800; letter-spacing: -.035em; line-height: 1; }
+.truckee-hero h1 { max-width: 930px; margin: 0; font-size: clamp(3.6rem, 8.5vw, 7.4rem); font-weight: 800; letter-spacing: -.018em; line-height: .94; }
+.truckee-subhead { margin: 28px 0 12px; color: var(--truckee-amber); font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 800; letter-spacing: -.008em; line-height: 1.08; }
 .truckee-intro { max-width: 620px; margin: 0 0 32px; color: #d9e5df; font-size: 1.18rem; }
 .truckee-button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; border: 0; border-radius: 4px; padding: 14px 22px; color: #17251f; background: var(--truckee-amber); font: inherit; font-weight: 800; text-decoration: none; cursor: pointer; }
 .truckee-button:hover, .truckee-button:focus-visible { background: #ffc66d; }
