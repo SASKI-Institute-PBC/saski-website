@@ -65,6 +65,8 @@
 .truckee-form input, .truckee-form textarea { width: 100%; margin: 0 0 18px; border: 1px solid #91a49b; border-radius: 3px; padding: 12px; color: var(--truckee-text); background: white; font: inherit; }
 .truckee-form textarea { resize: vertical; }
 .truckee-form .truckee-button { width: 100%; }
+.truckee-form .truckee-button:disabled { cursor: wait; opacity: .72; }
+.truckee-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
 .truckee-form-note, .truckee-form-status { margin: 12px 0 0; color: #53635c; font-size: .83rem; }
 .truckee-form-status { color: var(--truckee-pine); font-weight: 700; }
 .truckee-footer { padding: 48px 0; color: #dfe8e3; background: var(--truckee-pine-deep); }
