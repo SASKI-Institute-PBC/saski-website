@@ -51,6 +51,11 @@
 .truckee-about h2, .truckee-about .truckee-eyebrow { color: white; }
 .truckee-about p { color: #e0eae5; }
 .truckee-text-link, .truckee-contact-links a { display: block; width: fit-content; margin-top: 20px; color: var(--truckee-amber) !important; font-weight: 700; }
+.truckee-learn-more { padding: 58px 0; color: white; background: #294a3f; }
+.truckee-learn-more .truckee-wrap { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.truckee-learn-more .truckee-eyebrow { margin-bottom: 9px; color: #c8d9d1; }
+.truckee-learn-more h2 { max-width: 680px; margin: 0; color: white; font-size: clamp(1.8rem, 3.4vw, 3rem); font-weight: 800; letter-spacing: -.018em; line-height: 1.05; }
+.truckee-learn-more .truckee-button { flex: 0 0 auto; }
 .truckee-contact { background: var(--truckee-white); }
 .truckee-contact-links { margin-top: 34px; }
 .truckee-contact-links a { margin-top: 11px; }
@@ -83,6 +88,8 @@
   .truckee-cards article { min-height: 160px; }
   .truckee-cards h3 { margin-top: 24px; }
   .truckee-safety-grid, .truckee-about-grid, .truckee-contact-grid { gap: 24px; }
+  .truckee-learn-more .truckee-wrap { display: block; }
+  .truckee-learn-more .truckee-button { margin-top: 28px; }
   .truckee-safety-grid > p { margin-top: 0; }
   .truckee-process ol { gap: 34px; }
   .truckee-form { padding: 22px; }
