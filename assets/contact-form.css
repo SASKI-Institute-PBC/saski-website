@@ -1,0 +1,13 @@
+.direct-contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 72px; align-items: start; }
+.direct-contact-copy .lead { margin-top: 0; }
+.direct-contact-form { position: relative; padding: 32px; border: 1px solid #cbd8d3; background: #eef4f1; }
+.direct-contact-form label { display: block; margin: 0 0 7px; font-weight: 700; }
+.direct-contact-form label span { font-weight: 400; }
+.direct-contact-form input, .direct-contact-form textarea { width: 100%; margin: 0 0 18px; border: 1px solid #91a69e; border-radius: 3px; padding: 12px; color: #132b32; background: white; font: inherit; }
+.direct-contact-form textarea { resize: vertical; }
+.direct-contact-form .button { width: 100%; border: 0; cursor: pointer; }
+.direct-contact-form .button:disabled { cursor: wait; opacity: .72; }
+.contact-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+.contact-form-note, .contact-form-status { margin: 12px 0 0; color: #526760; font-size: .86rem; }
+.contact-form-status { color: #075f51; font-weight: 700; }
+@media (max-width: 760px) { .direct-contact-grid { grid-template-columns: 1fr; gap: 28px; } .direct-contact-form { padding: 22px; } }
