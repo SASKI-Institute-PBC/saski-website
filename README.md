@@ -42,6 +42,10 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 
 Every page has a unique title/description, canonical, Open Graph and Twitter metadata, Organization JSON-LD, and appropriate page schema. Product pages add Product schema, Findings adds Article schema, and AI Attestation adds TechArticle and FAQPage schema. No invented prices, ratings, review counts, or publication dates are included. A branded 1.91:1 social card is wired through absolute Open Graph and X image metadata for Facebook, LinkedIn, and other link previews. `llms.txt` provides a concise, canonical product map for AI systems that choose to use the emerging convention; the semantic page content and structured data remain the primary machine-readable sources.
 
+## Public receipt sample
+
+[`receipt-sample.json`](receipt-sample.json) is a sanitized SASKI Agentic 1.3 Ed25519 test vector containing no decimal-number fields. The sample can therefore be encoded exactly with sorted keys, compact separators, and UTF-8. The complete SASKI canonical JSON encoder additionally converts decimal values to fixed eight-place strings; plain `json.dumps` does not implement that decimal rule and must not be treated as a general SASKI receipt encoder. The matching public verification key and standalone verifier will be published with the public receipt specification.
+
 ## Migration scope
 
 Do not migrate pricing, founder story, old privacy/terms, beta-program content, or the full legacy blog. The existing `/findings`, `/tokenator`, and `/contact-us` names are preserved (Pages serves directory URLs with trailing slashes). Retired content is not silently redirected to unrelated pages. Before production, decide which historical URLs merit a specific replacement or an intentional removal. GitHub Pages cannot configure arbitrary HTTP 301 rules; any required server-side redirect strategy must be resolved separately.

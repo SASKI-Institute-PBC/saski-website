@@ -67,6 +67,10 @@ assert '"@type": "TechArticle"' in attestation
 assert '"@type": "FAQPage"' in attestation
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
 assert (ROOT/'assets/social-share.png').is_file()
+receipt=json.loads((ROOT/'receipt-sample.json').read_text())
+assert receipt['product']=='agentic' and receipt['receipt_version']=='1.3'
+assert receipt['alg']=='Ed25519' and receipt['kid']=='vector-1'
+assert len(receipt['signature'])==88
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow

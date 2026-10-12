@@ -170,6 +170,16 @@ h1,.page-hero h1,.product-hero h1{letter-spacing:0}
 .receipt-profiles span{display:block;margin-bottom:30px;color:var(--teal);font:11px monospace;letter-spacing:1px;text-transform:uppercase}
 .receipt-profiles h3{font-size:22px;line-height:1.3}
 .receipt-profiles p{margin-bottom:0;color:var(--muted);font-size:14px;line-height:1.7}
+.sample-download{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:start;padding:38px;background:var(--ink);color:white;box-shadow:12px 14px 0 #dce6dd}
+.sample-download .eyebrow{color:var(--mint)}
+.sample-download p{color:#c7d7d5}
+.sample-download .button{display:inline-block;margin:14px 22px 0 0;background:var(--mint);color:var(--ink)}
+.sample-download .text-link{color:white}
+.sample-download dl{margin:0;border-top:1px solid #3a5559}
+.sample-download dl>div{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid #3a5559}
+.sample-download dt{color:#b8cdca;font:10px monospace;letter-spacing:.7px;text-transform:uppercase}
+.sample-download dd{margin:0;font-size:14px;overflow-wrap:anywhere}
+.sample-note{margin:30px 0 0;color:var(--muted);font-size:13px}
 .roadmap-note{margin:28px 0 0;color:var(--muted);font-size:14px}
 .evidence-boundaries .eyebrow{margin-bottom:25px}
 .evidence-boundaries .plain-list{margin-bottom:0}
@@ -178,7 +188,7 @@ h1,.page-hero h1,.product-hero h1{letter-spacing:0}
 .faq-list summary{padding:24px 42px 24px 0;cursor:pointer;font-size:20px;font-weight:700;line-height:1.4}
 .faq-list details p{max-width:800px;margin:0 0 26px;color:var(--muted)}
 @media(max-width:1050px){.receipt-profiles{grid-template-columns:1fr}.receipt-profiles article{padding:28px}}
-@media(max-width:760px){.attestation-fields>div{grid-template-columns:1fr;gap:6px}.decision-execution,.evidence-boundaries,.publication-status{grid-template-columns:1fr}.decision-execution article,.evidence-boundaries article,.publication-status>div{padding:26px}.section-intro{font-size:16px;margin-bottom:30px}}
+@media(max-width:760px){.attestation-fields>div{grid-template-columns:1fr;gap:6px}.decision-execution,.evidence-boundaries,.publication-status{grid-template-columns:1fr}.decision-execution article,.evidence-boundaries article,.publication-status>div{padding:26px}.section-intro{font-size:16px;margin-bottom:30px}.sample-download{grid-template-columns:1fr;gap:34px;padding:26px;box-shadow:7px 8px 0 #dce6dd}.sample-download .button,.sample-download .text-link{display:block;width:max-content;margin-top:18px}}
 
 /* Unlisted personal essay and embedded-document area. */
 .private-article{max-width:900px;padding-top:64px;padding-bottom:100px}
