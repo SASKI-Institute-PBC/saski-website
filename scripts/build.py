@@ -365,7 +365,7 @@ nav=[('agentic','Agentic'),('sdk','SDK'),('replay','Replay'),('estate','Estate')
 def render(path,title,desc,body,kind):
     canonical=BASE+'/'+(path+'/' if path else '')
     social_image=BASE+'/assets/social-share.png'
-    social_alt='SASKI Institute, AI understands. SASKI governs.' if path=='ai-attestation' else 'SASKI Institute — AI understands. SASKI governs.'
+    social_alt='SASKI Institute | AI understands. SASKI governs.'
     org={'@type':'Organization','@id':BASE+'/#organization','name':'SASKI Institute PBC','url':BASE+'/','logo':BASE+'/assets/institute-logo.png','sameAs':['https://github.com/SASKI-Institute-PBC']}
     entity={'@type':kind,'@id':canonical+'#'+kind.lower(),'name':title.split(' | ')[0],'description':desc,'url':canonical}
     if kind=='Service':
@@ -401,7 +401,6 @@ for old in OUT.iterdir():
     else: old.unlink()
 shutil.copytree(ROOT/'assets',OUT/'assets')
 shutil.copy2(ROOT/'receipt-test-public-key.txt',OUT/'receipt-test-public-key.txt')
-shutil.copy2(ROOT/'verify-receipt.py',OUT/'verify-receipt.py')
 for path,(title,desc,body,kind) in pages.items():
     dest=OUT/path/'index.html'; dest.parent.mkdir(parents=True,exist_ok=True)
     dest.write_text(render_truckee(PREFIX,BASE,PUBLIC,GA_ID) if path=='truckee-locals' else render(path,title,desc,body,kind))

@@ -72,7 +72,6 @@ assert '"@type": "FAQPage"' in attestation
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
 assert (ROOT/'assets/social-share.png').is_file()
 assert (ROOT/'receipt-test-public-key.txt').read_text().strip()=='uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM='
-assert 'Ed25519PublicKey' in (ROOT/'verify-receipt.py').read_text()
 anatomy=(ROOT/'receipt-anatomy'/'index.html').read_text()
 assert 'Anatomy of a SASKI receipt' in anatomy
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
