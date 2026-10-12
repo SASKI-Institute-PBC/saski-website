@@ -248,11 +248,46 @@ attestation += section('Two records, two questions','What was decided, and what 
 attestation += section('Beyond tool calls','Attestation for actions and high-risk conversations.','<div class="split"><p class="lead">Consequential AI does more than invoke tools. It can influence a person before any external action occurs.</p><div><p>SASKI Agentic governs inputs, proposed actions, and outputs. SASKI SDK applies rulebooks around human-facing model interactions. In both cases, the useful evidence is the rulebook decision and its reasons—not a model-generated assurance that it behaved safely.</p>'+link('agentic','Explore SASKI Agentic ↗','text-link')+'<br>'+link('sdk','Explore SASKI SDK ↗','text-link')+'</div></div>','soft')
 attestation += section('Verification boundary','What a signed receipt proves—and what it does not.',attestation_limits)
 attestation += section('Receipt profiles','One engine. The receipt format you need.','<p class="section-intro">SASKI applies the same deterministic rulebook path independently of the receipt profile. The evidence can fit an auditor, insurer, regulator, or existing audit system without changing how the governance decision is made.</p><div class="receipt-profiles"><article><span>01 / SASKI Agentic 1.3</span><h3>Ed25519-signed decision receipts</h3><p>Each receipt binds the agent and session, requested-action digest, rulebook version and digest, verdict, reason codes, approvals, chain position, build identity, time, and receipt profile. Agentic verifies receipts and exported audit packages offline against pinned public keys.</p></article><article><span>02 / SASKI SDK 1.3</span><h3>HMAC attestations with optional Ed25519</h3><p>Each decision binds product identity, build, time, policy fingerprints, keyed request commitments, decision hashes, chain position, and format metadata. An Ed25519 signature over the same fields can be added for public-key verification. The audit report tool verifies both formats offline.</p></article><article><span>03 / SASKI Estate</span><h3>Signed execution evidence</h3><p>Estate uses Ed25519-signed execution receipts for governed smart-home actions. Optional external anchoring can sign chain checkpoints with a key held in Google Cloud KMS.</p></article></div>','soft')
-attestation += section('Public test vector','Inspect an Agentic 1.3 decision receipt.','<div class="sample-download"><div><p class="eyebrow">Test-only / Deny decision</p><h3>Download the signed receipt exactly as issued.</h3><p>This sanitized Agentic sample includes the requested-action digest, rulebook version and digest, verdict, reason code, build identity, time-window data, receipt profile, key identifier, and Ed25519 signature.</p><a class="button" href="'+PREFIX+'/receipt-sample.json" download>Download receipt-sample.json ↓</a><a class="text-link" href="'+PREFIX+'/receipt-sample.json" target="_blank" rel="noopener">View JSON ↗</a></div><dl><div><dt>Product</dt><dd>SASKI Agentic 1.7.2</dd></div><div><dt>Receipt format</dt><dd>1.3 / saski-native@1</dd></div><div><dt>Decision</dt><dd>Deny / VECTOR_DENY</dd></div><div><dt>Signature</dt><dd>Ed25519 / vector-1</dd></div></dl></div><p class="sample-note">This vector contains no decimal-number fields. The matching public verification key and free standalone verifier will be published with the public receipt specification.</p>')
+attestation += section('Public test vector','Inspect an Agentic 1.3 decision receipt.','<div class="sample-download"><div><p class="eyebrow">Test-only / Deny decision</p><h3>Download the signed receipt exactly as issued.</h3><p>This sanitized Agentic sample includes the requested-action digest, rulebook version and digest, verdict, reason code, build identity, time-window data, receipt profile, key identifier, and Ed25519 signature.</p><a class="button" href="'+PREFIX+'/receipt-sample.json" download>Download receipt-sample.json ↓</a><a class="text-link" href="'+PREFIX+'/receipt-sample.json" target="_blank" rel="noopener">View JSON ↗</a></div><dl><div><dt>Product</dt><dd>SASKI Agentic 1.7.2</dd></div><div><dt>Receipt format</dt><dd>1.3 / saski-native@1</dd></div><div><dt>Decision</dt><dd>Deny / VECTOR_DENY</dd></div><div><dt>Signature</dt><dd>Ed25519 / vector-1</dd></div></dl></div><p class="sample-note">This vector contains no decimal-number fields. The published test key and verifier reproduce the exact encoding used for this sample.</p>'+link('receipt-anatomy','See the receipt anatomy and verify it yourself ↗','text-link'))
 attestation += section('Integrity and privacy','Continuous evidence without raw content.','<div class="split"><p class="lead">Agentic and SDK chain their records. Altering, removing, or reordering a record breaks verification from that point forward.</p><div><p>SDK attestations contain keyed commitments and hashes rather than raw message text. Agentic rejects raw tool arguments at signing. Human-readable display text is added after signing and excluded from audit exports by default.</p><p>Records use SASKI canonical JSON: sorted keys, compact separators, UTF-8, and fixed eight-decimal strings for floats. This encoding is intentionally distinct from RFC 8785. Ed25519 signatures use base64; HMAC signatures use hexadecimal encoding.</p></div></div>')
 attestation += section('Output roadmap','OVERT-aligned receipts are coming soon.','<div class="publication-status"><div><span>Available today</span><h3>SASKI native receipts</h3><p>Agentic, SDK, and Estate produce product-specific attestation. Each record identifies its format, encoding, and signature algorithm; Agentic and SDK include chain and profile metadata inside the signed record.</p></div><div><span>Coming soon</span><h3>OVERT-aligned output</h3><p>SASKI is developing an output profile designed to align with OVERT, the open standard for verifiable runtime evidence in AI governance. The planned profile changes the evidence format, not the deterministic rulebook decision that produces it.</p><a class="text-link" href="https://overt.is/" target="_blank" rel="noopener">Read the OVERT standard ↗</a></div></div><p class="roadmap-note">A public receipt specification, sample records, test vectors, and a free standalone verifier are also planned. Current product verifiers already operate offline without a SASKI account.</p>','soft')
 attestation += section('Questions','AI attestation, in practical terms.',attestation_faq)
 add('ai-attestation','AI Attestation and Signed Decision Receipts','Learn how SASKI connects deterministic rulebook decisions to inspectable AI attestation, and how decision receipts differ from execution evidence.',attestation,'TechArticle')
+
+receipt_steps = [
+    ('Who acted','The agent, session, and workflow this decision belongs to.','agent_id','agent-vector','session_id','session-vector','workflow_id','wf-vector'),
+    ('What it tried to do','The requested tool and a digest of its arguments; raw tool arguments are not placed in the signed record.','tool_name','example__noop','parameters_digest','85415bab93be16f1…b1860cbae','',''),
+    ('Which rules applied','The policy version and digest of the rulebook in force for the decision.','policy_version','vector-policy-1','rulebook_digest','cdcdcdcdcdcdcd…cdcdcdcdcd','',''),
+    ('The decision','The verdict and reason code produced by the rulebook.','verdict','deny','reason_codes','VECTOR_DENY','',''),
+    ('Which software decided','The gateway build digest, instance, and product version.','gateway_code_digest','86f5de35ccae6995…2fa06e6','gateway_instance_id','gateway-instance-vector','product_version','1.7.2'),
+    ('When','A nanosecond timestamp bound to a five-minute time window.','timestamp','2026-01-15T00:00:00+00:00','timestamp_ns','1768435200000000000','time_window_id','5894784 / 300 seconds'),
+    ('Its place in the chain','The receipt identity and its position in the workflow chain.','receipt_id','receipt-vector-1','hop_index','0','prev_receipt_id','first in this workflow'),
+    ('The signature','An Ed25519 signature over the signed fields. Changing a signed value makes verification fail.','alg','Ed25519','kid','vector-1','signature','8Dm1XJ0v/fk4NX0s…VtRDw=='),
+]
+receipt_step_html = '<div class="receipt-anatomy">' + ''.join(
+    '<article><span class="receipt-number">'+str(number)+'</span><div><h3>'+html.escape(step[0])+'</h3><p>'+html.escape(step[1])+'</p><dl>'+
+    ''.join('<div><dt>'+html.escape(step[i])+'</dt><dd>'+html.escape(step[i+1])+'</dd></div>' for i in (2,4,6) if step[i])+
+    '</dl></div></article>' for number,step in enumerate(receipt_steps,1)
+) + '</div>'
+verifier_code='''import json, base64
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+
+PUBLIC_KEY = "uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM="
+
+receipt = json.load(open("receipt-sample.json"))
+signature = base64.b64decode(receipt.pop("signature"))
+canonical = json.dumps(receipt, sort_keys=True, separators=(",", ":"),
+                       ensure_ascii=False).encode("utf-8")
+
+key = Ed25519PublicKey.from_public_bytes(base64.b64decode(PUBLIC_KEY))
+key.verify(signature, canonical)
+print("valid")'''
+receipt_anatomy = hero('Public test vector','Anatomy of a<br> SASKI receipt.','Follow one sanitized Agentic decision from governed request to signed evidence, then verify the signature with the published test key.')
+receipt_anatomy += section('Agentic decision receipt','What the signed record contains.',receipt_step_html,'soft')
+receipt_anatomy += section('Tamper evidence','Change one signed value. Verification fails.','<div class="tamper-example"><div><code>verdict: deny</code><span>→</span><strong class="valid">Signature valid</strong></div><div><code>verdict: allow</code><span>→</span><strong class="invalid">Signature invalid</strong></div></div>')
+receipt_anatomy += section('Verify it yourself','No SASKI account or network connection required.','<div class="verify-grid"><div><p>Download the receipt and verifier into the same folder, install the Python <code>cryptography</code> package, and run <code>python verify-receipt.py</code>. A successful check prints <code>valid</code>; changing any signed field causes verification to fail.</p><div class="verify-actions"><a class="button" href="'+PREFIX+'/receipt-sample.json" download>Download receipt ↓</a><a class="button button-secondary" href="'+PREFIX+'/verify-receipt.py" download>Download verifier ↓</a><a class="text-link" href="'+PREFIX+'/receipt-test-public-key.txt" target="_blank" rel="noopener">View test public key ↗</a></div><p class="sample-note">The test key is for verification practice only and is never used in production. This vector contains no decimal-number fields; the complete SASKI canonical encoder additionally converts decimals to fixed eight-place strings.</p></div><pre class="verifier-code"><code>'+html.escape(verifier_code)+'</code></pre></div>','soft')
+receipt_anatomy += section('Complete sample','Inspect the exact signed object.','<div class="split"><p class="lead">The downloadable JSON is the source of truth for this test vector.</p><div><p>It contains sanitized, test-only identifiers and no raw tool arguments. The signature is base64 encoded and the public key identifies the test key labeled <code>vector-1</code>.</p><a class="text-link" href="'+PREFIX+'/receipt-sample.json" target="_blank" rel="noopener">Open receipt-sample.json ↗</a></div></div>')
+add('receipt-anatomy','Anatomy of a SASKI Agentic Receipt','Inspect and independently verify a sanitized SASKI Agentic 1.3 Ed25519 decision receipt using the published test key and Python verifier.',receipt_anatomy,'TechArticle')
 
 resource_path = (
     '<ol class="resource-path">'
@@ -336,7 +371,8 @@ def render(path,title,desc,body,kind):
         entity.update(provider={'@id':org['@id']},serviceType=title.split(' | ')[0])
         if path in ['agentic','estate']: entity['image']=BASE+'/assets/'+path+'-logo.png'
     if kind in ['Article','TechArticle']:
-        entity.update(headline=('AI Attestation and Signed Decision Receipts' if path=='ai-attestation' else 'Pre-LLM Infrastructure Failures in Production AI Chatbots'),author={'@id':org['@id']},publisher={'@id':org['@id']},mainEntityOfPage=canonical)
+        headlines={'ai-attestation':'AI Attestation and Signed Decision Receipts','receipt-anatomy':'Anatomy of a SASKI Agentic Receipt','findings':'Pre-LLM Infrastructure Failures in Production AI Chatbots'}
+        entity.update(headline=headlines[path],author={'@id':org['@id']},publisher={'@id':org['@id']},mainEntityOfPage=canonical)
     graph=[org,entity]
     if path=='ai-attestation':
         graph.append({'@type':'FAQPage','@id':canonical+'#faq','mainEntity':[
@@ -364,6 +400,8 @@ for old in OUT.iterdir():
     else: old.unlink()
 shutil.copytree(ROOT/'assets',OUT/'assets')
 shutil.copy2(ROOT/'receipt-sample.json',OUT/'receipt-sample.json')
+shutil.copy2(ROOT/'receipt-test-public-key.txt',OUT/'receipt-test-public-key.txt')
+shutil.copy2(ROOT/'verify-receipt.py',OUT/'verify-receipt.py')
 for path,(title,desc,body,kind) in pages.items():
     dest=OUT/path/'index.html'; dest.parent.mkdir(parents=True,exist_ok=True)
     dest.write_text(render_truckee(PREFIX,BASE,PUBLIC,GA_ID) if path=='truckee-locals' else render(path,title,desc,body,kind))
@@ -382,6 +420,7 @@ for path,(title,desc,body,kind) in pages.items():
     '## Evidence and information\n\n'
     f'- [How SASKI works]({BASE}/how-it-works/)\n'
     f'- [AI attestation and signed decision receipts]({BASE}/ai-attestation/)\n'
+    f'- [Anatomy of a SASKI Agentic receipt]({BASE}/receipt-anatomy/)\n'
     f'- [Research findings]({BASE}/findings/)\n'
     f'- [Resources]({BASE}/resources/)\n'
     f'- [About SASKI Institute]({BASE}/about/)\n'

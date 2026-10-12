@@ -33,6 +33,7 @@ Only after the migration is approved, set the repository variables `SITE_URL=htt
 | `/estate/` | Smart-home application of SASKI rulebook governance and attestation |
 | `/how-it-works/` | Independent enforcement architecture |
 | `/ai-attestation/` | AI attestation, signed decision receipts, and evidence boundaries |
+| `/receipt-anatomy/` | Public Agentic receipt anatomy and independent verification instructions |
 | `/findings/` | Condensed six-failure-class research article |
 | `/resources/` | Findings, architecture, and Tokenator discovery |
 | `/tokenator/` | Input-token overhead calculator |
@@ -44,7 +45,9 @@ Every page has a unique title/description, canonical, Open Graph and Twitter met
 
 ## Public receipt sample
 
-[`receipt-sample.json`](receipt-sample.json) is a sanitized SASKI Agentic 1.3 Ed25519 test vector containing no decimal-number fields. The sample can therefore be encoded exactly with sorted keys, compact separators, and UTF-8. The complete SASKI canonical JSON encoder additionally converts decimal values to fixed eight-place strings; plain `json.dumps` does not implement that decimal rule and must not be treated as a general SASKI receipt encoder. The matching public verification key and standalone verifier will be published with the public receipt specification.
+[`receipt-sample.json`](receipt-sample.json) is a sanitized SASKI Agentic 1.3 Ed25519 test vector containing no decimal-number fields. The sample can therefore be encoded exactly with sorted keys, compact separators, and UTF-8. The complete SASKI canonical JSON encoder additionally converts decimal values to fixed eight-place strings; plain `json.dumps` does not implement that decimal rule and must not be treated as a general SASKI receipt encoder.
+
+The test-only public key is published in [`receipt-test-public-key.txt`](receipt-test-public-key.txt), and [`verify-receipt.py`](verify-receipt.py) reproduces verification with Python and the `cryptography` package. These test credentials are never used in production.
 
 ## Migration scope
 

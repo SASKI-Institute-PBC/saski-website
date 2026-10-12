@@ -59,7 +59,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==13
+assert len(listed)==14
 assert listed.issubset(canonical_seen)
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
 assert 'AI Attestation and Signed Decision Receipts' in attestation
@@ -71,6 +71,10 @@ receipt=json.loads((ROOT/'receipt-sample.json').read_text())
 assert receipt['product']=='agentic' and receipt['receipt_version']=='1.3'
 assert receipt['alg']=='Ed25519' and receipt['kid']=='vector-1'
 assert len(receipt['signature'])==88
+assert (ROOT/'receipt-test-public-key.txt').read_text().strip()=='uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM='
+assert 'Ed25519PublicKey' in (ROOT/'verify-receipt.py').read_text()
+anatomy=(ROOT/'receipt-anatomy'/'index.html').read_text()
+assert 'Anatomy of a SASKI Agentic Receipt' in anatomy
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow
