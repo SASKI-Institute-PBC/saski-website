@@ -1,5 +1,8 @@
 name: Deploy Pages preview
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 permissions:
   contents: read
