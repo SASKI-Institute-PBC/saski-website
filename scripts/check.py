@@ -59,8 +59,12 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==12
+assert len(listed)==13
 assert listed.issubset(canonical_seen)
+attestation=(ROOT/'ai-attestation'/'index.html').read_text()
+assert 'AI Attestation and Signed Decision Receipts' in attestation
+assert '"@type": "TechArticle"' in attestation
+assert '"@type": "FAQPage"' in attestation
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
 assert (ROOT/'assets/social-share.png').is_file()
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
