@@ -45,9 +45,9 @@ Every page has a unique title/description, canonical, Open Graph and Twitter met
 
 ## Public receipt sample
 
-[`receipt-sample.json`](receipt-sample.json) is a sanitized SASKI Agentic 1.3 Ed25519 test vector containing no decimal-number fields. The sample can therefore be encoded exactly with sorted keys, compact separators, and UTF-8. The complete SASKI canonical JSON encoder additionally converts decimal values to fixed eight-place strings; plain `json.dumps` does not implement that decimal rule and must not be treated as a general SASKI receipt encoder.
+[`receipt-sample.json`](https://github.com/SASKI-Institute-PBC/saski-receipts/blob/main/samples/receipt-sample.json) is a sanitized SASKI Agentic 1.3 Ed25519 test vector containing no decimal-number fields. The sample can therefore be encoded exactly with sorted keys, compact separators, and UTF-8. The complete SASKI canonical JSON encoder additionally converts decimal values to fixed eight-place strings; plain `json.dumps` does not implement that decimal rule and must not be treated as a general SASKI receipt encoder.
 
-The test-only public key is published in [`receipt-test-public-key.txt`](receipt-test-public-key.txt), and [`verify-receipt.py`](verify-receipt.py) reproduces verification with Python and the `cryptography` package. These test credentials are never used in production.
+The test-only public key is published in [`receipt-test-public-key.txt`](receipt-test-public-key.txt), and the public [`verify.py`](https://github.com/SASKI-Institute-PBC/saski-receipts/blob/main/verify.py) reproduces verification with Python and the `cryptography` package. These test credentials are never used in production.
 
 ## Migration scope
 
