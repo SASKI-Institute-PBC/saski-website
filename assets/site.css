@@ -47,7 +47,7 @@
 
 /* Centered company title, Estate video, and governed-action diagram. */
 .header-inner{display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:10px 24px;padding:10px 0 16px}
-.header-title{justify-self:center;text-align:center;font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.header-title{justify-self:center;text-align:center;font-size:24px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;white-space:nowrap}
 .header-title:hover{text-decoration:none;color:var(--teal)}
 .header-inner nav{grid-column:1/-1;justify-content:center}
 .menu-toggle{grid-column:3;grid-row:1;justify-self:end}
