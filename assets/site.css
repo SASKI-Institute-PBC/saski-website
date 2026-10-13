@@ -229,3 +229,15 @@ h1,.page-hero h1,.product-hero h1{letter-spacing:0}
 .private-pdf .button{background:var(--mint);color:var(--ink)}
 .private-pdf .button-secondary{background:transparent;color:white;border:1px solid #789093}
 @media(max-width:760px){.private-article{padding-top:38px;padding-bottom:70px}.private-notice{flex-direction:column;margin-bottom:40px}.private-article>h1{font-size:36px}.private-article h2,.private-article h2.major-heading{font-size:29px}.private-article p,.private-article li{font-size:17px}.private-pdf{padding:26px;box-shadow:7px 8px 0 #dce6dd}}
+
+/* Long-form personal essay. */
+.story-article{max-width:860px;padding-top:70px;padding-bottom:110px}
+.story-article h2{margin:72px 0 24px;padding-top:34px;border-top:1px solid var(--line);font-size:34px;font-weight:500;line-height:1.22}
+.story-article p,.story-article li{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.85;color:#31464b}
+.story-article strong{color:var(--ink)}
+.story-signature{margin:42px 0;font-style:italic}
+.story-publications{margin-top:68px;padding:34px;background:var(--soft);border:1px solid var(--line)}
+.story-publications .eyebrow{margin-bottom:14px;font-family:Arial,Helvetica,sans-serif}
+.story-publications h2{margin:0 0 22px;padding:0;border:0;font-family:Arial,Helvetica,sans-serif;font-size:27px;font-weight:600}
+.story-publications a{display:block;padding:13px 0;border-top:1px solid var(--line);color:var(--teal);font-family:Arial,Helvetica,sans-serif;font-weight:700;text-decoration:none}
+@media(max-width:760px){.story-article{padding-top:42px;padding-bottom:76px}.story-article h2{margin-top:52px;font-size:29px}.story-article p,.story-article li{font-size:17px}.story-publications{padding:25px}}

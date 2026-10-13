@@ -63,7 +63,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==14
+assert len(listed)==15
 assert listed.issubset(canonical_seen | {loc for loc in listed if loc.endswith('/receipt-anatomy/')})
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
 assert 'AI Attestation and Signed Decision Receipts' in attestation
@@ -74,6 +74,12 @@ assert (ROOT/'assets/social-share.png').is_file()
 assert (ROOT/'receipt-test-public-key.txt').read_text().strip()=='uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM='
 anatomy=(ROOT/'receipt-anatomy'/'index.html').read_text()
 assert 'Anatomy of a SASKI receipt' in anatomy
+story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
+assert "Just Because You Can't See It Doesn't Mean It Isn't Real" in story
+assert 'class="wrap story-article"' in story
+assert '"@type": "Article"' in story
+assert '/believe-even-when-they-dont/' not in story.split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
+assert "Believe Even When They Don't" in story.split('<footer>',1)[1]
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow
