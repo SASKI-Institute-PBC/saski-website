@@ -2,6 +2,14 @@
 
 The story of a lifetime spent learning, building, predicting the future, and refusing to let other people define failure.
 
+SASKI did not begin with a single moment of inspiration. It grew from decades of building complex systems, living through setbacks, questioning assumptions, and learning that intelligence alone does not make a system dependable.
+
+As AI began moving into healthcare, education, finance, employment, and autonomous systems, I kept returning to one question: how can an organization prove that its AI followed the rules when the outcome matters?
+
+Policies and assurances from the AI itself were not enough. The safeguards needed to operate outside the AI, enforce clear boundaries, and produce verifiable evidence of what happened. That realization became SASKI.
+
+Looking back, I can see that the unusual path I had taken through computers, architecture, marine systems, automation, networking, manufacturing, robotics, business successes, and painful setbacks had prepared me to recognize this problem. This is the story of that path and why it ultimately led me here.
+
 "Creativity is just connecting things."
 
 **Steve Jobs, WIRED, February 1996**
