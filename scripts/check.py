@@ -19,6 +19,10 @@ pages=[p for p in ROOT.rglob('*.html') if 'assets' not in p.relative_to(ROOT).pa
 for file in pages:
     source=file.read_text()
     route=file.parent.relative_to(ROOT).as_posix()
+    if route=='believe-even-when-they-dont':
+        assert 'content="noindex,follow"' in source
+        assert '/founders-story/' in source
+        continue
     if route=='receipt-anatomy':
         assert hashlib.sha256(file.read_bytes()).hexdigest()=='90248fa1ad45afc643b11ed3d53f4afe47b21cf42de91ed334fea931ef391f00'
         continue
@@ -74,12 +78,14 @@ assert (ROOT/'assets/social-share.png').is_file()
 assert (ROOT/'receipt-test-public-key.txt').read_text().strip()=='uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM='
 anatomy=(ROOT/'receipt-anatomy'/'index.html').read_text()
 assert 'Anatomy of a SASKI receipt' in anatomy
-story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
+story=(ROOT/'founders-story'/'index.html').read_text()
 assert "Just Because You Can't See It Doesn't Mean It Isn't Real" in story
 assert 'class="wrap story-article"' in story
 assert '"@type": "Article"' in story
-assert '/believe-even-when-they-dont/' not in story.split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
+assert '/founders-story/' not in story.split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
 assert "Founder's Story" in story.split('<footer>',1)[1]
+legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
+assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow
