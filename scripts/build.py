@@ -374,11 +374,36 @@ story_publications=(
     '<a href="https://github.com/SASKI-Institute-PBC/saski-website/blob/main/publications/GenZPlay_Biz_Plan.pdf" target="_blank" rel="noopener">GenZPlay Business Plan ↗</a>'
     '<a href="https://github.com/SASKI-Institute-PBC/saski-website/blob/main/publications/The_Calhoun_Forecasts.pdf" target="_blank" rel="noopener">The Calhoun Forecasts ↗</a></section>'
 )
+story_media={
+    'STORY_MEDIA_YACHTS':(
+        '<div class="story-gallery story-gallery-two">'
+        f'<figure><img src="{PREFIX}/assets/founders-story/yacht.webp" alt="Large private yacht anchored beside a tropical shoreline" width="1440" height="761" loading="lazy"><figcaption>The scale and complexity of the private vessels that shaped Stephen’s early systems experience.</figcaption></figure>'
+        f'<figure><img src="{PREFIX}/assets/founders-story/yacht-crew.webp" alt="Stephen Calhoun standing with two fellow yacht crew members" width="1400" height="945" loading="lazy"><figcaption>Stephen with fellow crew members during his years in the yacht industry.</figcaption></figure>'
+        '</div>'
+    ),
+    'STORY_MEDIA_BIKE':(
+        f'<figure class="story-media story-media-compact"><img src="{PREFIX}/assets/founders-story/bike-accident.webp" alt="Stephen Calhoun recovering in a hospital after his 2001 bicycle accident" width="640" height="480" loading="lazy"><figcaption>Recovering in the hospital after the September 2001 bicycle accident.</figcaption></figure>'
+    ),
+    'STORY_MEDIA_GENZPLAY':(
+        f'<figure class="story-media"><img src="{PREFIX}/assets/founders-story/genzplay.webp" alt="GenZPlay logo featuring an athletic cartoon tiger" width="1200" height="898" loading="lazy"><figcaption>GenZPlay joined outdoor activity with interactive digital experiences years before location-based games became mainstream.</figcaption></figure>'
+    ),
+    'STORY_MEDIA_SONOMA':(
+        f'<figure class="story-media"><img src="{PREFIX}/assets/founders-story/sonoma-strong.webp" alt="Sonoma Strong graphic showing flames above a vineyard" width="960" height="539" loading="lazy"><figcaption>The 2017 Sonoma County wildfires changed the community and the direction of Stephen’s technology business.</figcaption></figure>'
+    ),
+    'STORY_MEDIA_FURNITURE':(
+        '<div class="story-gallery story-gallery-two">'
+        f'<figure><img src="{PREFIX}/assets/founders-story/heritage-furniture-storefront.webp" alt="Heritage Furniture storefront with Adirondack chairs displayed in the windows" width="1400" height="1050" loading="lazy"><figcaption>The Heritage Furniture storefront near the Fairmont Sonoma Mission Inn.</figcaption></figure>'
+        f'<figure><img src="{PREFIX}/assets/founders-story/adirondack-chair.webp" alt="Red wooden Adirondack chair and matching footrest built by Stephen Calhoun" width="960" height="960" loading="lazy"><figcaption>An Adirondack chair Stephen built from his great-grandfather’s pattern.</figcaption></figure>'
+        '</div>'
+    ),
+}
 story_article=(
     legal_markdown(story_source)
     .replace('<p>STORY_SIGNATURE</p>','<p class="story-signature">Stephen Calhoun</p>')
     .replace('<p>RELATED_PUBLICATIONS</p>',story_publications)
 )
+for marker,media in story_media.items():
+    story_article=story_article.replace(f'<p>{marker}</p>',media)
 story_body=(
     hero('Personal essay / Stephen Calhoun',story_heading,story_subtitle)
     +'<article class="wrap story-article">'+story_article+'</article>'

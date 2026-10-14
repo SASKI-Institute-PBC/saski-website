@@ -84,6 +84,8 @@ assert 'class="wrap story-article"' in story
 assert '"@type": "Article"' in story
 assert '/founders-story/' not in story.split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
 assert "Founder's Story" in story.split('<footer>',1)[1]
+assert story.count('assets/founders-story/')==7
+assert 'STORY_MEDIA_' not in story
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
