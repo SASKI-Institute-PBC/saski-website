@@ -79,7 +79,7 @@ assert "Just Because You Can't See It Doesn't Mean It Isn't Real" in story
 assert 'class="wrap story-article"' in story
 assert '"@type": "Article"' in story
 assert '/believe-even-when-they-dont/' not in story.split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
-assert "Believe Even When They Don't" in story.split('<footer>',1)[1]
+assert "Founder's Story" in story.split('<footer>',1)[1]
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow
