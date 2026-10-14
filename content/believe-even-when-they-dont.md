@@ -64,10 +64,6 @@ That insatiable curiosity was anchored by a Bible-based philosophy my parents ta
 
 I wanted to understand all of it.
 
-My parents had also raised me with a Bible-based philosophy that one person wasn't inherently better than another.
-
-That stayed with me, but over time, that mindset took a toll. Believing no one was special led me to constantly question my own abilities all through my 30s. That way of thinking did not help improve my self-confidence, leaving me to doubt whether my insights and talents actually held value.
-
 I was simply fascinated by how things worked, and I wanted to keep learning.
 
 When the Internet started taking off, I sucked it down like a lost explorer in the desert who had just stumbled upon a freshwater oasis.
