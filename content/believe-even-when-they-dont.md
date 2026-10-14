@@ -86,6 +86,8 @@ And eventually, I began connecting those pieces in ways I hadn't expected.
 
 ## Mega Yachts, Architecture, and a Few Unplanned Detours
 
+STORY_MEDIA_YACHTS
+
 In 1994, my stepbrother called and suggested I come to Florida to work aboard mega yachts.
 
 I did, and I had an absolute blast.
@@ -141,6 +143,8 @@ Bicycle racing.
 And that's when my life took another unexpected turn.
 
 ## Forty Miles Per Hour of Combined Impact
+
+STORY_MEDIA_BIKE
 
 I was training five days a week, often riding along a quiet frontage road around the Fort Lauderdale airport.
 
@@ -242,6 +246,8 @@ Then another idea came along.
 
 ## Watching My Son on His Tree Swing
 
+STORY_MEDIA_GENZPLAY
+
 Around 2012, I was sitting on my back porch watching my son playing on his tree swing.
 
 I started thinking about video games and how much time children were spending staring at screens.
@@ -334,6 +340,8 @@ And then came the Sonoma County wildfires.
 
 ## When the World Changes Your Business Plan
 
+STORY_MEDIA_SONOMA
+
 In 2017, devastating wildfires swept through Sonoma County.
 
 Thousands of families lost their homes.
@@ -387,6 +395,8 @@ That's the part that has always bothered me.
 **People can be remarkably confident in their judgments when they know remarkably little about the circumstances.**
 
 ## My Great-Grandfather's Adirondack Chairs
+
+STORY_MEDIA_FURNITURE
 
 When the pandemic disrupted my business, I needed another way to keep myself busy.
 
