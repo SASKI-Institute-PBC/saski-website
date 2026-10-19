@@ -6,6 +6,7 @@ OUT=ROOT/'dist'
 BASE=os.getenv('SITE_URL','https://saski-institute-pbc.github.io/saski-website').rstrip('/')
 PUBLIC=os.getenv('SITE_INDEXABLE','false').lower()=='true'
 GA_ID=os.getenv('GOOGLE_ANALYTICS_ID','G-KN2FB37JB4').strip()
+STORYBOOK_URL='https://docs.google.com/presentation/d/e/2PACX-1vTM1NK88qdqq08BjEoZ3kNQCHr3UKYHcXfRjT_7R8erHKQBA3bnmdIG0dAtt75GjoeFXLf22l2wKUw8/pub?start=false&loop=false&delayms=10000'
 if GA_ID and not re.fullmatch(r'G-[A-Z0-9]+', GA_ID):
     raise ValueError('GOOGLE_ANALYTICS_ID must be a GA4 Measurement ID beginning with G-')
 PREFIX=__import__('urllib.parse',fromlist=['urlparse']).urlparse(BASE).path.rstrip('/')
@@ -459,6 +460,9 @@ for path,(title,desc,body,kind) in pages.items():
 legacy_story=OUT/'believe-even-when-they-dont'/'index.html'
 legacy_story.parent.mkdir(parents=True,exist_ok=True)
 legacy_story.write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Founder’s Story | SASKI Institute</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{BASE}/founders-story/"><meta http-equiv="refresh" content="0; url={url('founders-story')}"><script>window.location.replace({json.dumps(url('founders-story'))});</script></head><body><main><h1>Founder’s Story</h1><p>This page has moved to <a href="{url('founders-story')}">saski.io/founders-story/</a>.</p></main></body></html>''')
+storybook=OUT/'educators'/'storybook'/'index.html'
+storybook.parent.mkdir(parents=True,exist_ok=True)
+storybook.write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Educator Storybook | SASKI Institute</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{BASE}/educators/storybook/"><meta http-equiv="refresh" content="0; url={html.escape(STORYBOOK_URL,quote=True)}"><script>window.location.replace({json.dumps(STORYBOOK_URL)});</script></head><body><main><h1>SASKI Educator Storybook</h1><p>Opening the storybook. If it does not open automatically, <a href="{html.escape(STORYBOOK_URL,quote=True)}">view it on Google Slides</a>.</p></main></body></html>''')
 shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html')
 (OUT/'404.html').write_text(render('404','Page not found | SASKI Institute','The requested page could not be found.',hero('404 / Page not found','Let’s find a better path.','This page may have moved or may not be part of our current site.')+'<div class="wrap section">'+link('','Return to the homepage','button')+'</div>','WebPage'))
 (OUT/'.nojekyll').touch()
