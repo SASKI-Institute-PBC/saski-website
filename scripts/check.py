@@ -31,6 +31,8 @@ for file in pages:
         assert "gtag('event','page_view'" in source if SITE_PUBLIC else True
         assert 'event_callback:openStorybook' in source if SITE_PUBLIC else True
         assert 'setTimeout(openStorybook,800)' in source if SITE_PUBLIC else True
+        assert 'body{visibility:hidden}' in source
+        assert '<noscript><style>body{visibility:visible}' in source
         continue
     if route=='receipt-anatomy':
         assert hashlib.sha256(file.read_bytes()).hexdigest()=='90248fa1ad45afc643b11ed3d53f4afe47b21cf42de91ed334fea931ef391f00'
