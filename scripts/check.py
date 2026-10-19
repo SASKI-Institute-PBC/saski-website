@@ -27,6 +27,10 @@ for file in pages:
         assert 'content="noindex,follow"' in source
         assert 'window.location.replace' in source
         assert 'docs.google.com/presentation/' in source
+        assert (GA_ID in source)==SITE_PUBLIC
+        assert "gtag('event','page_view'" in source if SITE_PUBLIC else True
+        assert 'event_callback:openStorybook' in source if SITE_PUBLIC else True
+        assert 'setTimeout(openStorybook,800)' in source if SITE_PUBLIC else True
         continue
     if route=='receipt-anatomy':
         assert hashlib.sha256(file.read_bytes()).hexdigest()=='90248fa1ad45afc643b11ed3d53f4afe47b21cf42de91ed334fea931ef391f00'
@@ -95,6 +99,7 @@ legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 storybook=(ROOT/'educators'/'storybook'/'index.html').read_text()
 assert 'window.location.replace' in storybook and 'docs.google.com/presentation/' in storybook
+assert ("gtag('event','page_view'" in storybook)==SITE_PUBLIC
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow
