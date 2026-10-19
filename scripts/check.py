@@ -78,7 +78,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==15
+assert len(listed)==16
 assert listed.issubset(canonical_seen | {loc for loc in listed if loc.endswith('/receipt-anatomy/')})
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
 assert 'AI Attestation and Signed Decision Receipts' in attestation
@@ -99,6 +99,22 @@ assert story.count('assets/founders-story/')==7
 assert 'STORY_MEDIA_' not in story
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
+home=(ROOT/'index.html').read_text()
+assert 'One governance foundation for your company’s AI.' in home
+assert '/enterprise-ai-governance/' in home
+enterprise=(ROOT/'enterprise-ai-governance'/'index.html').read_text()
+assert 'Govern existing AI or design the controls before launch.' in enterprise
+assert 'https://www.mytrusted.ai/' in enterprise
+assert 'Future company-chatbot packaging remains in development' in enterprise
+about=(ROOT/'about'/'index.html').read_text()
+assert '40+ years of multidisciplinary experience' in about
+agentic=(ROOT/'agentic'/'index.html').read_text()
+resources=(ROOT/'resources'/'index.html').read_text()
+assert 'SASKI-conducted lab test' in agentic and 'SASKI-conducted lab test' in resources
+assert 'independent lab test' not in agentic.lower() and 'independent lab test' not in resources.lower()
+estate=(ROOT/'estate'/'index.html').read_text()
+assert 'Control-system integration targets' in estate
+assert 'Compatibility must be validated for each product, version, interface, and deployment.' in estate
 storybook=(ROOT/'educators'/'storybook'/'index.html').read_text()
 assert 'window.location.replace' in storybook and 'docs.google.com/presentation/' in storybook
 assert ("gtag('event','page_view'" in storybook)==SITE_PUBLIC
