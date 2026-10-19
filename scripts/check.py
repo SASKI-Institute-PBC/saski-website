@@ -23,6 +23,11 @@ for file in pages:
         assert 'content="noindex,follow"' in source
         assert '/founders-story/' in source
         continue
+    if route=='educators/storybook':
+        assert 'content="noindex,follow"' in source
+        assert 'window.location.replace' in source
+        assert 'docs.google.com/presentation/' in source
+        continue
     if route=='receipt-anatomy':
         assert hashlib.sha256(file.read_bytes()).hexdigest()=='90248fa1ad45afc643b11ed3d53f4afe47b21cf42de91ed334fea931ef391f00'
         continue
@@ -88,6 +93,8 @@ assert story.count('assets/founders-story/')==7
 assert 'STORY_MEDIA_' not in story
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
+storybook=(ROOT/'educators'/'storybook'/'index.html').read_text()
+assert 'window.location.replace' in storybook and 'docs.google.com/presentation/' in storybook
 workflow=(ROOT/'assets/agentic-enterprise-workflow.html').read_text()
 assert '<meta charset="utf-8">' in workflow
 assert 'prefers-reduced-motion' in workflow
