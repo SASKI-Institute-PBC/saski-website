@@ -78,7 +78,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==16
+assert len(listed)==17
 assert listed.issubset(canonical_seen | {loc for loc in listed if loc.endswith('/receipt-anatomy/')})
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
 assert 'AI Attestation and Signed Decision Receipts' in attestation
@@ -115,6 +115,19 @@ assert 'independent lab test' not in agentic.lower() and 'independent lab test' 
 estate=(ROOT/'estate'/'index.html').read_text()
 assert 'Control-system integration targets' in estate
 assert 'Compatibility must be validated for each product, version, interface, and deployment.' in estate
+replay=(ROOT/'replay'/'index.html').read_text()
+assert 'SASKI Replay is available as a self-hosted deployment' in replay
+assert 'Federal and state references' in replay
+assert 'They are not legal advice' in replay
+how=(ROOT/'how-it-works'/'index.html').read_text()
+assert 'The governance feedback loop' in how
+assert all(label in how for label in ['Enforce','Evidence','Verify','Analyze','Refine'])
+press=(ROOT/'press'/'index.html').read_text()
+assert 'Experience the safeguards.' in press
+assert 'Verify the evidence yourself.' in press
+assert 'info@saski.io' in press
+assert 'These are company-issued materials from SASKI Institute, not independent news coverage.' in press
+assert '/assets/institute-logo.png' in press and '/assets/stephen-calhoun.png' in press
 storybook=(ROOT/'educators'/'storybook'/'index.html').read_text()
 assert 'window.location.replace' in storybook and 'docs.google.com/presentation/' in storybook
 assert ("gtag('event','page_view'" in storybook)==SITE_PUBLIC
