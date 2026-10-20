@@ -60,6 +60,37 @@ def legal_markdown(text):
             paragraph.append(lines[i].strip()); i+=1
         out.append('<p>'+legal_inline(' '.join(paragraph))+'</p>')
     return ''.join(out)
+def article_inline(text):
+    text=(text.replace(r'\.', '.').replace(r'\&', '&').replace(r'\$', '$')
+              .replace(r'\[', '[').replace(r'\]', ']'))
+    text=html.escape(text)
+    text=re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)',r'<a href="\2" target="_blank" rel="noopener">\1</a>',text)
+    text=re.sub(r'\*\*(.+?)\*\*',r'<strong>\1</strong>',text)
+    text=re.sub(r'(?<!\*)\*([^*]+?)\*(?!\*)',r'<em>\1</em>',text)
+    return text
+def article_markdown(text):
+    lines=text.splitlines(); out=[]; i=0
+    def clean_heading(value): return value.strip().strip('*').strip()
+    while i < len(lines):
+        line=lines[i].strip()
+        if not line: i+=1; continue
+        if line.startswith('### '):
+            out.append('<h2>'+article_inline(clean_heading(line[4:]))+'</h2>'); i+=1; continue
+        if line.startswith('## '):
+            out.append('<h2>'+article_inline(clean_heading(line[3:]))+'</h2>'); i+=1; continue
+        numbered=re.match(r'^\*\*(\d+)\\?\.\s+(.+?)\*\*\s*$',line)
+        if numbered:
+            out.append(f'<h2><span>{numbered.group(1).zfill(2)}</span>{article_inline(numbered.group(2))}</h2>'); i+=1; continue
+        if line.startswith('**') and line.endswith('**'):
+            value=clean_heading(line)
+            out.append(('<h2>' if len(value.split())<=10 else '<p>')+article_inline(line)+('</h2>' if len(value.split())<=10 else '</p>')); i+=1; continue
+        if line.startswith(('* ', '- ')):
+            items=[]
+            while i < len(lines) and lines[i].strip().startswith(('* ', '- ')):
+                items.append('<li>'+article_inline(lines[i].strip()[2:])+'</li>'); i+=1
+            out.append('<ul>'+''.join(items)+'</ul>'); continue
+        out.append('<p>'+article_inline(line)+'</p>'); i+=1
+    return ''.join(out)
 def hero(k,t,d):
     product = 'agentic' if k.startswith('SASKI Agentic /') else 'estate' if k.startswith('SASKI Estate /') else None
     logo = f'<img class="product-logo" src="{PREFIX}/assets/{product}-logo.png" alt="SASKI {product.title()} logo" width="280" height="280">' if product else ''
@@ -73,6 +104,7 @@ home='''<section class="home-hero"><div class="wrap hero-grid"><div><p class="ey
 home=home.replace('__ASSET_PREFIX__',PREFIX)
 home+=section('The SASKI model','De-risk. Govern. Attest.',cards(principles),'soft')
 home+=section('Enterprise AI governance','One governance foundation for your company’s AI.','<div class="split"><p class="lead">Whether you are already using AI or preparing to introduce it, SASKI helps your organization define authority, enforce boundaries, and retain verifiable evidence.</p><div><h3>Already running AI?</h3><p>Evaluate representative historical activity, identify where a rulebook would intervene, and introduce governance around conversations and agent actions.</p><h3>Planning a new deployment?</h3><p>Define the permitted use case, approval requirements, integration boundary, and evidence your organization needs before the system goes live.</p>'+link('enterprise-ai-governance','Explore enterprise AI governance ↗','text-link')+'</div></div>')
+home+=section('Public application','Experience SASKI governance in a working application.','<div class="split"><p class="lead">MyTrusted.ai is a public multi-model application developed by SASKI Institute and protected by SASKI governance.</p><div><p>Use its built-in test prompts to explore sensitive conversational paths and see how governance can shape a live experience.</p><p class="small-copy">Future enterprise chatbot packaging remains in development and is not presented as a finished product.</p><a class="text-link" href="https://www.mytrusted.ai/" target="_blank" rel="noopener">Try MyTrusted.ai ↗</a></div></div>','soft')
 home+=section('One company. Four products.','One governance architecture.<br> Four places to apply it.',cards(products))
 home+=section('How it works','AI proposes.<br> The rulebook decides.',flow+link('how-it-works','See the architecture ↗','text-link'),'soft')
 home+=section('Attestation by design','A governance decision should leave a record.','<div class="split"><p class="lead">Connect what was requested, which rule applied, and why the outcome was allowed, held, or denied.</p><div><p>SASKI pairs deterministic governance with cryptographic decision receipts, giving engineering and review teams evidence they can inspect beyond the model’s explanation.</p><p>Replay extends that approach to historical traffic, helping teams examine rulebook behavior before an enforcement rollout.</p>'+link('replay','Explore SASKI Replay ↗','text-link')+'</div></div>')
@@ -215,14 +247,14 @@ attestation_example = (
     '</dl></div><p>A governance receipt proves the decision the control layer made. The application’s execution record establishes what happened next. Keeping both prevents a generated claim from being mistaken for a completed action.</p></div>'
 )
 feedback_loop = (
-    '<div class="governance-loop" aria-label="Continuous governance feedback loop">'
-    '<div class="loop-center"><strong>Stronger future governance</strong><span>Evidence informs the next approved rulebook version.</span></div>'
-    '<article class="loop-step loop-enforce"><span>01</span><h3>Enforce</h3><p>Apply the approved rulebook at the interaction or action boundary.</p></article>'
-    '<article class="loop-step loop-evidence"><span>02</span><h3>Evidence</h3><p>Retain the decision, reasons, policy version, and related references.</p></article>'
-    '<article class="loop-step loop-verify"><span>03</span><h3>Verify</h3><p>Check signatures, chains, and the integrity of the recorded evidence.</p></article>'
-    '<article class="loop-step loop-analyze"><span>04</span><h3>Analyze</h3><p>Review patterns, gaps, holds, denials, and outcomes with accountable owners.</p></article>'
-    '<article class="loop-step loop-refine"><span>05</span><h3>Refine</h3><p>Approve a stronger rulebook and test it before the next release.</p></article>'
-    '</div><p class="flow-note">The loop is governed change management, not automatic policy rewriting. People remain responsible for approving rulebook changes.</p>'
+    f'<a class="governance-loop-graphic" href="{PREFIX}/assets/continuous-governance-loop.webp" target="_blank" rel="noopener">'
+    f'<img src="{PREFIX}/assets/continuous-governance-loop.webp" alt="Continuous governance cycle: an AI action is enforced, produces a signed receipt, undergoes independent review, and informs approved rule improvements before the next action." width="1600" height="1007" loading="lazy"></a>'
+    '<p class="diagram-note">Select the diagram to open the full-size version.</p>'
+    '<ol class="loop-summary"><li><strong>Enforce</strong><span>Apply the approved rulebook at the interaction or action boundary.</span></li>'
+    '<li><strong>Signed receipt</strong><span>Retain the decision, reasons, policy version, and related references.</span></li>'
+    '<li><strong>Independent review</strong><span>Verify the evidence and examine patterns, gaps, holds, denials, and outcomes.</span></li>'
+    '<li><strong>Improve rules</strong><span>Approve and test a stronger rulebook before the next release.</span></li></ol>'
+    '<p class="flow-note">The loop is governed change management, not automatic policy rewriting. People remain responsible for approving rulebook changes.</p>'
 )
 how_it_works = hero('Architecture','De-risk. Govern.<br> Attest.','AI proposes a response or action. SASKI applies the organization’s rulebook, returns an enforceable decision, and records why it was made.')
 how_it_works += section('The shared architecture','One control model from proposal to proof.',governance_path,'soft')
@@ -373,9 +405,44 @@ resources += section('Product explainers','See where each governed path fits.',c
 ]),'soft')
 resources += section('AI attestation','Understand the evidence boundary.','<div class="split"><p class="lead">Learn what a signed decision receipt can establish, what it cannot prove by itself, and why governance evidence must remain distinct from execution evidence.</p><div><p>The AI attestation guide explains SASKI’s evidence model for both agent actions and high-risk human-facing interactions.</p>'+link('ai-attestation','Read the AI attestation guide ↗','text-link')+'</div></div>')
 resources += section('Lab publication','SASKI Agentic in an NVIDIA OpenShell sandbox.','<div class="split"><p class="lead">A SASKI-conducted lab test examined how NVIDIA OpenShell egress controls and SASKI rulebook governance work together around an AI agent.</p><div><p>The report documents the setup, allow, hold, and deny results, signed receipts, network evidence, limitations, and open hardening items.</p><a class="text-link" href="'+openshell_report+'" target="_blank" rel="noopener">Read the complete lab report (PDF) ↗</a><p class="small-copy">'+openshell_disclaimer+'</p></div></div>','soft')
+resources += section('From the archive','Earlier writing on AI safety and governance.','<div class="archive-links"><article><span>February 2026</span><h3>The Quiet Consensus</h3><p>Why AI safety is moving out of the model and into middleware.</p>'+link('blog/the-quiet-consensus--why-ai-safety-is-moving-out-of-the-model-and-into-middleware','Read the article ↗','text-link')+'</article><article><span>February 2026</span><h3>Beyond the App Store</h3><p>An eight-point safety checklist for mental health AI.</p>'+link('blog/8-point-safety-checklist','Read the article ↗','text-link')+'</article><article><span>March 2026</span><h3>The Enterprise AI Pricing Trap</h3><p>How security pricing can constrain AI innovation.</p>'+link('blog/enterprise-ai-pricing-trap','Read the article ↗','text-link')+'</article></div>')
 resources += section('Prepare for a working session','Bring the decisions that shape the rulebook.',resource_questions)
 resources += section('A practical first step','Evaluate before you enforce.','<div class="split"><p class="lead">Start with one consequential workflow and representative records from the work your system actually performs.</p><div><p>SASKI Replay and Shadow Mode can help surface likely interventions, reason codes, and sample attestation before your team changes the live path. The result is a focused discussion about rulebook coverage, integration boundaries, and review evidence.</p>'+link('contact-us','Discuss an evaluation ↗','text-link')+'</div></div>','soft')
 add('resources','Resources — AI Governance Architecture, Evidence & Tools','Explore SASKI’s governance architecture, evaluation findings, Replay workflow, product diagrams, and Tokenator planning calculator.',resources)
+
+def add_archived_article(path,filename,title,date,description,note):
+    source=(ROOT/'content'/'blog'/filename).read_text()
+    lines=source.splitlines()
+    byline=next((i for i,line in enumerate(lines) if '·By Stephen Calhoun' in line),0)
+    body=article_markdown('\n'.join(lines[byline+1:]))
+    page=(hero('Archived article / '+date,title,'By Stephen Calhoun')
+          +'<article class="wrap legacy-article"><aside class="archive-note"><strong>Archive note</strong><p>'+html.escape(note)+'</p></aside>'+body+'</article>')
+    add(path,title,description,page,'Article')
+
+add_archived_article(
+    'blog/the-quiet-consensus--why-ai-safety-is-moving-out-of-the-model-and-into-middleware',
+    'quiet-consensus.md',
+    'The Quiet Consensus: Why AI Safety Is Moving Out of the Model and Into Middleware',
+    'February 5, 2026',
+    'Why AI safety is moving from model training alone toward runtime middleware, deterministic enforcement, monitoring, and auditable controls.',
+    'This article reflects the author’s analysis at the time of publication. References and product descriptions may have evolved.'
+)
+add_archived_article(
+    'blog/8-point-safety-checklist',
+    'mental-health-ai-checklist.md',
+    'Beyond the App Store: The 8-Point Safety Checklist for Mental Health AI',
+    'February 27, 2026',
+    'An eight-point framework for examining accountability, monitoring, privacy, evidence, and incident response in mental health AI.',
+    'This archived article is commentary, not legal, medical, clinical, or insurance advice. References reflect the original publication date.'
+)
+add_archived_article(
+    'blog/enterprise-ai-pricing-trap',
+    'enterprise-ai-pricing-trap.md',
+    'The Enterprise AI Pricing Trap: How the Security Market Is Suffocating Innovation',
+    'March 4, 2026',
+    'An examination of consumption and seat-based pricing in enterprise AI governance and security markets.',
+    'This archived article reflects market observations and product concepts at the time of publication. Pricing, product names, and availability mentioned below are historical and are not current offers.'
+)
 calc='''<div class="calculator"><form id="calculator" class="calc-fields"><h2>Your assumptions</h2><p>Illustrative defaults. Replace them with your own measured values.</p><label for="turns">Monthly model calls</label><input id="turns" type="number" min="0" max="1000000000000" step="1" value="1000000" required><label for="legacy">Current repeated prompt tokens per call</label><input id="legacy" type="number" min="0" max="10000000" step="1" value="450" required><label for="lean">Proposed repeated prompt tokens per call</label><input id="lean" type="number" min="0" max="10000000" step="1" value="150" required><label for="price">Input price per million tokens (USD)</label><input id="price" type="number" min="0" max="100000" step="0.01" value="2.50" required><button class="button" type="submit">Calculate estimate <span aria-hidden="true">↗</span></button></form><div class="calc-result" aria-live="polite" aria-atomic="true"><p class="eyebrow">Estimated prompt overhead reduction</p><p class="result-number" id="monthly">$750.00</p><p>per month</p><div class="result-details"><p><strong id="annual">$9,000.00</strong><span>Annualized estimate</span></p><p><strong id="tokens">300,000,000</strong><span>Fewer input tokens per month</span></p><p><strong id="percent">66.7%</strong><span>Reduction in repeated prompt tokens</span></p></div><p id="calc-note">This estimate covers repeated input tokens only.</p></div></div>'''
 add('tokenator','Tokenator — Estimate Prompt Token Savings','Estimate monthly and annual repeated input-token savings using your call volume, prompt sizes, and input-token price. A transparent planning calculator.',hero('Resources / Token Savings','Less repetition.<br> More useful context.','Estimate the input-token cost of repeating governance instructions on every call. All calculations run in your browser.')+'<section class="section"><div class="wrap">'+calc+'<noscript><p>Enable JavaScript to calculate an estimate. The displayed values use the illustrative defaults.</p></noscript></div></section>'+section('Transparent assumptions','Know what the number means.','<div class="split"><div><h3>The calculation</h3><p>Monthly reduction = monthly calls × (current tokens − proposed tokens) × input price ÷ 1,000,000. Annualized reduction is the monthly result multiplied by 12.</p></div><div><h3>The scope</h3><p>This planning estimate excludes output tokens, caching discounts, blocked calls, variable safety context, integration costs, and SASKI fees. It is not a quote or a performance guarantee. Validate any removal of prompt instructions against your application’s policy needs.</p></div></div>','soft'))
 add('about','About SASKI Institute PBC','SASKI Institute PBC develops rulebook governance and verifiable attestation to help organizations de-risk AI interactions and actions.',hero('About SASKI Institute','Accountability belongs<br> in the architecture.','We help organizations de-risk AI with independent rulebook governance and verifiable attestation.')+section('Our purpose','Make consequential AI decisions governable and inspectable.','<div class="split"><p class="lead">SASKI Institute is a public benefit corporation focused on more accountable AI.</p><div><p>We believe the ability to generate an answer should be separated from the authority to take an action. Explicit rulebooks, independent enforcement, and verifiable attestation are the foundations of that approach.</p><p>SASKI Agentic governs actions, SASKI SDK governs human-facing interactions, SASKI Replay evaluates historical activity, and SASKI Estate applies the same architecture to the connected home.</p></div></div>')+section('Our work','One governance architecture. Four products.',cards(products),'soft'))
@@ -513,7 +580,8 @@ def render(path,title,desc,body,kind):
         if path in ['agentic','estate']: entity['image']=BASE+'/assets/'+path+'-logo.png'
     if kind in ['Article','TechArticle']:
         headlines={'ai-attestation':'AI Attestation and Signed Decision Receipts','receipt-anatomy':'Anatomy of a SASKI Agentic Receipt','findings':'Pre-LLM Infrastructure Failures in Production AI Chatbots','founders-story':story_heading}
-        entity.update(headline=headlines[path],author={'@type':'Person','name':'Stephen Calhoun'} if path=='founders-story' else {'@id':org['@id']},publisher={'@id':org['@id']},mainEntityOfPage=canonical)
+        personal_article=path=='founders-story' or path.startswith('blog/')
+        entity.update(headline=headlines.get(path,title.split(' | ')[0]),author={'@type':'Person','name':'Stephen Calhoun'} if personal_article else {'@id':org['@id']},publisher={'@id':org['@id']},mainEntityOfPage=canonical)
     graph=[org,entity]
     if path=='ai-attestation':
         graph.append({'@type':'FAQPage','@id':canonical+'#faq','mainEntity':[
@@ -574,6 +642,9 @@ shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html'
     f'- [AI attestation and signed decision receipts]({BASE}/ai-attestation/)\n'
     f'- [Anatomy of a SASKI Agentic receipt]({BASE}/receipt-anatomy/)\n'
     f'- [Research findings]({BASE}/findings/)\n'
+    f'- [The Quiet Consensus]({BASE}/blog/the-quiet-consensus--why-ai-safety-is-moving-out-of-the-model-and-into-middleware/)\n'
+    f'- [Beyond the App Store: The 8-Point Safety Checklist for Mental Health AI]({BASE}/blog/8-point-safety-checklist/)\n'
+    f'- [The Enterprise AI Pricing Trap]({BASE}/blog/enterprise-ai-pricing-trap/)\n'
     f'- [Press and media]({BASE}/press/)\n'
     f'- [Resources]({BASE}/resources/)\n'
     f'- [About SASKI Institute]({BASE}/about/)\n'
