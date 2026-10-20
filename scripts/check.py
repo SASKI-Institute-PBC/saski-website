@@ -78,7 +78,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==17
+assert len(listed)==20
 assert listed.issubset(canonical_seen | {loc for loc in listed if loc.endswith('/receipt-anatomy/')})
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
 assert 'AI Attestation and Signed Decision Receipts' in attestation
@@ -107,6 +107,9 @@ assert 'window.location.replace' in legacy_story and '/founders-story/' in legac
 home=(ROOT/'index.html').read_text()
 assert 'One governance foundation for your company’s AI.' in home
 assert '/enterprise-ai-governance/' in home
+assert 'Experience SASKI governance in a working application.' in home
+assert 'https://www.mytrusted.ai/' in home
+assert 'Future enterprise chatbot packaging remains in development' in home
 enterprise=(ROOT/'enterprise-ai-governance'/'index.html').read_text()
 assert 'Govern existing AI or design the controls before launch.' in enterprise
 assert 'https://www.mytrusted.ai/' in enterprise
@@ -128,7 +131,23 @@ assert 'Federal and state references' in replay
 assert 'They are not legal advice' in replay
 how=(ROOT/'how-it-works'/'index.html').read_text()
 assert 'The governance feedback loop' in how
-assert all(label in how for label in ['Enforce','Evidence','Verify','Analyze','Refine'])
+assert '/assets/continuous-governance-loop.webp' in how
+assert all(label in how for label in ['Enforce','Signed receipt','Independent review','Improve rules'])
+assert 'People remain responsible for approving rulebook changes.' in how
+assert (ROOT/'assets'/'continuous-governance-loop.webp').is_file()
+articles={
+    'blog/the-quiet-consensus--why-ai-safety-is-moving-out-of-the-model-and-into-middleware':'The Quiet Consensus',
+    'blog/8-point-safety-checklist':'Beyond the App Store',
+    'blog/enterprise-ai-pricing-trap':'The Enterprise AI Pricing Trap',
+}
+for route,heading in articles.items():
+    article=(ROOT/route/'index.html').read_text()
+    assert heading in article and 'Archive note' in article
+    assert 'content="index,follow"' in article if SITE_PUBLIC else 'content="noindex,follow"' in article
+    assert 'data:image' not in article and '[image1]' not in article and 'SASI' not in article
+    assert any(loc.endswith('/'+route+'/') for loc in listed)
+pricing=(ROOT/'blog'/'enterprise-ai-pricing-trap'/'index.html').read_text()
+assert 'historical and are not current offers' in pricing
 press=(ROOT/'press'/'index.html').read_text()
 assert 'Experience the safeguards.' in press
 assert 'Verify the evidence yourself.' in press
