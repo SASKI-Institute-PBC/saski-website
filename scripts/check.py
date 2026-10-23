@@ -34,6 +34,14 @@ for file in pages:
         assert 'body{visibility:hidden}' in source
         assert '<noscript><style>body{visibility:visible}' in source
         continue
+    if route=='tiktok':
+        assert 'content="noindex,follow"' in source
+        assert '<title>Questions About AI Safety? | SASKI Institute</title>' in source
+        assert '/assets/ai-safety-live-tv-16x9.jpg' in source
+        assert 'object-fit:contain' in source
+        assert 'requestFullscreen' in source
+        assert (ROOT/'assets'/'ai-safety-live-tv-16x9.jpg').is_file()
+        continue
     if route=='receipt-anatomy':
         assert hashlib.sha256(file.read_bytes()).hexdigest()=='90248fa1ad45afc643b11ed3d53f4afe47b21cf42de91ed334fea931ef391f00'
         continue
@@ -79,6 +87,7 @@ for file in pages:
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
 assert len(listed)==20
+assert not any(loc.endswith('/tiktok/') for loc in listed)
 assert listed.issubset(canonical_seen | {loc for loc in listed if loc.endswith('/receipt-anatomy/')})
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
 assert 'AI Attestation and Signed Decision Receipts' in attestation
