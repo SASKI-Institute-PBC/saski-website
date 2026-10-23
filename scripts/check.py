@@ -16,12 +16,25 @@ class Page(HTMLParser):
     def handle_endtag(self,tag):
         if tag=='script' and self.in_ld: self.ld.append(json.loads(self.data)); self.in_ld=False
 pages=[p for p in ROOT.rglob('*.html') if 'assets' not in p.relative_to(ROOT).parts]; canonical_seen=set(); descriptions=set()
+legacy_redirects={
+    'ai-watch':'resources',
+    'enterprise-ai':'enterprise-ai-governance',
+    'contact':'contact-us',
+}
 for file in pages:
     source=file.read_text()
     route=file.parent.relative_to(ROOT).as_posix()
     if route=='believe-even-when-they-dont':
         assert 'content="noindex,follow"' in source
         assert '/founders-story/' in source
+        continue
+    if route in legacy_redirects:
+        target=legacy_redirects[route]
+        assert 'content="noindex,follow"' in source
+        assert f'<link rel="canonical" href="https://www.saski.io/{target}/">' in source if SITE_PUBLIC else f'/{target}/' in source
+        assert 'window.location.replace' in source
+        assert f'/{target}/' in source
+        assert 'body{visibility:hidden}' in source
         continue
     if route=='educators/storybook':
         assert 'content="noindex,follow"' in source

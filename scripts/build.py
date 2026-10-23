@@ -615,6 +615,16 @@ for path,(title,desc,body,kind) in pages.items():
 legacy_story=OUT/'believe-even-when-they-dont'/'index.html'
 legacy_story.parent.mkdir(parents=True,exist_ok=True)
 legacy_story.write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Founder’s Story | SASKI Institute</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{BASE}/founders-story/"><meta http-equiv="refresh" content="0; url={url('founders-story')}"><script>window.location.replace({json.dumps(url('founders-story'))});</script></head><body><main><h1>Founder’s Story</h1><p>This page has moved to <a href="{url('founders-story')}">saski.io/founders-story/</a>.</p></main></body></html>''')
+legacy_redirects = {
+    'ai-watch': ('resources', 'AI governance resources'),
+    'enterprise-ai': ('enterprise-ai-governance', 'Enterprise AI governance'),
+    'contact': ('contact-us', 'Contact SASKI Institute'),
+}
+for source_path, (target_path, title) in legacy_redirects.items():
+    target = url(target_path)
+    destination = OUT/source_path/'index.html'
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(title)} | SASKI Institute</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{BASE}/{target_path}/"><meta http-equiv="refresh" content="0; url={target}"><style>body{{visibility:hidden}}</style><noscript><style>body{{visibility:visible}}</style></noscript><script>window.location.replace({json.dumps(target)});</script></head><body><main><h1>{html.escape(title)}</h1><p>This page has moved to <a href="{target}">{BASE}/{target_path}/</a>.</p></main></body></html>''')
 storybook=OUT/'educators'/'storybook'/'index.html'
 storybook.parent.mkdir(parents=True,exist_ok=True)
 storybook_tracking = ''
