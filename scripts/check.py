@@ -113,9 +113,11 @@ assert 'does not establish organizational conformity with ISO/IEC 42001' in atte
 assert 'https://www.iso.org/standard/42001' in attestation
 assert (ROOT/'robots.txt').read_text().startswith('User-agent: *')
 assert (ROOT/'assets/social-share.png').is_file()
-assert (ROOT/'receipt-test-public-key.txt').read_text().strip()=='uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM='
 anatomy=(ROOT/'receipt-anatomy'/'index.html').read_text()
 assert 'Anatomy of a SASKI receipt' in anatomy
+assert hashlib.sha256((ROOT/'receipt-anatomy'/'index.html').read_bytes()).hexdigest()=='90248fa1ad45afc643b11ed3d53f4afe47b21cf42de91ed334fea931ef391f00'
+for retired_file in ['receipt-sample.json','verify-receipt.py','receipt-test-public-key.txt']:
+    assert not (ROOT/retired_file).exists(), retired_file
 story=(ROOT/'founders-story'/'index.html').read_text()
 assert "Just Because You Can't See It Doesn't Mean It Isn't Real" in story
 assert 'class="wrap story-article"' in story
