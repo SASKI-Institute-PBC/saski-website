@@ -342,40 +342,9 @@ attestation += section('Output roadmap','OVERT-aligned receipts are coming soon.
 attestation += section('Questions','AI attestation, in practical terms.',attestation_faq)
 add('ai-attestation','AI Attestation and Signed Decision Receipts','Learn how SASKI connects deterministic rulebook decisions to inspectable AI attestation, and how decision receipts differ from execution evidence.',attestation,'TechArticle')
 
-receipt_steps = [
-    ('Who acted','The agent, session, and workflow this decision belongs to.','agent_id','agent-vector','session_id','session-vector','workflow_id','wf-vector'),
-    ('What it tried to do','The requested tool and a digest of its arguments; raw tool arguments are not placed in the signed record.','tool_name','example__noop','parameters_digest','85415bab93be16f1…b1860cbae','',''),
-    ('Which rules applied','The policy version and digest of the rulebook in force for the decision.','policy_version','vector-policy-1','rulebook_digest','cdcdcdcdcdcdcd…cdcdcdcdcd','',''),
-    ('The decision','The verdict and reason code produced by the rulebook.','verdict','deny','reason_codes','VECTOR_DENY','',''),
-    ('Which software decided','The gateway build digest, instance, and product version.','gateway_code_digest','86f5de35ccae6995…2fa06e6','gateway_instance_id','gateway-instance-vector','product_version','1.7.2'),
-    ('When','A nanosecond timestamp bound to a five-minute time window.','timestamp','2026-01-15T00:00:00+00:00','timestamp_ns','1768435200000000000','time_window_id','5894784 / 300 seconds'),
-    ('Its place in the chain','The receipt identity and its position in the workflow chain.','receipt_id','receipt-vector-1','hop_index','0','prev_receipt_id','first in this workflow'),
-    ('The signature','An Ed25519 signature over the signed fields. Changing a signed value makes verification fail.','alg','Ed25519','kid','vector-1','signature','8Dm1XJ0v/fk4NX0s…VtRDw=='),
-]
-receipt_step_html = '<div class="receipt-anatomy">' + ''.join(
-    '<article><span class="receipt-number">'+str(number)+'</span><div><h3>'+html.escape(step[0])+'</h3><p>'+html.escape(step[1])+'</p><dl>'+
-    ''.join('<div><dt>'+html.escape(step[i])+'</dt><dd>'+html.escape(step[i+1])+'</dd></div>' for i in (2,4,6) if step[i])+
-    '</dl></div></article>' for number,step in enumerate(receipt_steps,1)
-) + '</div>'
-verifier_code='''import json, base64
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-
-PUBLIC_KEY = "uAKiced9sck1tT/LJ82Vw9ouImOqVNYHYn1+STp6MzM="
-
-receipt = json.load(open("receipt-sample.json"))
-signature = base64.b64decode(receipt.pop("signature"))
-canonical = json.dumps(receipt, sort_keys=True, separators=(",", ":"),
-                       ensure_ascii=False).encode("utf-8")
-
-key = Ed25519PublicKey.from_public_bytes(base64.b64decode(PUBLIC_KEY))
-key.verify(signature, canonical)
-print("valid")'''
-receipt_anatomy = hero('Public test vector','Anatomy of a<br> SASKI receipt.','Follow one sanitized Agentic decision from governed request to signed evidence, then verify the signature with the published test key.')
-receipt_anatomy += section('Agentic decision receipt','What the signed record contains.',receipt_step_html,'soft')
-receipt_anatomy += section('Tamper evidence','Change one signed value. Verification fails.','<div class="tamper-example"><div><code>verdict: deny</code><span>→</span><strong class="valid">Signature valid</strong></div><div><code>verdict: allow</code><span>→</span><strong class="invalid">Signature invalid</strong></div></div>')
-receipt_anatomy += section('Verify it yourself','No SASKI account or network connection required.','<div class="verify-grid"><div><p>Download the receipt and verifier into the same folder, install the Python <code>cryptography</code> package, and run <code>python verify-receipt.py</code>. A successful check prints <code>valid</code>; changing any signed field causes verification to fail.</p><div class="verify-actions"><a class="button" href="'+PREFIX+'/receipt-sample.json" download>Download receipt ↓</a><a class="button button-secondary" href="'+PREFIX+'/verify-receipt.py" download>Download verifier ↓</a><a class="text-link" href="'+PREFIX+'/receipt-test-public-key.txt" target="_blank" rel="noopener">View test public key ↗</a></div><p class="sample-note">The test key is for verification practice only and is never used in production. This vector contains no decimal-number fields; the complete SASKI canonical encoder additionally converts decimals to fixed eight-place strings.</p></div><pre class="verifier-code"><code>'+html.escape(verifier_code)+'</code></pre></div>','soft')
-receipt_anatomy += section('Complete sample','Inspect the exact signed object.','<div class="split"><p class="lead">The downloadable JSON is the source of truth for this test vector.</p><div><p>It contains sanitized, test-only identifiers and no raw tool arguments. The signature is base64 encoded and the public key identifies the test key labeled <code>vector-1</code>.</p><a class="text-link" href="'+PREFIX+'/receipt-sample.json" target="_blank" rel="noopener">Open receipt-sample.json ↗</a></div></div>')
-add('receipt-anatomy','Anatomy of a SASKI Agentic Receipt','Inspect and independently verify a sanitized SASKI Agentic 1.3 Ed25519 decision receipt using the published test key and Python verifier.',receipt_anatomy,'TechArticle')
+# This route is replaced byte-for-byte with the signed public sample below.
+# Keeping it in pages includes its canonical URL in the sitemap.
+add('receipt-anatomy','Anatomy of a SASKI Agentic Receipt','Inspect and independently verify a sanitized SASKI Agentic 1.3 Ed25519 decision receipt using the public sample and verifier.','', 'TechArticle')
 
 resource_path = (
     '<ol class="resource-path">'
@@ -608,7 +577,6 @@ for old in OUT.iterdir():
     if old.is_dir(): shutil.rmtree(old)
     else: old.unlink()
 shutil.copytree(ROOT/'assets',OUT/'assets')
-shutil.copy2(ROOT/'receipt-test-public-key.txt',OUT/'receipt-test-public-key.txt')
 for path,(title,desc,body,kind) in pages.items():
     dest=OUT/path/'index.html'; dest.parent.mkdir(parents=True,exist_ok=True)
     dest.write_text(render_truckee(PREFIX,BASE,PUBLIC,GA_ID) if path=='truckee-locals' else render(path,title,desc,body,kind))
