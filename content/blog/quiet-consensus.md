@@ -223,7 +223,5 @@ Shows why best-effort defenses without guarantees fail under adaptive pressure.
 Goodfellow, I. et al. Explaining and Harnessing Adversarial Examples. ICLR 2015
 Demonstrates intrinsic fragility of learned systems under small perturbations.
 Key takeaway: robustness must be engineered, not hoped for.
-Learn more about our SASKI technology [HERE](https://techviz.us/sasi-integration)
-Test our SASKI middleware in our sandbox app at [www\.mytrusted.ai](http://www.mytrusted.ai/)
-
-.
+Explore [How SASKI Works](https://www.saski.io/how-it-works/) to see the governance architecture.
+Experience SASKI governance in the public [MyTrusted.ai application](https://www.mytrusted.ai/).

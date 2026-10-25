@@ -168,6 +168,11 @@ for route,heading in articles.items():
     assert 'content="index,follow"' in article if SITE_PUBLIC else 'content="noindex,follow"' in article
     assert 'data:image' not in article and '[image1]' not in article and 'SASI' not in article
     assert any(loc.endswith('/'+route+'/') for loc in listed)
+quiet=(ROOT/'blog'/'the-quiet-consensus--why-ai-safety-is-moving-out-of-the-model-and-into-middleware'/'index.html').read_text()
+assert 'Explore <a href="https://www.saski.io/how-it-works/"' in quiet
+assert 'public <a href="https://www.mytrusted.ai/"' in quiet
+assert 'techviz.us/sasi-integration' not in quiet and 'http://www.mytrusted.ai/' not in quiet
+assert '<p>.</p>' not in quiet
 pricing=(ROOT/'blog'/'enterprise-ai-pricing-trap'/'index.html').read_text()
 assert 'historical and are not current offers' in pricing
 press=(ROOT/'press'/'index.html').read_text()
