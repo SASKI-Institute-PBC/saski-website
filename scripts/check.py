@@ -99,7 +99,7 @@ for file in pages:
         if t=='input': assert any(lt=='label' and la.get('for')==a.get('id') for lt,la in tags),(file,a)
 urls=ET.parse(ROOT/'sitemap.xml').getroot()
 listed={e.text for e in urls.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert len(listed)==20
+assert len(listed)==21
 assert not any(loc.endswith('/tiktok/') for loc in listed)
 assert listed.issubset(canonical_seen | {loc for loc in listed if loc.endswith('/receipt-anatomy/')})
 attestation=(ROOT/'ai-attestation'/'index.html').read_text()
@@ -183,6 +183,14 @@ assert 'Verify the evidence yourself.' in press
 assert 'info@saski.io' in press
 assert 'These are company-issued materials from SASKI Institute, not independent news coverage.' in press
 assert '/assets/institute-logo.png' in press and '/assets/stephen-calhoun.png' in press
+news=(ROOT/'ai-news'/'index.html').read_text()
+assert 'AI developments<br> worth governing.' in news
+assert news.count('class="news-story"')==3
+assert all(text in news for text in ['Anthropic model submitted a fabricated homicide tip','OpenAI agent gained unauthorized access','Senators demand answers from Google'])
+assert all(source in news for source in ['apnews.com','abc.net.au','blumenthal.senate.gov','hawley.senate.gov','wsj.com'])
+assert 'SASKI did not independently investigate these events.' in news
+assert '/ai-news/' in (ROOT/'index.html').read_text().split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
+assert any(loc.endswith('/ai-news/') for loc in listed)
 contact=(ROOT/'contact-us'/'index.html').read_text()
 assert all(text in contact for text in ['AI governance assessment','Enterprise AI deployment','Technical demonstration'])
 assert contact.count('https://calendar.app.google/WZfXQN1dpcvTcMGLA')==3
