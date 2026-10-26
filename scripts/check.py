@@ -185,10 +185,11 @@ assert 'These are company-issued materials from SASKI Institute, not independent
 assert '/assets/institute-logo.png' in press and '/assets/stephen-calhoun.png' in press
 news=(ROOT/'ai-news'/'index.html').read_text()
 assert 'AI developments<br> worth governing.' in news
-assert news.count('class="news-story"')==3
-assert all(text in news for text in ['Anthropic model submitted a fabricated homicide tip','OpenAI agent gained unauthorized access','Senators demand answers from Google'])
-assert all(source in news for source in ['apnews.com','abc.net.au','blumenthal.senate.gov','hawley.senate.gov','wsj.com'])
+assert news.count('class="news-story"')==7
+assert all(text in news for text in ['Anthropic model submitted a fabricated homicide tip','OpenAI agent gained unauthorized access','Senators demand answers from Google','New York City schools restrict student-facing generative AI','Major U.S. banks restrict unvetted AI agents','Community Bank disclosed customer data','Suspected AI-assisted attacks affected 16 South Korean financial firms'])
+assert all(source in news for source in ['apnews.com','abc.net.au','blumenthal.senate.gov','hawley.senate.gov','wsj.com','schools.nyc.gov','nyc.gov','cnbc.com','axios.com','americanbanker.com','sec.gov','yna.co.kr','koreatimes.co.kr'])
 assert 'SASKI did not independently investigate these events.' in news
+assert news.index('Recent headlines') < news.index('About this page')
 assert '/ai-news/' in (ROOT/'index.html').read_text().split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
 assert any(loc.endswith('/ai-news/') for loc in listed)
 contact=(ROOT/'contact-us'/'index.html').read_text()
