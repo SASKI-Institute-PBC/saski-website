@@ -195,11 +195,11 @@ assert '/ai-news/' in (ROOT/'index.html').read_text().split('<nav id="navigation
 assert any(loc.endswith('/ai-news/') for loc in listed)
 illustrations=(ROOT/'illustrations'/'index.html').read_text()
 assert 'AI governance,<br> illustrated.' in illustrations
-assert illustrations.count('class="illustration-card"')==3
-assert illustrations.count('data-illustration-open')==3
-assert all(text in illustrations for text in ['The Memory Defense','Where’s the Evidence?','Empty Binder, Empty Promises','Governance must leave evidence.'])
+assert illustrations.count('class="illustration-card"')==6
+assert illustrations.count('data-illustration-open')==6
+assert all(text in illustrations for text in ['The Memory Defense','Where’s the Evidence?','Empty Binder, Empty Promises','The Incident Report Shredder','The Proof Problem','The Safety Feedback Loop','Governance must leave evidence.'])
 assert 'SASKI Educator Storybook' in illustrations and '/educators/storybook/' in illustrations
-assert all((ROOT/'assets'/'illustrations'/asset).is_file() for asset in ['courtroom-memory-defense.jpg','courtroom-blame-game.jpg','empty-binder-empty-promises.jpg'])
+assert all((ROOT/'assets'/'illustrations'/asset).is_file() for asset in ['courtroom-memory-defense.jpg','courtroom-blame-game.jpg','empty-binder-empty-promises.jpg','ai-incident-report-shredder.jpg','ai-safety-proof-problem.jpg','ai-safety-workflow-workshop.jpg'])
 assert 'data-illustration-viewer' in illustrations and 'data-illustration-zoom-in' in illustrations
 assert '/illustrations/' in (ROOT/'index.html').read_text().split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
 assert any(loc.endswith('/illustrations/') for loc in listed)
