@@ -198,6 +198,7 @@ assert 'AI governance,<br> illustrated.' in illustrations
 assert illustrations.count('class="illustration-card"')==3
 assert illustrations.count('data-illustration-open')==3
 assert all(text in illustrations for text in ['The Memory Defense','Where’s the Evidence?','Empty Binder, Empty Promises','Governance must leave evidence.'])
+assert 'SASKI Educator Storybook' in illustrations and '/educators/storybook/' in illustrations
 assert all((ROOT/'assets'/'illustrations'/asset).is_file() for asset in ['courtroom-memory-defense.jpg','courtroom-blame-game.jpg','empty-binder-empty-promises.jpg'])
 assert 'data-illustration-viewer' in illustrations and 'data-illustration-zoom-in' in illustrations
 assert '/illustrations/' in (ROOT/'index.html').read_text().split('<nav id="navigation"',1)[1].split('</nav>',1)[0]
