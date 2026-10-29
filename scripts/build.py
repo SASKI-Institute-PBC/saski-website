@@ -514,6 +514,27 @@ illustrations = [
         'alt':'An illustration showing AI interactions, attestation, research, and improved safeguards moving through a continuous safety workflow',
         'caption':'Receipts are not only for after-the-fact review. They help teams identify recurring patterns, improve rulebooks, and test whether later safeguards address the evidence.'
     },
+    {
+        'number':'07',
+        'title':'The Missing Version',
+        'image':'missing-ai-instructions-version.jpg',
+        'alt':'A courtroom illustration in which a reviewer asks for the AI instructions that existed before an incident and learns that the original version was changed',
+        'caption':'Updating safeguards after an incident is responsible. Replacing the prior instructions without preserving their version destroys the evidence needed to understand what governed the original decision.'
+    },
+    {
+        'number':'08',
+        'title':'Who Authorizes the Authorizers?',
+        'image':'ai-safety-log-authority.jpg',
+        'alt':'An illustration in which a reviewer asks who authorizes changes to AI safety logs while a robot holds an eraser',
+        'caption':'Restricting edits to authorized personnel is only the first question. Governance also needs an attributable record of who changed what, under which authority, and when.'
+    },
+    {
+        'number':'09',
+        'title':'Investigating With What?',
+        'image':'ai-liability-incident-evidence.jpg',
+        'alt':'An insurance reviewer asks what evidence will support an investigation after a mental health AI mishandles a high-risk interaction',
+        'caption':'A promise to investigate is only as useful as the evidence available. High-risk, human-facing AI needs decision-time records of what was detected, how the interaction was routed, and which safeguards ran.'
+    },
 ]
 illustration_cards = ''.join(
     '<article class="illustration-card">'
@@ -532,7 +553,7 @@ illustration_viewer = '''<dialog class="illustration-viewer" data-illustration-v
 </div></dialog>'''
 illustrations_body = hero('Illustration series','AI governance,<br> illustrated.','A visual series about authority, evidence, memory, and what organizations can prove after an AI decision.')
 illustrations_body += section('The series','Policies describe what should happen. Evidence shows what did.','<div class="split illustration-intro"><p class="lead">AI governance becomes real at the moment a system allows, modifies, holds, denies, or routes a decision.</p><div><p>These illustrations examine the questions organizations face afterward: Who authorized the action? Which safeguards ran? What evidence survives when neither the model nor its developer can reconstruct the event?</p><p>SASKI connects deterministic rulebook decisions to signed, inspectable receipts so a reviewer can examine the rulebook version, outcome, reasons, and chain of evidence without relying on the AI’s memory or a promise written after the fact.</p></div></div>')
-illustrations_body += section('The attestation series','Six questions every governed AI system should be ready to answer.','<div class="illustration-gallery">'+illustration_cards+'</div>','soft')
+illustrations_body += section('The attestation series','Nine questions every governed AI system should be ready to answer.','<div class="illustration-gallery">'+illustration_cards+'</div>','soft')
 illustrations_body += section('For educators','Continue with the storybook.','<a class="storybook-feature" href="'+url('educators/storybook')+'" target="_blank" rel="noopener"><span><span class="eyebrow">SASKI Educator Storybook</span><strong>Explore AI safety through a visual story.</strong><span>Open the published storybook presentation and continue the conversation about safer AI.</span></span><span class="storybook-feature-action">Open the storybook ↗</span></a>')
 illustrations_body += section('The principle','Governance must leave evidence.','<div class="split"><p class="lead">A policy is a plan. A model explanation is a reconstruction. Attestation is contemporaneous evidence of the governance decision.</p><div><p>Signed decision receipts make it possible to inspect what was evaluated, which rulebook applied, what outcome was recorded, and why.</p><a class="button" href="'+url('ai-attestation')+'">Explore SASKI attestation ↗</a></div></div>')
 illustrations_body += illustration_viewer
