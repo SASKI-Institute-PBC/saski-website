@@ -798,42 +798,4 @@ And after everything I've been through, I wouldn't trade the knowledge I've gain
 
 STORY_SIGNATURE
 
-## Something happened today that makes this even more interesting
-
-On October 13, 2026, we completed a technical test involving SASKI Agentic and NVIDIA's OpenShell agent sandboxing technology.
-
-In our Linux test with NVIDIA's OpenShell agent sandboxing, the sandboxed agent could reach only the SASKI gateway, blocking direct external attempts.
-
-Acting as the enforcement gateway, SASKI routed actions into three explicit decisions: ALLOW for permitted reads, HOLD for payment requests requiring human approval, and DENY for out-of-policy requests, generating signed receipts for each.
-
-This architecture ensures autonomous agents must route external requests through strict policy enforcement before proceeding.
-
-The agent can be intelligent.
-
-It can be capable.
-
-It can perform useful work.
-
-**But intelligence doesn't automatically grant authority.**
-
-And that's exactly the distinction SASKI is being built to enforce.
-
-## The Market Opportunity
-
-How large could this become?
-
-My preliminary research suggests that somewhere between 50,000 and 200,000 organizations in the United States could eventually fall into the potential market for higher-risk AI safety and governance systems, depending on how the market is defined.
-
-That includes AI developers and deployers across healthcare, mental health, education, finance, human resources, and enterprise AI agents.
-
-My competitive research also suggests that only a relatively small number of US companies, perhaps around 20, are developing comparable forms of specialized AI attestation technology.
-
-Those are working estimates rather than official industry counts.
-
-But even allowing for considerable uncertainty, the potential imbalance between the number of organizations that may need independently verifiable AI safeguards and the number of companies building specialized attestation systems is enormous.
-
-And we're working to be one of those companies.
-
-Note: I needed to write this story to clear my head and leave these reflections behind. As I step into this next chapter with SASKI, I am fully committed to being the focused professional and leader that a CEO needs to be. I have 2 wonderful children and 2 experienced co-founders that share the vision, and I owe them nothing less than being focused and committed.
-
 RELATED_PUBLICATIONS

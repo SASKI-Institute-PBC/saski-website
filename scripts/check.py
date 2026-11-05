@@ -134,6 +134,12 @@ assert '<a href="https://commerce.utah.gov/2026/10/05/utah-enhances-pro-human-ai
 assert 'The People Who Challenge You Versus the People Who Diminish You' not in story
 assert "Not everyone who questions your ideas is toxic" not in story
 assert 'Maybe I Wasn&#x27;t Lost. Maybe I Was Early.' in story
+assert 'Something happened today that makes this even more interesting' not in story
+assert 'The Market Opportunity' not in story
+assert '50,000 and 200,000 organizations' not in story
+assert 'But intelligence doesn&#x27;t automatically grant authority.' not in story
+assert 'class="story-signature"' in story and 'class="story-publications"' in story
+assert story.index('class="story-signature"') < story.index('class="story-publications"')
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 home=(ROOT/'index.html').read_text()
