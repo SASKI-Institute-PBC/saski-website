@@ -237,6 +237,7 @@ h1,.page-hero h1,.product-hero h1{letter-spacing:0}
 .story-article h2{margin:72px 0 24px;padding-top:34px;border-top:1px solid var(--line);font-size:34px;font-weight:500;line-height:1.22}
 .story-article p,.story-article li{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.85;color:#31464b}
 .story-article strong{color:var(--ink)}
+.story-divider{width:100%;margin:48px 0;border:0;border-top:1px solid var(--line)}
 .story-signature{margin:42px 0;font-style:italic}
 .story-media,.story-gallery{margin:34px 0 46px}
 .story-media{max-width:760px}
