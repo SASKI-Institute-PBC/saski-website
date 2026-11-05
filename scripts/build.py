@@ -17,6 +17,7 @@ def section(k,t,body,cls=''): return f'<section class="section {cls}"><div class
 def legal_inline(text):
     text=text.replace(r'\[','[').replace(r'\]',']')
     text=html.escape(text)
+    text=re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)',r'<a href="\2" target="_blank" rel="noopener">\1</a>',text)
     text=re.sub(r'\*\*(.+?)\*\*',r'<strong>\1</strong>',text)
     text=re.sub(r'\[([^\[\]]+)\]',r'<mark class="legal-placeholder">[\1]</mark>',text)
     text=text.replace('info@saski.io','<a href="mailto:info@saski.io">info@saski.io</a>')

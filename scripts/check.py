@@ -130,6 +130,7 @@ assert '<hr class="story-divider">' in story
 assert 'This might sound harsh' in story
 assert 'If your family starts putting down your dreams' not in story
 assert 'STORY_DIVIDER' not in story
+assert '<a href="https://commerce.utah.gov/2026/10/05/utah-enhances-pro-human-ai-initiative-with-new-healthcare-pillar-adds-new-pilots-to-its-regulatory-sandbox-and-partners-with-third-party-evaluators/" target="_blank" rel="noopener">official Utah announcement</a>' in story
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 home=(ROOT/'index.html').read_text()
