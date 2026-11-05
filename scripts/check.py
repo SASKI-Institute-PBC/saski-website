@@ -126,6 +126,10 @@ assert '/founders-story/' not in story.split('<nav id="navigation"',1)[1].split(
 assert "Founder's Story" in story.split('<footer>',1)[1]
 assert story.count('assets/founders-story/')==7
 assert 'STORY_MEDIA_' not in story
+assert '<hr class="story-divider">' in story
+assert 'This might sound harsh' in story
+assert 'If your family starts putting down your dreams' not in story
+assert 'STORY_DIVIDER' not in story
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 home=(ROOT/'index.html').read_text()

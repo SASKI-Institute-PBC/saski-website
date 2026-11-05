@@ -617,6 +617,7 @@ story_media={
 }
 story_article=(
     legal_markdown(story_source)
+    .replace('<p>STORY_DIVIDER</p>','<hr class="story-divider">')
     .replace('<p>STORY_SIGNATURE</p>','<p class="story-signature">Stephen Calhoun</p>')
     .replace('<p>RELATED_PUBLICATIONS</p>',story_publications)
 )

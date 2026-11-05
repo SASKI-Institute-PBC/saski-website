@@ -20,9 +20,9 @@ I've thought a lot about those words.
 
 By the time you finish reading this story, I think you'll understand why.
 
-**If your family starts putting down your dreams, get away from their pessimism as fast as you can.**
+STORY_DIVIDER
 
-That might sound harsh, but I've learned something over the years. Sometimes the people closest to you can be the most damaging to your ambitions—especially when they equate multi-decade tenure in a single trade with the only true measure of stability.
+This might sound harsh, but I've learned something over the years. Sometimes the people closest to you can be the most damaging to your ambitions—especially when they equate multi-decade tenure in a single trade with the only true measure of stability.
 
 Not necessarily because they want you to fail, but because they cannot see what you see. And rather than acknowledging that they don't understand your vision, they assume you're the one who doesn't understand reality.
 
