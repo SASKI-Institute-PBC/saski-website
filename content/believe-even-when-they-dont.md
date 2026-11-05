@@ -598,7 +598,7 @@ On October 5, 2026, Utah announced an expansion of its healthcare AI regulatory 
 
 These evaluators will help validate technical attestations, assess how accurately AI decisions are reported, and examine whether healthcare AI systems meet appropriate clinical standards.
 
-You can read the official Utah announcement here.
+You can read the [official Utah announcement](https://commerce.utah.gov/2026/10/05/utah-enhances-pro-human-ai-initiative-with-new-healthcare-pillar-adds-new-pilots-to-its-regulatory-sandbox-and-partners-with-third-party-evaluators/) here.
 
 To be clear, SASKI is not part of Utah's evaluator network. I'm pointing to the program as a sign of where regulators are heading.
 
