@@ -684,30 +684,6 @@ And changing direction isn't the same as giving up.
 
 **Sometimes the most valuable thing you carry out of an unsuccessful venture is the knowledge you didn't have when you started it.**
 
-## The People Who Challenge You Versus the People Who Diminish You
-
-Not everyone who questions your ideas is toxic.
-
-I've made enough mistakes to appreciate good advice.
-
-Someone who challenges your pricing, business model, market timing, or technical assumptions might be doing you an enormous favor.
-
-That's constructive criticism.
-
-But someone who continually dismisses your ambitions, ignores your accomplishments, and treats previous setbacks as proof that your next idea is foolish isn't helping you improve.
-
-They're passing judgment.
-
-And when that judgment comes from family and friends, it can be especially painful.
-
-But being related to someone doesn't automatically make their opinion informed or accurate.
-
-Sometimes you need distance.
-
-Not because you hate them.
-
-But because you've worked too hard to let someone else's pessimism become the voice inside your own head.
-
 ## Maybe I Wasn't Lost. Maybe I Was Early.
 
 I suspect some people reading this will recognize themselves.
