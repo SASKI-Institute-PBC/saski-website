@@ -131,6 +131,9 @@ assert 'This might sound harsh' in story
 assert 'If your family starts putting down your dreams' not in story
 assert 'STORY_DIVIDER' not in story
 assert '<a href="https://commerce.utah.gov/2026/10/05/utah-enhances-pro-human-ai-initiative-with-new-healthcare-pillar-adds-new-pilots-to-its-regulatory-sandbox-and-partners-with-third-party-evaluators/" target="_blank" rel="noopener">official Utah announcement</a>' in story
+assert 'The People Who Challenge You Versus the People Who Diminish You' not in story
+assert "Not everyone who questions your ideas is toxic" not in story
+assert 'Maybe I Wasn&#x27;t Lost. Maybe I Was Early.' in story
 legacy_story=(ROOT/'believe-even-when-they-dont'/'index.html').read_text()
 assert 'window.location.replace' in legacy_story and '/founders-story/' in legacy_story
 home=(ROOT/'index.html').read_text()
