@@ -847,13 +847,7 @@ shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html'
     f'- [Contact]({BASE}/contact-us/)\n'
 )
 qa_path='qa-chat-embed-test-7k3'
-qa_widget='''
-<script
-  src="https://app.livechatai.com/embed.js"
-  data-id="cmwmocvbq000kjv080zkgtkr2"
-  async defer>
-</script>
-'''
+qa_widget=''
 qa_page=OUT/qa_path/'index.html'
 qa_page.parent.mkdir(parents=True,exist_ok=True)
 qa_page.write_text(f'''<!doctype html>
