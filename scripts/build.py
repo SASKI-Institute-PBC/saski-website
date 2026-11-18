@@ -846,6 +846,18 @@ shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html'
     f'- [About SASKI Institute]({BASE}/about/)\n'
     f'- [Contact]({BASE}/contact-us/)\n'
 )
+qa_path='qa-chat-embed-test-7k3'
+qa_widget='''
+<script
+  src="https://app.livechatai.com/embed.js"
+  data-id="cmwmocvbq000kjv080zkgtkr2"
+  async defer>
+</script>
+'''
+qa_page=OUT/qa_path/'index.html'
+qa_page.parent.mkdir(parents=True,exist_ok=True)
+qa_page.write_text(f'''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Internal QA test page</title><link rel="canonical" href="{BASE}/{qa_path}/"><meta name="robots" content="noindex, nofollow"></head><body><main><h1>Internal QA test page</h1></main>{qa_widget}</body></html>''')
 retired_copy={
     r'SASKI Agentic':'SASKI',
     r'SASKI SDK':'SASKI',

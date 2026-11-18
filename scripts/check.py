@@ -36,6 +36,14 @@ for file in live_pages:
 home = (ROOT / 'index.html').read_text()
 assert '<a class="button" href="/contact-us/">Request a Shadow Replay' in home
 assert 'MyTrusted' not in home and 'href="/saski/">Explore SASKI' not in home
+qa_path = 'qa-chat-embed-test-7k3'
+qa = (ROOT / qa_path / 'index.html').read_text()
+assert '<h1>Internal QA test page</h1>' in qa
+assert 'content="noindex, nofollow"' in qa
+assert 'src="https://app.livechatai.com/embed.js"' in qa
+assert 'data-id="cmwmocvbq000kjv080zkgtkr2"' in qa
+for unwanted in ['site.css', 'site.js', 'googletagmanager.com', 'SASKI_GA_ID', '<nav', '<footer', 'consent-banner']:
+    assert unwanted not in qa, unwanted
 saski = (ROOT / 'saski' / 'index.html').read_text()
 for anchor in ['overview','checks','action-gate','chat-gate','deployments','attestation','ship','openshell','enterprise','tokens','contact']:
     assert f'id="{anchor}"' in saski, anchor
@@ -80,5 +88,6 @@ listing = (ROOT / 'sitemap.xml').read_text() + (ROOT / 'llms.txt').read_text()
 for route in [*REDIRECTS, *ARCHIVES]:
     assert not any(urlparse(url).path.rstrip('/') == '/'+route for url in listed), route
     assert not any(urlparse(url).path.rstrip('/') == '/'+route for url in re.findall(r'\]\((https?://[^)]+)\)', listing)), route
+assert f'/{qa_path}/' not in listing
 assert any(loc.endswith('/attestation/') for loc in listed) and any(loc.endswith('/solutions/') for loc in listed)
 print(f'PASS: {len(html_pages)} HTML files; navigation, CTAs, anchors, redirects, links, copy scan, and discovery files.')
