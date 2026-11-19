@@ -40,6 +40,8 @@ qa_path = 'qa-chat-embed-test-7k3'
 qa = (ROOT / qa_path / 'index.html').read_text()
 assert '<h1>Internal QA test page</h1>' in qa
 assert 'content="noindex, nofollow"' in qa
+assert 'https://www.chatbase.co/embed.min.js' in qa
+assert 'FbAZBl-M8r9R6dSDsEqk5' in qa
 for unwanted in ['site.css', 'site.js', 'googletagmanager.com', 'SASKI_GA_ID', '<nav', '<footer', 'consent-banner', 'livechatai.com']:
     assert unwanted not in qa, unwanted
 saski = (ROOT / 'saski' / 'index.html').read_text()

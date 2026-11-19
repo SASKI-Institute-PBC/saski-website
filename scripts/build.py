@@ -847,7 +847,9 @@ shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html'
     f'- [Contact]({BASE}/contact-us/)\n'
 )
 qa_path='qa-chat-embed-test-7k3'
-qa_widget=''
+qa_widget='''
+<script>(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="FbAZBl-M8r9R6dSDsEqk5";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();</script>
+'''
 qa_page=OUT/qa_path/'index.html'
 qa_page.parent.mkdir(parents=True,exist_ok=True)
 qa_page.write_text(f'''<!doctype html>
