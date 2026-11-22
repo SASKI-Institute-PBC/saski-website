@@ -848,8 +848,7 @@ shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html'
 )
 qa_path='qa-chat-embed-test-7k3'
 qa_widget='''
-<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/11/19/02/20261119020509-TF38OSP5.js" defer></script>
+<script type="text/javascript">window.$sitegpt=[];(function(){d=document;s=d.createElement("script");s.src="https://sitegpt.ai/widget/5e8810a7-ad4b-494f-9f0d-5dea50c32e5d.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 '''
 qa_page=OUT/qa_path/'index.html'
 qa_page.parent.mkdir(parents=True,exist_ok=True)

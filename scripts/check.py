@@ -40,9 +40,8 @@ qa_path = 'qa-chat-embed-test-7k3'
 qa = (ROOT / qa_path / 'index.html').read_text()
 assert '<h1>Internal QA test page</h1>' in qa
 assert 'content="noindex, nofollow"' in qa
-assert 'https://cdn.botpress.cloud/webchat/v3.7/inject.js' in qa
-assert 'https://files.bpcontent.cloud/2026/11/19/02/20261119020509-TF38OSP5.js' in qa
-for unwanted in ['site.css', 'site.js', 'googletagmanager.com', 'SASKI_GA_ID', '<nav', '<footer', 'consent-banner', 'livechatai.com', 'chatbase.co']:
+assert 'https://sitegpt.ai/widget/5e8810a7-ad4b-494f-9f0d-5dea50c32e5d.js' in qa
+for unwanted in ['site.css', 'site.js', 'googletagmanager.com', 'SASKI_GA_ID', '<nav', '<footer', 'consent-banner', 'livechatai.com', 'chatbase.co', 'botpress.cloud', 'bpcontent.cloud']:
     assert unwanted not in qa, unwanted
 saski = (ROOT / 'saski' / 'index.html').read_text()
 for anchor in ['overview','checks','action-gate','chat-gate','deployments','attestation','ship','openshell','enterprise','tokens','contact']:
