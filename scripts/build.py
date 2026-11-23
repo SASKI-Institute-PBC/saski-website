@@ -848,8 +848,8 @@ shutil.copy2(ROOT/'saski-receipt-sample.html',OUT/'receipt-anatomy'/'index.html'
 )
 qa_path='qa-chat-embed-test-7k3'
 qa_widget='''
-<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/11/19/02/20261119020509-TF38OSP5.js" defer></script>
+<!-- AskAI Chat Widget Script -->
+<script defer type="text/javascript" src="https://myaskai.com/api/1.1/wf/embed-v2?i=NK1gglbBlAFpXlv1vOQbXP3f3AtGI7" id="NK1gglbBlAFpXlv1vOQbXP3f3AtGI7"></script>
 '''
 qa_page=OUT/qa_path/'index.html'
 qa_page.parent.mkdir(parents=True,exist_ok=True)
