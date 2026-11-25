@@ -40,9 +40,9 @@ qa_path = 'qa-chat-embed-test-7k3'
 qa = (ROOT / qa_path / 'index.html').read_text()
 assert '<h1>Internal QA test page</h1>' in qa
 assert 'content="noindex, nofollow"' in qa
-assert 'https://myaskai.com/api/1.1/wf/embed-v2?i=NK1gglbBlAFpXlv1vOQbXP3f3AtGI7' in qa
-assert 'id="NK1gglbBlAFpXlv1vOQbXP3f3AtGI7"' in qa
-for unwanted in ['site.css', 'site.js', 'googletagmanager.com', 'SASKI_GA_ID', '<nav', '<footer', 'consent-banner', 'chatbase.co', 'livechatai.com', 'sitegpt.ai', 'botpress.cloud', 'bpcontent.cloud']:
+assert 'https://app.livechatai.com/embed.js' in qa
+assert 'data-id="cmwwgkg72000xl0084fvh9hth"' in qa
+for unwanted in ['site.css', 'site.js', 'googletagmanager.com', 'SASKI_GA_ID', '<nav', '<footer', 'consent-banner', 'chatbase.co', 'myaskai.com', 'sitegpt.ai', 'botpress.cloud', 'bpcontent.cloud']:
     assert unwanted not in qa, unwanted
 saski = (ROOT / 'saski' / 'index.html').read_text()
 for anchor in ['overview','checks','action-gate','chat-gate','deployments','attestation','ship','openshell','enterprise','tokens','contact']:
